@@ -51,6 +51,22 @@ def fix_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, invalid_r
         swapdict[entrance], swapdict[rand_entrance] = rand_region, old_dest
     swapdict.pop(entrance)
 
+def validate_plando_connection(entrance: str, exit: str) -> (bool, str):
+    """
+    Validates the entrance and exit from a PlandoConnection.
+    """
+    # Must be valid Super Mario 64 levels
+    if entrance not in sm64_entrances_to_level.keys():
+        return False, "Entrance not a valid Super Mario 64 level entrance."
+    if exit not in sm64_entrances_to_level.keys():
+        return False, "Exit not a valid Super Mario 64 level entrance."
+    if entrance == "Cavern of the Metal Cap" and exit == "Hazy Maze Cave":
+        return False, "Connection is logically impossible."
+    # At this point, we could add more validation related to fix_reg calls.
+
+    # Validated.
+    return True, ""
+
 def set_rules(world, options: SM64Options, player: int, area_connections: dict, star_costs: dict, move_rando_bitvec: int):
     valid_move_randomizer_start_courses = [
         "Bob-omb Battlefield", "Jolly Roger Bay", "Cool, Cool Mountain",
@@ -96,12 +112,18 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
 
     # Plando Connections
     if options.plando_connections:
-        plando_swapdict = randomized_level_to_paintings.copy()
+        plando_swapdict = sm64_level_to_entrances.copy()
         for conn in options.plando_connections:
-            # (validation step or not)
-            plando_entrance = sm64_entrances_to_level[conn.entrance]
-            plando_exit = conn.exit
-            assign_reg(randomized_entrances, plando_entrance, {plando_exit}, plando_swapdict, world)
+                valid, msg = validate_plando_connection(conn.entrance, conn.exit)
+                if not valid:
+                    raise Exception(f"Invalid connection: {conn.entrance} => {conn.exit} for player {world.player_name} ({msg})")
+                try:
+                    plando_entrance = sm64_entrances_to_level[conn.entrance]
+                    plando_exit = conn.exit
+                    assign_reg(randomized_entrances, plando_entrance, {plando_exit}, plando_swapdict, world)
+                except Exception:
+                    raise Exception(f"Invalid connection: {conn.entrance} => {conn.exit} for player {world.player_name}")
+
 
     # Destination Format: LVL | AREA with LVL = LEVEL_x, AREA = Area as used in sm64 code
     # Cast to int to not rely on availability of SM64Levels enum. Will cause crash in MultiServer otherwise

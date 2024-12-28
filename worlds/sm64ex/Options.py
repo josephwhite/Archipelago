@@ -140,7 +140,6 @@ class MoveRandomizerActions(OptionSet):
     default = valid_keys
 
 class SM64PlandoConnections(PlandoConnections):
-
     entrances = exits = [
         "Bob-omb Battlefield",
         "Whomp's Fortress",
