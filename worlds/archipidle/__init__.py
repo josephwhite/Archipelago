@@ -2,6 +2,7 @@ from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, 
 from worlds.AutoWorld import World, WebWorld
 from datetime import datetime
 from .Items import item_table
+from .Locations import location_table, ArchipIDLELocation
 from .Rules import set_rules
 
 
@@ -42,11 +43,7 @@ class ArchipIDLEWorld(World):
         item_name_to_id[item] = start_id
         start_id += 1
 
-    location_name_to_id = {}
-    start_id = 9000
-    for i in range(1, 201):
-        location_name_to_id[f"IDLE item number {i}"] = start_id
-        start_id += 1
+    location_name_to_id = {name: id for name, id in location_table.items()}
 
     def set_rules(self):
         set_rules(self.multiworld, self.player)
@@ -122,7 +119,3 @@ def create_region(world: MultiWorld, player: int, name: str, locations=None, exi
 
 class ArchipIDLEItem(Item):
     game = "ArchipIDLE"
-
-
-class ArchipIDLELocation(Location):
-    game: str = "ArchipIDLE"
