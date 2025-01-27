@@ -81,8 +81,10 @@ sm64_level_to_entrances = {**sm64_level_to_paintings, **sm64_level_to_secrets }
 
 def create_regions(world: MultiWorld, options: SM64Options, player: int):
     regSS = Region("Menu", player, world, "Castle Area")
-    create_default_locs(regSS, locSS_table)
+    #create_default_locs(regSS, locSS_table)
     world.regions.append(regSS)
+
+    regFloor1 = create_region("First Floor", player, world)
 
     regBoB = create_region("Bob-omb Battlefield", player, world)
     create_locs(regBoB, "BoB: Big Bob-Omb on the Summit", "BoB: Footrace with Koopa The Quick",
@@ -134,7 +136,8 @@ def create_regions(world: MultiWorld, options: SM64Options, player: int):
     regBitDW = create_region("Bowser in the Dark World", player, world)
     create_default_locs(regBitDW, locBitDW_table)
 
-    create_region("Basement", player, world)
+    regBasement = create_region("Basement", player, world)
+    create_locs(regBasement, "Toad (Basement)", "MIPS 1", "MIPS 2")
 
     regHMC = create_region("Hazy Maze Cave", player, world)
     create_locs(regHMC, "HMC: Swimming Beast in the Cavern", "HMC: Metal-Head Mario Can Move!",
@@ -179,7 +182,8 @@ def create_regions(world: MultiWorld, options: SM64Options, player: int):
     bitfs_upper = create_subregion(regBitFS, "BitFS: Upper", *locBitFS_table.keys())
     regBitFS.subregions = [bitfs_upper]
 
-    create_region("Second Floor", player, world)
+    regFloor2 = create_region("Second Floor", player, world)
+    create_locs(regFloor2, "Toad (Second Floor)")
 
     regSL = create_region("Snowman's Land", player, world)
     create_default_locs(regSL, locSL_table)
@@ -217,6 +221,7 @@ def create_regions(world: MultiWorld, options: SM64Options, player: int):
         create_locs(thi_large_top, "THI: 100 Coins")
 
     regFloor3 = create_region("Third Floor", player, world)
+    create_locs(regFloor3, "Toad (Third Floor)")
 
     regTTC = create_region("Tick Tock Clock", player, world)
     create_locs(regTTC, "TTC: Stop Time for Red Coins")

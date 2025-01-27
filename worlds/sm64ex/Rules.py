@@ -69,20 +69,20 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
     randomized_entrances_s = {sm64_level_to_entrances[entrance_lvl]: destination for (entrance_lvl,destination) in randomized_entrances.items()}
 
     rf = RuleFactory(world, options, player, move_rando_bitvec)
-
-    connect_regions(world, player, "Menu", randomized_entrances_s["Bob-omb Battlefield"])
-    connect_regions(world, player, "Menu", randomized_entrances_s["Whomp's Fortress"], lambda state: state.has("Power Star", player, 1))
-    connect_regions(world, player, "Menu", randomized_entrances_s["Jolly Roger Bay"], lambda state: state.has("Power Star", player, 3))
-    connect_regions(world, player, "Menu", randomized_entrances_s["Cool, Cool Mountain"], lambda state: state.has("Power Star", player, 3))
-    connect_regions(world, player, "Menu", randomized_entrances_s["Big Boo's Haunt"], lambda state: state.has("Power Star", player, 12))
-    connect_regions(world, player, "Menu", randomized_entrances_s["The Princess's Secret Slide"], lambda state: state.has("Power Star", player, 1))
+    connect_regions(world, player, "Menu", "First Floor")
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Bob-omb Battlefield"])
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Whomp's Fortress"], lambda state: state.has("Power Star", player, 1))
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Jolly Roger Bay"], lambda state: state.has("Power Star", player, 3))
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Cool, Cool Mountain"], lambda state: state.has("Power Star", player, 3))
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Big Boo's Haunt"], lambda state: state.has("Power Star", player, 12))
+    connect_regions(world, player, "First Floor", randomized_entrances_s["The Princess's Secret Slide"], lambda state: state.has("Power Star", player, 1))
     connect_regions(world, player, randomized_entrances_s["Jolly Roger Bay"], randomized_entrances_s["The Secret Aquarium"],
                     rf.build_rule("SF/BF | TJ & LG | MOVELESS & TJ"))
-    connect_regions(world, player, "Menu", randomized_entrances_s["Tower of the Wing Cap"], lambda state: state.has("Power Star", player, 10))
-    connect_regions(world, player, "Menu", randomized_entrances_s["Bowser in the Dark World"],
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Tower of the Wing Cap"], lambda state: state.has("Power Star", player, 10))
+    connect_regions(world, player, "First Floor", randomized_entrances_s["Bowser in the Dark World"],
                     lambda state: state.has("Power Star", player, star_costs["FirstBowserDoorCost"]))
 
-    connect_regions(world, player, "Menu", "Basement", lambda state: state.has("Basement Key", player) or state.has("Progressive Key", player, 1))
+    connect_regions(world, player, "First Floor", "Basement", lambda state: state.has("Basement Key", player) or state.has("Progressive Key", player, 1))
 
     connect_regions(world, player, "Basement", randomized_entrances_s["Hazy Maze Cave"])
     connect_regions(world, player, "Basement", randomized_entrances_s["Lethal Lava Land"])
@@ -99,7 +99,7 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
     # needs to be registered is its parent region.
     world.register_indirect_condition(world.get_location("DDD: Board Bowser's Sub", player).parent_region, entrance)
 
-    connect_regions(world, player, "Menu", "Second Floor", lambda state: state.has("Second Floor Key", player) or state.has("Progressive Key", player, 2))
+    connect_regions(world, player, "First Floor", "Second Floor", lambda state: state.has("Second Floor Key", player) or state.has("Progressive Key", player, 2))
 
     connect_regions(world, player, "Second Floor", randomized_entrances_s["Snowman's Land"])
     connect_regions(world, player, "Second Floor", randomized_entrances_s["Wet-Dry World"])
@@ -235,6 +235,9 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
         world.completion_condition[player] = lambda state: state.can_reach("Bowser in the Dark World", 'Region', player) and \
                                                            state.can_reach("BitFS: Upper", 'Region', player) and \
                                                            state.can_reach("BitS: Top", 'Region', player)
+    
+    from Utils import visualize_regions
+    visualize_regions(world.get_region("Menu", player), "my_world_2.puml")
 
 
 class RuleFactory:
