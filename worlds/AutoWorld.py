@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import pathlib
+import random
 import sys
 import time
 from random import Random
@@ -213,8 +214,9 @@ class WebWorld(metaclass=WebWorldRegister):
     tutorials: List["Tutorial"]
     """docs folder will also be scanned for tutorial guides. Each Tutorial class is to be used for one guide."""
 
-    theme = "grass"
+    theme: str = "grass"
     """Choose a theme for you /game/* pages.
+    If set to 'random', the theme will be set to one of the available themes.
     Available: dirt, grass, grassFlowers, ice, jungle, ocean, partyTime, stone"""
 
     bug_report_page: Optional[str]
@@ -246,6 +248,12 @@ class WebWorld(metaclass=WebWorldRegister):
 
     item_descriptions: Dict[str, str] = {}
     """An optional map from item names (or item group names) to brief descriptions for users."""
+
+    def __init__(self):
+        if self.theme.lower() == 'random':
+            valid_themes = ['dirt', 'grass', 'grassFlowers', 'ice', 'jungle', 'ocean', 'partyTime', 'stone']
+            self.theme = random.choice(valid_themes)
+
 
 
 class World(metaclass=AutoWorldRegister):
