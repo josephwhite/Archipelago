@@ -6,12 +6,12 @@
     * Windows.
 * Download the Godot Mod Loader from this [Github](https://github.com/GodotModding/godot-mod-loader/pull/533)
     * We use this version due to the main branch not working with Nodebuster.
-* Download the [Archipelago Mod]()
+* Download the [Archipelago Mod](https://github.com/Emerald836/Emerlads-Nodebuster_AP_Mod/releases)
 
 ## Recommended Software
 * QOL Mods.
     * I would highly recommend using a QOL mod just to make your life easier. As this while normally not long. Does have over 500 checks on the standard settings. And with progression being so broken up due to randomization it can easily make the game a lot longer.
-    * If you can not find a mod for Nodebuster you can find one [Here]
+    * If you can not find a mod for Nodebuster you can find one [Here](https://github.com/Emerald836/Emerlad-Nodebuster-QOL-Mod/releases/tag/v0.1.0)
 
 ## Setting up Mod Loader and Installing the Archipelago Mod
 1. After downloading the Mod Loader from [Here](https://github.com/GodotModding/godot-mod-loader/pull/533). Extract the addons folder from the zip and put it in your Nodebuster files right next to the Executable.
@@ -20,7 +20,7 @@
 3. After the window opens find launch options and put "--script addons/mod_loader/mod_loader_setup.gd"(remove quotes) in the launch options field. Then open Nodebuster once.
 3. After you opened the game go back to the properties window and remove what we put in the launch options field.
 4. Go back to the Nodebuster local files. and create a folder named "mods".
-5. Insert the ZIP file of the archipelago mod into the mods folder.
+5. Insert the ZIP file of the archipelago mod found [here](https://github.com/Emerald836/Emerlads-Nodebuster_AP_Mod/releases) into the mods folder.
  * Do not unzip the mod file as the mod loader requires for it to be zipped.
 6. Open up Nodebuster once more and the game should ask you to restart the game. Click yes. After restarting the game the mod will be installed.
 
@@ -39,7 +39,7 @@ An YAML file is the way that you provide your player options to Archipelago.
 See the [basic multiworld setup guide](/tutorial/Archipelago/setup/en) here on the Archipelago website to learn more.
 
 ### Where do I get a YAML?
-You can either download it from the repo. Or you can generate a template with the Archipelago Launcher after installing the APWorld.
+You can either download it from the [mod release page](https://github.com/Emerald836/Emerlads-Nodebuster_AP_Mod/releases). Or you can generate a template with the Archipelago Launcher after installing the APWorld.
 
 ### Joining an Archipelago Game in Nodebuster
 1. Start the game after installing all necessary mods.
