@@ -130,7 +130,7 @@ milestone_items: List[ItemDict] = [
     { "name": "Blues500", "count":1 ,"classification": ItemClassification.filler},
     { "name": "Reds10k", "count":1 ,"classification": ItemClassification.filler},
     { "name": "Blues800", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Yellow5", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Yellows5", "count":1 ,"classification": ItemClassification.filler},
     { "name": "Reds15k", "count":1 ,"classification": ItemClassification.filler},
     { "name": "Blues1.2k", "count":1 ,"classification": ItemClassification.filler},
     { "name": "Yellows10", "count":1 ,"classification": ItemClassification.filler},

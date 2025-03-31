@@ -1,7 +1,7 @@
 #from .Options import InscryptionOptions, Goal, EpitaphPiecesRandomization, PaintingChecksBalancing
 from .options import NodebusterOptions, Goal, CryptoMine
 from .items import upgrade_items, ItemDict, base_id, NodebusterItem, milestone_items
-from .locations import upgrade_locations, regions_to_locations
+from .locations import upgrade_locations, milestone_locations, regions_to_locations
 from .regions import nodebuster_regions_all
 #from .Items import act1_items, act2_items, act3_items, filler_items, base_id, InscryptionItem, ItemDict
 #from .Locations import act1_locations, act2_locations, act3_locations, regions_to_locations
@@ -38,9 +38,9 @@ class NodebusterWorld(World):
     web = NodebusterWeb()
     options_dataclass = NodebusterOptions
     options: NodebusterOptions
-    all_items = upgrade_items
+    all_items = upgrade_items + milestone_items
     item_name_to_id = {item["name"]: i + base_id for i, item in enumerate(all_items)}
-    all_locations = upgrade_locations
+    all_locations = upgrade_locations + milestone_locations
     location_name_to_id = {location: i + base_id for i, location in enumerate(all_locations)}
 
 

@@ -128,6 +128,37 @@ upgrade_locations = [
     "AutoCollect-7", "AutoCollect-8"
 ]
 
+milestone_locations = [
+    "Reds500",
+    "Blues10",
+    "Reds2k",
+    "Blues100",
+    "Reds4k",
+    "Blues200",
+    "Reds6k",
+    "Blues300",
+    "Reds8k",
+    "Blues300",
+    "Reds8k",
+    "Blues500",
+    "Reds10k",
+    "Blues800",
+    "Yellows5",
+    "Reds15k",
+    "Blues1.2k",
+    "Yellows10",
+    "Reds20k",
+    "Blues1.6k",
+    "Yellows15",
+    "Reds30k",
+    "Blues2k",
+    "Reds50k",
+    "Blues4k",
+    "Reds100k",
+    "Blues8k"
+]
+
+
 goal_locations = [
     "Virus Released"
 ]
@@ -136,5 +167,6 @@ goal_locations = [
 regions_to_locations: Dict[str, List[str]] = {
     "Menu": [],
     "Upgrades": upgrade_locations,
+    "Milestones": milestone_locations,
     "Epilogue": []
 }
