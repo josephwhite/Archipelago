@@ -81,7 +81,6 @@ sm64_level_to_entrances = {**sm64_level_to_paintings, **sm64_level_to_secrets }
 
 def create_regions(world: MultiWorld, options: SM64Options, player: int):
     regSS = Region("Menu", player, world, "Castle Area")
-    #create_default_locs(regSS, locSS_table)
     world.regions.append(regSS)
 
     regFloor1 = create_region("First Floor", player, world)
