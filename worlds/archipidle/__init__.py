@@ -1,7 +1,7 @@
 from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, ItemClassification
 from worlds.AutoWorld import World, WebWorld
 from datetime import datetime
-from .Items import item_table
+from .Items import item_table, ArchipIDLEItem
 from .Locations import location_table, ArchipIDLELocation
 from .Rules import set_rules
 
@@ -116,6 +116,3 @@ def create_region(world: MultiWorld, player: int, name: str, locations=None, exi
 
     return region
 
-
-class ArchipIDLEItem(Item):
-    game = "ArchipIDLE"

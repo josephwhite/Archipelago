@@ -1,3 +1,9 @@
+from BaseClasses import Item
+
+
+class ArchipIDLEItem(Item):
+    game = "ArchipIDLE"
+
 item_table = (
     'An Old GeoCities Profile',
     'Very Funny Joke',

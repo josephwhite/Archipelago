@@ -1,5 +1,6 @@
 from BaseClasses import Location
 
+
 class ArchipIDLELocation(Location):
     game: str = "ArchipIDLE"
 
