@@ -11,7 +11,7 @@
 ## Recommended Software
 * QOL Mods.
     * I would highly recommend using a QOL mod just to make your life easier. As this while normally not long. Does have over 500 checks on the standard settings. And with progression being so broken up due to randomization it can easily make the game a lot longer.
-    * If you can not find a mod for Nodebuster you can find one [Here](https://github.com/Emerald836/Emerlad-Nodebuster-QOL-Mod/releases/tag/v0.1.0)
+    * If you can not find a mod for Nodebuster you can find one [Here](https://github.com/Emerald836/Emerlad-Nodebuster-QOL-Mod/releases)
 
 ## Setting up Mod Loader and Installing the Archipelago Mod
 1. After downloading the Mod Loader from [Here](https://github.com/GodotModding/godot-mod-loader/pull/533). Extract the addons folder from the zip and put it in your Nodebuster files right next to the Executable.
@@ -43,9 +43,14 @@ You can either download it from the [mod release page](https://github.com/Emeral
 
 ### Joining an Archipelago Game in Nodebuster
 1. Start the game after installing all necessary mods.
-2. At the top of the game screen input the server address, slot name, and password in the appropiate fields.
-3. Click new game.
- * I do not recommend clicking continue as it will most likely cause you to be further in progression then you should be.
+2. In the main menu you should see a Connect button instead of a new game, and cotinue game button.
+3. Click said Connect button.
+4. Input the correct information in the correct fields. (ie. "archipelago:12993" in the address slot.).
+5. Click Connect and wait a tiny bit.
+ * If it takes more then a min to connect then check your input fields to make sure everything is correct.
+6. After the game connects to archipelago. It will either take you straight to the upgrade tree scene. Or if you have a save file that was already connected to the server address you are using. It will instead ask if you want to use the aforementioned save file or no.
+7. Enjoy!
+
 
 ## Hints and other commands
 While playing in a multiworld, you can interact with the server using various commands listed in the 
