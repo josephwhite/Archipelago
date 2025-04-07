@@ -26,7 +26,7 @@ upgrade_items: List[ItemDict] = [
 { "name": "Size1", "count": 10 ,'classification': ItemClassification.useful},
 { "name": "BossArmor1", "count": 10 ,'classification': ItemClassification.useful},
 { "name": "HealthRegen1", "count": 5 ,'classification': ItemClassification.useful},
-{ "name": "NodeFinder1", "count": 5 ,'classification': ItemClassification.useful},
+{ "name": "NodeFinder1", "count": 5 ,'classification': ItemClassification.progression},
 { "name": "Salvaging1", "count": 5 ,'classification': ItemClassification.useful},
 { "name": "DamagePerEnemy1", "count": 5 ,'classification': ItemClassification.useful},
 { "name": "BossDamage1", "count": 10 ,'classification': ItemClassification.useful},
@@ -39,7 +39,7 @@ upgrade_items: List[ItemDict] = [
 { "name": "Damage2", "count": 10 ,'classification': ItemClassification.useful},
 { "name": "PickupRadius1", "count": 5 ,'classification': ItemClassification.useful},
 { "name": "HealthRegen2", "count": 1 ,'classification': ItemClassification.useful},
-{ "name": "Milestones", "count": 1 ,'classification': ItemClassification.useful},
+{ "name": "Milestones", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Salvaging2", "count": 1 ,'classification': ItemClassification.useful},
 { "name": "AttackSpeed2", "count": 1 ,'classification': ItemClassification.useful},
 { "name": "SpawnRate2", "count": 1 ,'classification': ItemClassification.useful},
@@ -63,7 +63,7 @@ upgrade_items: List[ItemDict] = [
 { "name": "Armor5", "count": 20 ,'classification': ItemClassification.useful},
 { "name": "Damage4", "count": 3 ,'classification': ItemClassification.useful},
 { "name": "Size2", "count": 1 ,'classification': ItemClassification.useful},
-{ "name": "CryptoMine", "count": 1 ,'classification': ItemClassification.useful},
+{ "name": "CryptoMine", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Health4", "count": 10 ,'classification': ItemClassification.useful},
 { "name": "YellowSpawn1", "count": 1 ,'classification': ItemClassification.useful},
 { "name": "Armor6", "count": 30 ,'classification': ItemClassification.useful},
@@ -118,33 +118,67 @@ upgrade_items: List[ItemDict] = [
 ]
 
 milestone_items: List[ItemDict] = [
-    { "name": "Reds500", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues10", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds2k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues100", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds4k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues200", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds6k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues300", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds8k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues500", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds10k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues800", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Yellows5", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds15k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues1.2k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Yellows10", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds20k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues1.6k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Yellows15", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds30k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues2k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds50k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues4k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Reds100k", "count":1 ,"classification": ItemClassification.filler},
-    { "name": "Blues8k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds500", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues10", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds2k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues100", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds4k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues200", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds6k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues300", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds8k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues500", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds10k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues800", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Yellows5", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds15k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues1.2k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Yellows10", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds20k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues1.6k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Yellows15", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds30k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues2k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds50k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues4k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds100k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Blues8k", "count":1 ,"classification": ItemClassification.useful},
+]
+
+crypto_level_items: List[ItemDict] = [
+    {"name": "CryptoLevel", "count":36,"classification": ItemClassification.filler}
+]
+
+boss_drop_items: List[ItemDict] = [
+    {"name": "Boss Drop", "count":18,"classification": ItemClassification.progression},
+    {"name": "Extra Bits", "count":4,"classification": ItemClassification.filler},
+    {"name": "Extra Nodes", "count":4,"classification": ItemClassification.filler}
+]
+
+junk_items: List[ItemDict] = [
+    {"name": "Nothing", "count":0,"classification": ItemClassification.filler}
 ]
 
 goal_items: List[ItemDict] = [
     { "name": "Virus Deployed", "count":1,"classification": ItemClassification.progression}
+]
+
+progressive_items: List[ItemDict] = [
+    { "name": "Progressive Damage", "count":110,"classification":ItemClassification.useful},
+    { "name": "Progressive Health", "count":51,"classification":ItemClassification.useful},
+    { "name": "Progressive Regen", "count":41,"classification":ItemClassification.useful},
+    { "name": "Progressive SpawnRate", "count":33,"classification":ItemClassification.useful},
+    { "name": "Progressive Armor", "count":134,"classification":ItemClassification.useful},
+    { "name": "Progressive Infinity", "count":9,"classification":ItemClassification.useful},
+    { "name": "Progressive Milestone Reward", "count":25,"classification":ItemClassification.useful},
+]
+
+progressive_items_exclude_list: List[str] = [
+    "Damage1","DamagePerEnemy1","BossDamage1","Damage2","Damage3","Undamaged1","Execute1","Damage4","BossDamage2","CritDamage1","Damage5","Undamaged2","Execute2","RampingDamage1","CritDamage2","MaxHealthToDamage1",
+    "Health1","Health2","Health3","Health4","Health5","Health6","Health7",
+    "HealthRegen1","Salvaging1","Lifesteal1","HealthRegen2","Salvaging2","DropHeal1","MaxHealthHeal1","Lifesteal2","Lifesteal3","StealMaxHealth1","MaxHealthHeal2","StealMaxHealth2","StealMaxHealth3",
+    "SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4","NodeFinder1","YellowSpawn1","YellowSpawn2",
+    "Armor1","BossArmor1","Armor2","ArmorPerEnemy1","Armor3","Armor4","BossArmor2","Armor5","Armor6","MaxHealthToArmor1","Armor7","FocusArmor1","MaxHealthToArmor2","RampingArmor1",
+    "Infinity1","Infinity2","Infinity3","Infinity4","Infinity5","Infinity6","Infinity7","Infinity8","Infinity9",
+    "Reds500","Blues10","Reds2k","Blues100","Reds4k","Blues200","Reds6k","Blues300","Reds8k","Blues500","Reds10k","Blues800","Yellows5","Reds15k","Blues1.2k","Yellows10","Reds20k","Blues1.6k","Yellows15","Reds30k","Blues2k","Reds50k","Blues4k","Reds100k","Blues8k"
 ]
