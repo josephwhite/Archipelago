@@ -14,6 +14,29 @@ def shuffle_dict_keys(world, dictionary: dict) -> dict:
     world.random.shuffle(keys)
     return dict(zip(keys, values))
 
+def assign_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, to_region: str,
+               swapdict: Dict[SM64Levels, str], world):
+    """
+    Set entrance to go to one of the specified levels.
+
+    :param entrance_map: Dictionary of levels where entrance should be a key value in.
+    :param entrance: Level in entrance_map.
+    :param to_region: Level that entrance should go to.
+    :param swapdict: Dictionary of levels used for finding replacement levels.
+    :param world: World.
+    """
+    old_dest = entrance_map[entrance]
+    if old_dest != to_region:
+        replacement_entrance = ""
+        for curr_ent, curr_lev in entrance_map.items():
+            if curr_lev == to_region:
+                replacement_entrance = curr_ent
+        # Swap
+        entrance_map[entrance] = to_region
+        entrance_map[replacement_entrance] = old_dest
+    swapdict.pop(entrance)
+
+
 def fix_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, invalid_regions: Set[str],
             swapdict: Dict[SM64Levels, str], world):
     if entrance_map[entrance] in invalid_regions: # Unlucky :C
@@ -25,33 +48,62 @@ def fix_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, invalid_r
         swapdict[entrance], swapdict[rand_entrance] = rand_region, old_dest
     swapdict.pop(entrance)
 
+def validate_plando_connection(entrance: str, exit: str, swapdict: dict[SM64Levels, str]) -> (bool, str):
+    """
+    Validates the entrance and exit from a PlandoConnection.
+    """
+    # Must be valid Super Mario 64 levels
+    if entrance not in sm64_entrances_to_level.keys():
+        return False, "Entrance not a valid Super Mario 64 level entrance."
+    if exit not in sm64_entrances_to_level.keys():
+        return False, "Exit not a valid Super Mario 64 level entrance."
+    # Must be present in available level list
+    if entrance not in swapdict.values():
+        return False, "Entrance already in use by Plando."
+    if exit not in swapdict.values():
+        return False, "Exit already in use by Plando."
+    # Logic checks
+    if entrance == "Cavern of the Metal Cap" and exit == "Hazy Maze Cave":
+        return False, "Connection is logically impossible."
+    # At this point, we could add more validation related to fix_reg calls.
+
+    # Validated.
+    return True, ""
+
 def set_rules(world, options: SM64Options, player: int, area_connections: dict, star_costs: dict, move_rando_bitvec: int):
-    randomized_level_to_paintings = sm64_level_to_paintings.copy()
-    randomized_level_to_secrets = sm64_level_to_secrets.copy()
     valid_move_randomizer_start_courses = [
         "Bob-omb Battlefield", "Jolly Roger Bay", "Cool, Cool Mountain",
         "Big Boo's Haunt", "Lethal Lava Land", "Shifting Sand Land",
         "Dire, Dire Docks", "Snowman's Land"
     ]  # Excluding WF, HMC, WDW, TTM, THI, TTC, and RR
+
+    # Begin randomizing entrances to levels
+    randomized_level_to_paintings = sm64_level_to_paintings.copy()
+    randomized_level_to_secrets = sm64_level_to_secrets.copy()
     if options.area_rando >= 1:  # Some randomization is happening, randomize Courses
         randomized_level_to_paintings = shuffle_dict_keys(world,sm64_level_to_paintings)
-        # If not shuffling later, ensure a valid start course on move randomizer
-        if options.area_rando < 3 and move_rando_bitvec > 0:
-            swapdict = randomized_level_to_paintings.copy()
-            invalid_start_courses = {course for course in randomized_level_to_paintings.values() if course not in valid_move_randomizer_start_courses}
-            fix_reg(randomized_level_to_paintings, SM64Levels.BOB_OMB_BATTLEFIELD, invalid_start_courses, swapdict, world)
-            fix_reg(randomized_level_to_paintings, SM64Levels.WHOMPS_FORTRESS, invalid_start_courses, swapdict, world)
-
     if options.area_rando == 2:  # Randomize Secrets as well
-        randomized_level_to_secrets = shuffle_dict_keys(world,sm64_level_to_secrets)
+        randomized_level_to_secrets = shuffle_dict_keys(world, sm64_level_to_secrets)
     randomized_entrances = {**randomized_level_to_paintings, **randomized_level_to_secrets}
     if options.area_rando == 3:  # Randomize Courses and Secrets in one pool
         randomized_entrances = shuffle_dict_keys(world, randomized_entrances)
+
+    # Fix entrances if needed
+    if (3 > options.area_rando >= 1) and move_rando_bitvec > 0:
+        # Ensure valid start courses on move randomizer
+        swapdict = randomized_level_to_paintings.copy()
+        invalid_start_courses = {course for course in randomized_level_to_paintings.values() if
+                                 course not in valid_move_randomizer_start_courses}
+        fix_reg(randomized_level_to_paintings, SM64Levels.BOB_OMB_BATTLEFIELD, invalid_start_courses, swapdict,
+                world)
+        fix_reg(randomized_level_to_paintings, SM64Levels.WHOMPS_FORTRESS, invalid_start_courses, swapdict, world)
+    if options.area_rando == 3:
         # Guarantee first entrance is a course
         swapdict = randomized_entrances.copy()
         if move_rando_bitvec == 0:
             fix_reg(randomized_entrances, SM64Levels.BOB_OMB_BATTLEFIELD, sm64_secrets_to_level.keys(), swapdict, world)
         else:
+            # Ensure valid start courses on move randomizer
             invalid_start_courses = {course for course in randomized_entrances.values() if course not in valid_move_randomizer_start_courses}
             fix_reg(randomized_entrances, SM64Levels.BOB_OMB_BATTLEFIELD, invalid_start_courses, swapdict, world)
             fix_reg(randomized_entrances, SM64Levels.WHOMPS_FORTRESS, invalid_start_courses, swapdict, world)
@@ -62,6 +114,22 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
             fix_reg(randomized_entrances, SM64Levels.CAVERN_OF_THE_METAL_CAP, {"Hazy Maze Cave", "Dire, Dire Docks"}, swapdict, world)
         else:
             fix_reg(randomized_entrances, SM64Levels.CAVERN_OF_THE_METAL_CAP, {"Hazy Maze Cave"}, swapdict, world)
+
+    # Plando Connections
+    if options.plando_connections:
+        plando_swapdict = sm64_level_to_entrances.copy()
+        for conn in options.plando_connections:
+            valid, msg = validate_plando_connection(conn.entrance, conn.exit, plando_swapdict)
+            if not valid:
+                raise Exception(
+                    f"Invalid connection: {conn.entrance} => {conn.exit} for player {world.player_name} ({msg})")
+            try:
+                plando_entrance = sm64_entrances_to_level[conn.entrance]
+                plando_exit = conn.exit
+                assign_reg(randomized_entrances, plando_entrance, plando_exit, plando_swapdict, world)
+                print(f"{randomized_entrances[plando_entrance]} connected to {plando_entrance}")
+            except Exception:
+                raise Exception(f"Invalid connection: {conn.entrance} => {conn.exit} for player {world.player_name}")
 
     # Destination Format: LVL | AREA with LVL = LEVEL_x, AREA = Area as used in sm64 code
     # Cast to int to not rely on availability of SM64Levels enum. Will cause crash in MultiServer otherwise
@@ -235,9 +303,9 @@ def set_rules(world, options: SM64Options, player: int, area_connections: dict, 
         world.completion_condition[player] = lambda state: state.can_reach("Bowser in the Dark World", 'Region', player) and \
                                                            state.can_reach("BitFS: Upper", 'Region', player) and \
                                                            state.can_reach("BitS: Top", 'Region', player)
-    
-    from Utils import visualize_regions
-    visualize_regions(world.get_region("Menu", player), "my_world_2.puml")
+    # (Debug) Generate graph of regions
+    #from Utils import visualize_regions
+    #visualize_regions(world.get_region("Menu", player), "my_world_2.puml")
 
 
 class RuleFactory:

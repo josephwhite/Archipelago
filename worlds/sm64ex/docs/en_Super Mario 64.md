@@ -26,3 +26,23 @@ When you receive an item, a message will pop up to inform you where you received
 and which one it is.
 
 NOTE: The Secret Star count in the menu is broken.
+
+## Is Connection Plando supported?
+Yes. The host needs to enable it in their `host.yaml`, and the player's yaml needs to contain a plando_connections block.
+
+Example:
+```
+plando_connections:
+  - entrance: Bob-omb Battlefield
+    exit: Jolly Roger Bay
+  - entrance: Whomp's Fortress
+    exit: Whomp's Fortress
+  - entrance: Jolly Roger Bay
+    exit: Tower of the Wing Cap
+```
+Notes:
+- The `direction` field is not supported.
+- For a list of entrance names, check the entrances/exits of `SM64PlandoConnections` from [`Options.py` in the sm64ex world folder](../Options.py) or generate a game with the Entrance Randomizer option enable
+ and check the spoiler log.
+
+See the Archipelago Plando Guide for more information on Plando and Connection Plando.

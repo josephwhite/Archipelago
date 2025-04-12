@@ -1,6 +1,7 @@
 import typing
 from dataclasses import dataclass
-from Options import DefaultOnToggle, Range, Toggle, DeathLink, Choice, PerGameCommonOptions, OptionSet, OptionGroup
+from Options import DefaultOnToggle, Range, Toggle, DeathLink, Choice, PerGameCommonOptions, OptionSet, OptionGroup, \
+    PlandoConnections
 from .Items import action_item_data_table
 
 class EnableCoinStars(Choice):
@@ -138,6 +139,36 @@ class MoveRandomizerActions(OptionSet):
     valid_keys = [action for action in action_item_data_table if action != 'Double Jump']
     default = valid_keys
 
+class SM64PlandoConnections(PlandoConnections):
+    display_name = "Entrance Plando"
+    entrances = exits = [
+        "Bob-omb Battlefield",
+        "Whomp's Fortress",
+        "Jolly Roger Bay",
+        "Cool, Cool Mountain",
+        "Big Boo's Haunt",
+        "Hazy Maze Cave",
+        "Lethal Lava Land",
+        "Shifting Sand Land",
+        "Dire, Dire Docks",
+        "Snowman's Land",
+        "Wet-Dry World",
+        "Tall, Tall Mountain",
+        "Tiny-Huge Island (Tiny)",
+        "Tiny-Huge Island (Huge)",
+        "Tick Tock Clock",
+        "Rainbow Ride",
+        "The Princess's Secret Slide",
+        "The Secret Aquarium",
+        "Bowser in the Dark World",
+        "Tower of the Wing Cap",
+        "Cavern of the Metal Cap",
+        "Vanish Cap under the Moat",
+        "Bowser in the Fire Sea",
+        "Wing Mario over the Rainbow"
+    ]
+    duplicate_exits: bool = False
+
 sm64_options_groups = [
     OptionGroup("Logic Options", [
         AreaRandomizer,
@@ -167,6 +198,7 @@ sm64_options_groups = [
 @dataclass
 class SM64Options(PerGameCommonOptions):
     area_rando: AreaRandomizer
+    plando_connections: SM64PlandoConnections
     buddy_checks: BuddyChecks
     exclamation_boxes: ExclamationBoxes
     progressive_keys: ProgressiveKeys
