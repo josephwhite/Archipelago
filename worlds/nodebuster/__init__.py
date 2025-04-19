@@ -1,16 +1,17 @@
 #from .Options import InscryptionOptions, Goal, EpitaphPiecesRandomization, PaintingChecksBalancing
-from Utils import visualize_regions
+
+
 from .Options import NodebusterOptions
 from .items import upgrade_items, ItemDict, base_id, NodebusterItem, milestone_items, crypto_level_items, boss_drop_items, junk_items, progressive_items, progressive_items_exclude_list
-from .locations import regions_to_locations, get_locations, get_milestone_locations, get_boss_locations, get_crypto_locations
-from .regions import nodebuster_regions_all, _add_milestone_regions, _add_boss_regions, _add_crypto_regions
+from .locations import NodebusterLocation, regions_to_locations, get_locations, get_milestone_locations, get_boss_locations, get_crypto_locations
+from .regions import every_region, nodebuster_regions_all, _add_milestone_regions, _add_boss_regions, _add_crypto_regions
 #from .Items import act1_items, act2_items, act3_items, filler_items, base_id, InscryptionItem, ItemDict
 #from .Locations import act1_locations, act2_locations, act3_locations, regions_to_locations
 #from .Regions import inscryption_regions_all, inscryption_regions_act_1
 from typing import Dict, Any
 from . import rules
 from .rules import set_all_rules
-from BaseClasses import Region, Item, Tutorial, ItemClassification
+from BaseClasses import Region, Item, Tutorial, Entrance, EntranceType, ItemClassification
 from worlds.AutoWorld import World, WebWorld
 
 
@@ -40,6 +41,7 @@ class NodebusterWorld(World):
     options_dataclass = Options.NodebusterOptions
     options: Options.NodebusterOptions
     topology_present = True
+    rule = rules
     all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + junk_items + progressive_items
     all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations()
     item_name_to_id = {item["name"]: i + base_id for i, item in enumerate(all_items)}
@@ -64,22 +66,109 @@ class NodebusterWorld(World):
     
 
     def create_regions(self) -> None:
-        if self.options.milestone:
-            _add_milestone_regions()
-        if self.options.crypto:
-            _add_crypto_regions()
-        if not self.options.bossdrops == 0:
-            _add_boss_regions()
-        used_regions = nodebuster_regions_all
-        for region_name in used_regions.keys():
-            self.multiworld.regions.append(Region(region_name, self.player, self.multiworld))
+        used_regions = every_region
+        for region_name, exits in used_regions["regions"].items():
+            r = Region(region_name, self.player,self.multiworld)
+            for exit_name in exits:
+                if not self.options.milestone:
+                    if exit_name in used_regions["milestone_regions"]:
+                        continue
+                if not self.options.crypto:
+                    if exit_name in used_regions["crypto_regions"]:
+                        continue
+                if self.options.bossdrops <= 0:
+                    if exit_name in used_regions["boss_regions"]:
+                        continue
+                r.exits.append(Entrance(self.player, exit_name, r))
+            self.multiworld.regions.append(r)
 
-        for region_name, region_connections in used_regions.items():
-            region = self.get_region(region_name)
-            region.add_exits(region_connections)
-            region.add_locations({
-                location: self.location_name_to_id[location] for location in regions_to_locations[region_name]
-            })
+        if self.options.milestone:
+            for region_name, exits in used_regions["milestone_regions"].items():
+                r = Region(region_name, self.player,self.multiworld)
+                for exit_name in exits:
+                    if not self.options.crypto:
+                        if exit_name in used_regions["crypto_regions"]:
+                            continue
+                    if self.options.bossdrops <= 0:
+                        if exit_name in used_regions["boss_regions"]:
+                            continue
+                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+                self.multiworld.regions.append(r)
+
+
+        if self.options.crypto:
+            for region_name, exits in used_regions["crypto_regions"].items():
+                r = Region(region_name, self.player, self.multiworld)
+                for exit_name in exits:
+                    if not self.options.milestone:
+                        if exit_name in used_regions["milestone_regions"]:
+                            continue
+                    if self.options.bossdrops <= 0:
+                        if exit_name in used_regions["boss_regions"]:
+                            continue
+                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+                self.multiworld.regions.append(r)
+
+
+
+        if self.options.bossdrops > 0:
+            for region_name, exits in used_regions["boss_regions"].items():
+                r = Region(region_name, self.player, self.multiworld)
+                for exit_name in exits:
+                    if not self.options.milestone:
+                        if exit_name in used_regions["milestone_regions"]:
+                            continue
+                    if not self.options.crypto:
+                        if exit_name in used_regions["crypto_regions"]:
+                            continue
+                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+                self.multiworld.regions.append(r)
+
+
+
+        for entr_name, region  in used_regions["mandatory_regions"].items():
+            for region_name in region:
+                if not self.options.milestone:
+                    if region_name in used_regions["milestone_regions"]:
+                        continue
+                if not self.options.crypto:
+                    if region_name in used_regions["crypto_regions"]:
+                        continue
+                if self.options.bossdrops <= 0:
+                    if region_name in used_regions["boss_regions"]:
+                        continue
+                e = self.multiworld.get_entrance(entr_name, self.player)
+                r = self.multiworld.get_region(region_name, self.player)
+                e.connect(r)
+
+      #  for entr_name, region in used_regions["regions"].items():
+      #      if entr_name == "Menu": continue
+      #      for region_name in region:
+      #          if not self.options.milestone:
+      #              if region_name in used_regions["milestone_regions"]:
+      #                  continue
+      #          if not self.options.crypto:
+     #               if region_name in used_regions["crypto_regions"]:
+     #                   continue
+      #          if self.options.bossdrops <= 0:
+     #               if region_name in used_regions["boss_regions"]:
+       #                 continue
+    #            e = self.multiworld.get_entrance(entr_name, self.player)
+     #           r = self.multiworld.get_region(region_name, self.player)
+       #         e.connect(r)
+
+        for region_name, location in regions_to_locations.items():
+            if used_regions.get(region_name,None) is None: continue
+            region = self.multiworld.get_region(region_name, self.player)
+            for loc_name in location:
+                loc = NodebusterLocation(self.player, loc_name, self.location_name_to_id.get(loc_name, None), region)
+                region.locations.append(loc)
+        #for region_name, region_connections in used_regions.items():
+        #    region = self.get_region(region_name)
+         #   region.add_exits(region_connections)
+         #   region.add_locations({
+         #       location: self.location_name_to_id[location] for location in regions_to_locations[region_name]
+         #   })
     
     def create_items(self) -> None:
         for item in self.all_items:
@@ -125,7 +214,7 @@ class NodebusterWorld(World):
         #junk = len(self.all_locations) - len(self.all_items)
         #self.multiworld.itempool += [self.create_item("Nothing") for _ in range(junk)]
 
-    set_all_rules = set_all_rules
+    set_rules = rules.set_rules
 
 
    # def set_rules(self) -> None:

@@ -45,7 +45,7 @@ class BossDrops(Choice):
     option_none = 0
     option_necessary = 1
     option_all_26 = 2
-    default = 2
+    default = 0
 
 
 @dataclass

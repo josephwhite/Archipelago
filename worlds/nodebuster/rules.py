@@ -2,6 +2,7 @@ from typing import Dict, Callable, TYPE_CHECKING
 from BaseClasses import CollectionState, Location, Entrance, LocationProgressType
 from worlds.generic.Rules import set_rule
 from .Options import Goal
+from Utils import visualize_regions
 
 if TYPE_CHECKING:
     from . import NodebusterWorld
@@ -12,7 +13,7 @@ def has_crypto_mine(world:"NodebusterWorld", state: CollectionState, player: int
     return state.has("CryptoMine", player)
 
 def has_access_to_blue_enemies(world:"NodebusterWorld", state: CollectionState, player: int) -> bool:
-    return state.has("NodeFinder1", player)
+    return state.has("NodeFinder1", player) or state.has("Progressive SpawnRate",player,15)
 
 def has_milestones_upgrade(world:"NodebusterWorld", state: CollectionState, player: int) -> bool:
     return state.has("Milestones", player)
@@ -21,7 +22,7 @@ def has_access_to_net_and_nodes(world:"NodebusterWorld", state: CollectionState,
     return has_crypto_mine(world,state,player) and has_access_to_blue_enemies(world,state,player)
 
 def has_access_to_yellow_enemies(world:"NodebusterWorld", state: CollectionState, player: int) -> bool:
-    return state.has("YellowSpawn1", player) or state.has("YellowSpawn2", player)
+    return state.has("YellowSpawn1", player) or state.has("YellowSpawn2", player) or state.has("Progressive SpawnRate",player,26)
 
 def get_rules_lookup(world, player: int):
         rules_lookup = {
@@ -181,14 +182,33 @@ def set_all_rules(self) -> None:
 
     rules_lookup = get_rules_lookup(self, player)
 
-    for entrance_name, rule in rules_lookup["locations"]:
+    for entrance_name, rule in rules_lookup["regions"]:
+
         multiworld.get_entrance(entrance_name, player).access_rule = rule
     
     for location_name, rule in rules_lookup["locations"]:
         multiworld.get_location(location_name, player).access_rule = rule
     
 
-    
+def set_rules(self) -> None:
+
+    multiworld = self.multiworld
+    player = self.player
+
+    rules_lookup = get_rules_lookup(self, player)
+
+    region_list = list(multiworld.get_regions(player))
+
+    for entrance_name, rule in rules_lookup["regions"].items():
+        if region_list.count(entrance_name) <= 0: continue
+        multiworld.get_entrance(entrance_name,player).access_rule = rule
+        #set_rule(multiworld.get_entrance(entrance_name, player),rules_lookup["regions"][entrance_name])
+
+    #for location_name, rule in rules_lookup["locations"].items():
+    #    multiworld.get_location(location_name, player).access_rule = rule
+        #set_rule(multiworld.get_location(location_name, player),rules_lookup["locations"][location_name])
+
+    visualize_regions(multiworld.get_region("Menu",player), "my_world.puml")
 
     #for region in multiworld.get_regions(player):
     #    if region.name in rules_lookup["regions"]:
