@@ -4,7 +4,7 @@ import re
 
 Color = namedtuple('Color', '  R     G     B')
 
-tunic_colors = {
+tunic_colors: dict[str, Color] = {
     "Kokiri Green":      Color(0x1E, 0x69, 0x1B),
     "Goron Red":         Color(0x64, 0x14, 0x00),
     "Zora Blue":         Color(0x00, 0x3C, 0x64),
@@ -38,7 +38,8 @@ tunic_colors = {
     "Lumen":             Color(0x50, 0x8C, 0xF0),
 }
 
-NaviColors = {          # Inner Core Color         Outer Glow Color
+NaviColors: dict[str, tuple[Color, Color]] = {
+#                         Inner Core Color         Outer Glow Color
     "Rainbow":           (Color(0x00, 0x00, 0x00), Color(0x00, 0x00, 0x00)),
     "Gold":              (Color(0xFE, 0xCC, 0x3C), Color(0xFE, 0xC0, 0x07)),
     "White":             (Color(0xFF, 0xFF, 0xFF), Color(0x00, 0x00, 0xFF)),
@@ -61,7 +62,7 @@ NaviColors = {          # Inner Core Color         Outer Glow Color
     "Phantom Zelda":     (Color(0x97, 0x7A, 0x6C), Color(0x6F, 0x46, 0x67)),
 }
 
-sword_trail_colors = {
+sword_trail_colors: dict[str, Color] = {
     "Rainbow":           Color(0x00, 0x00, 0x00),
     "White":             Color(0xFF, 0xFF, 0xFF),
     "Red":               Color(0xFF, 0x00, 0x00),
@@ -75,7 +76,7 @@ sword_trail_colors = {
     "Pink":              Color(0xFF, 0x69, 0xB4),
 }
 
-bombchu_trail_colors = {
+bombchu_trail_colors: dict[str, Color] = {
     "Rainbow":           Color(0x00, 0x00, 0x00),
     "Red":               Color(0xFA, 0x00, 0x00),
     "Green":             Color(0x00, 0xFF, 0x00),
@@ -88,7 +89,7 @@ bombchu_trail_colors = {
     "Pink":              Color(0xFF, 0x69, 0xB4),
 }
 
-boomerang_trail_colors = {
+boomerang_trail_colors: dict[str, Color] = {
     "Rainbow":           Color(0x00, 0x00, 0x00),
     "Yellow":            Color(0xFF, 0xFF, 0x64),
     "Red":               Color(0xFF, 0x00, 0x00),
@@ -102,7 +103,7 @@ boomerang_trail_colors = {
     "Pink":              Color(0xFF, 0x69, 0xB4),
 }
 
-gauntlet_colors = {
+gauntlet_colors: dict[str, Color] = {
     "Silver":            Color(0xFF, 0xFF, 0xFF),
     "Gold":              Color(0xFE, 0xCF, 0x0F),
     "Black":             Color(0x00, 0x00, 0x06),
@@ -118,7 +119,7 @@ gauntlet_colors = {
     "Purple":            Color(0x80, 0x00, 0x80),
 }
 
-shield_frame_colors = {
+shield_frame_colors: dict[str, Color] = {
     "Red":               Color(0xD7, 0x00, 0x00),
     "Green":             Color(0x00, 0xFF, 0x00),
     "Blue":              Color(0x00, 0x40, 0xD8),
@@ -131,14 +132,14 @@ shield_frame_colors = {
     "Pink":              Color(0xFF, 0x69, 0xB4),
 }
 
-heart_colors = {
+heart_colors: dict[str, Color] = {
     "Red":          Color(0xFF, 0x46, 0x32),
     "Green":        Color(0x46, 0xC8, 0x32),
     "Blue":         Color(0x32, 0x46, 0xFF),
     "Yellow":       Color(0xFF, 0xE0, 0x00),
 }
 
-magic_colors = {
+magic_colors: dict[str, Color] = {
     "Green":             Color(0x00, 0xC8, 0x00),
     "Red":               Color(0xC8, 0x00, 0x00),
     "Blue":              Color(0x00, 0x30, 0xFF),
@@ -150,7 +151,7 @@ magic_colors = {
 
 #                        A Button                 Text Cursor              Shop Cursor              Save/Death Cursor
 #                        Pause Menu A Cursor      Pause Menu A Icon        A Note
-a_button_colors = {
+a_button_colors: dict[str, tuple[Color, Color, Color, Color, Color, Color, Color]] = {
     "N64 Blue":         (Color(0x5A, 0x5A, 0xFF), Color(0x00, 0x50, 0xC8), Color(0x00, 0x50, 0xFF), Color(0x64, 0x64, 0xFF),
                          Color(0x00, 0x32, 0xFF), Color(0x00, 0x64, 0xFF), Color(0x50, 0x96, 0xFF)),
     "N64 Green":        (Color(0x00, 0x96, 0x00), Color(0x00, 0x96, 0x00), Color(0x00, 0x96, 0x00), Color(0x64, 0x96, 0x64),
@@ -186,7 +187,7 @@ a_button_colors = {
 }
 
 #                       B Button
-b_button_colors = {
+b_button_colors: dict[str, Color] = {
     "N64 Blue":         Color(0x5A, 0x5A, 0xFF),
     "N64 Green":        Color(0x00, 0x96, 0x00),
     "N64 Red":          Color(0xC8, 0x00, 0x00),
@@ -206,7 +207,7 @@ b_button_colors = {
 }
 
 #                        C Button                 Pause Menu C Cursor      Pause Menu C Icon        C Note
-c_button_colors = {
+c_button_colors: dict[str, tuple[Color, Color, Color, Color]] = {
     "N64 Blue":         (Color(0x5A, 0x5A, 0xFF), Color(0x00, 0x32, 0xFF), Color(0x00, 0x64, 0xFF), Color(0x50, 0x96, 0xFF)),
     "N64 Green":        (Color(0x00, 0x96, 0x00), Color(0x00, 0x96, 0x00), Color(0x00, 0x96, 0x00), Color(0x00, 0x96, 0x00)),
     "N64 Red":          (Color(0xC8, 0x00, 0x00), Color(0xC8, 0x00, 0x00), Color(0xC8, 0x00, 0x00), Color(0xC8, 0x00, 0x00)),
@@ -226,7 +227,7 @@ c_button_colors = {
 }
 
 #                       Start Button
-start_button_colors = {
+start_button_colors: dict[str, Color] = {
     "N64 Blue":         Color(0x5A, 0x5A, 0xFF),
     "N64 Green":        Color(0x00, 0x96, 0x00),
     "N64 Red":          Color(0xC8, 0x00, 0x00),
@@ -248,135 +249,137 @@ start_button_colors = {
 meta_color_choices = ["Random Choice", "Completely Random"] #, "Custom Color"]
 
 
-def get_tunic_colors():
+def get_tunic_colors() -> list[str]:
     return list(tunic_colors.keys())
 
 
-def get_tunic_color_options():
+def get_tunic_color_options() -> list[str]:
+    # For when Rainbow Tunic is ready
+    # return meta_color_choices + ["Rainbow"] + get_tunic_colors()
     return meta_color_choices + get_tunic_colors()
 
 
-def get_navi_colors():
+def get_navi_colors() -> list[str]:
     return list(NaviColors.keys())
 
 
-def get_navi_color_options(outer=False):
+def get_navi_color_options(outer: bool = False) -> list[str]:
     if outer:
         return ["[Same as Inner]"] + meta_color_choices + get_navi_colors()
     else:
         return meta_color_choices + get_navi_colors()
 
 
-def get_sword_trail_colors():
+def get_sword_trail_colors() -> list[str]:
     return list(sword_trail_colors.keys())
 
 
-def get_sword_trail_color_options(outer=False):
+def get_sword_trail_color_options(outer: bool = False) -> list[str]:
     if outer:
         return ["[Same as Inner]"] + meta_color_choices + get_sword_trail_colors()
     else:
         return meta_color_choices + get_sword_trail_colors()
 
 
-def get_bombchu_trail_colors():
+def get_bombchu_trail_colors() -> list[str]:
     return list(bombchu_trail_colors.keys())
 
 
-def get_bombchu_trail_color_options(outer=False):
+def get_bombchu_trail_color_options(outer: bool = False) -> list[str]:
     if outer:
         return ["[Same as Inner]"] + meta_color_choices + get_bombchu_trail_colors()
     else:
         return meta_color_choices + get_bombchu_trail_colors()
 
 
-def get_boomerang_trail_colors():
+def get_boomerang_trail_colors() -> list[str]:
     return list(boomerang_trail_colors.keys())
 
 
-def get_boomerang_trail_color_options(outer=False):
+def get_boomerang_trail_color_options(outer: bool = False) -> list[str]:
     if outer:
         return ["[Same as Inner]"] + meta_color_choices + get_boomerang_trail_colors()
     else:
         return meta_color_choices + get_boomerang_trail_colors()
 
 
-def get_gauntlet_colors():
+def get_gauntlet_colors() -> list[str]:
     return list(gauntlet_colors.keys())
 
 
-def get_gauntlet_color_options():
+def get_gauntlet_color_options() -> list[str]:
     return meta_color_choices + get_gauntlet_colors()
 
 
-def get_shield_frame_colors():
+def get_shield_frame_colors() -> list[str]:
     return list(shield_frame_colors.keys())
 
 
-def get_shield_frame_color_options():
+def get_shield_frame_color_options() -> list[str]:
     return meta_color_choices + get_shield_frame_colors()
 
 
-def get_heart_colors():
+def get_heart_colors() -> list[str]:
     return list(heart_colors.keys())
 
 
-def get_heart_color_options():
+def get_heart_color_options() -> list[str]:
     return meta_color_choices + get_heart_colors()
 
 
-def get_magic_colors():
+def get_magic_colors() -> list[str]:
     return list(magic_colors.keys())
 
 
-def get_magic_color_options():
+def get_magic_color_options() -> list[str]:
     return meta_color_choices + get_magic_colors()
 
 
-def get_a_button_colors():
+def get_a_button_colors() -> list[str]:
     return list(a_button_colors.keys())
 
 
-def get_a_button_color_options():
+def get_a_button_color_options() -> list[str]:
     return meta_color_choices + get_a_button_colors()
 
 
-def get_b_button_colors():
+def get_b_button_colors() -> list[str]:
     return list(b_button_colors.keys())
 
 
-def get_b_button_color_options():
+def get_b_button_color_options() -> list[str]:
     return meta_color_choices + get_b_button_colors()
 
 
-def get_c_button_colors():
+def get_c_button_colors() -> list[str]:
     return list(c_button_colors.keys())
 
 
-def get_c_button_color_options():
+def get_c_button_color_options() -> list[str]:
     return meta_color_choices + get_c_button_colors()
 
 
-def get_start_button_colors():
+def get_start_button_colors() -> list[str]:
     return list(start_button_colors.keys())
 
 
-def get_start_button_color_options():
+def get_start_button_color_options() -> list[str]:
     return meta_color_choices + get_start_button_colors()
 
 
-def contrast_ratio(color1, color2):
+def contrast_ratio(color1: list[int], color2: list[int]) -> float:
     # Based on accessibility standards (WCAG 2.0)
     lum1 = relative_luminance(color1)
     lum2 = relative_luminance(color2)
     return (max(lum1, lum2) + 0.05) / (min(lum1, lum2) + 0.05)
 
 
-def relative_luminance(color):
+def relative_luminance(color: list[int]) -> float:
     color_ratios = list(map(lum_color_ratio, color))
     return color_ratios[0] * 0.299 + color_ratios[1] * 0.587 + color_ratios[2] * 0.114
 
 
-def lum_color_ratio(val):
+def lum_color_ratio(val: float) -> float:
     val /= 255
     if val <= 0.03928:
         return val / 12.92
@@ -384,11 +387,11 @@ def lum_color_ratio(val):
         return pow((val + 0.055) / 1.055, 2.4)
 
 
-def generate_random_color():
+def generate_random_color() -> list[int]:
     return [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)]
 
 
-def hex_to_color(option):
+def hex_to_color(option: str) -> list[int]:
     # build color from hex code
     option = option[1:] if option[0] == "#" else option
     if not re.search(r'^(?:[0-9a-fA-F]{3}){1,2}$', option):
@@ -399,5 +402,5 @@ def hex_to_color(option):
         return list(int(f'{option[i]}{option[i]}', 16) for i in (0, 1, 2))
 
 
-def color_to_hex(color):
+def color_to_hex(color) -> str:
     return '#' + ''.join(['{:02X}'.format(c) for c in color])
