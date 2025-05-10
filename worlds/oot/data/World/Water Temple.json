@@ -16,13 +16,12 @@
                 at('Water Temple Lowered Water Levels', True) or can_use(Boomerang) or
                 ((can_use(Iron_Boots) or (Progressive_Scale, 2)) and
                     (can_use(Bow) or can_use(Hookshot) or can_use(Slingshot)) and
-                    (can_use(Zora_Tunic) or logic_fewer_tunic_requirements))", 
+                    (can_use(Zora_Tunic) or logic_fewer_tunic_requirements))",
             "Water Temple Main Room L2 Pot 2": "
                 at('Water Temple Lowered Water Levels', True) or can_use(Boomerang) or
                 ((can_use(Iron_Boots) or (Progressive_Scale, 2)) and
                     (can_use(Bow) or can_use(Hookshot) or can_use(Slingshot)) and
-                    (can_use(Zora_Tunic) or logic_fewer_tunic_requirements))",
-            "Fairy Pot": "has_bottle and can_use(Longshot)"
+                    (can_use(Zora_Tunic) or logic_fewer_tunic_requirements))"
         },
         "exits": {
             "Lake Hylia": "True",
@@ -30,7 +29,21 @@
                 is_adult and (Zora_Tunic or logic_fewer_tunic_requirements) and
                 ((logic_water_temple_torch_longshot and Longshot) or Iron_Boots)",
             "Water Temple Falling Platform Room": "Raise_Water_Level and (Small_Key_Water_Temple, 4)",
-            "Water Temple Boss Door": "can_use(Longshot)"
+            "Water Temple Before Boss": "can_use(Longshot)",
+            "Farores Wind Warp": "can_use(Farores_Wind)"
+        }
+    },
+    {
+        "region_name": "Water Temple Before Boss",
+        "dungeon": "Water Temple",
+        "savewarp": "Lake Hylia -> Water Temple Lobby",
+        "locations": {
+            "Water Temple Near Boss Pot 1": "can_use(Longshot)",
+            "Water Temple Near Boss Pot 2": "can_use(Longshot)",
+            "Fairy Pot": "has_bottle"
+        },
+        "exits": {
+            "Morpha Boss Room": "Boss_Key_Water_Temple"
         }
     },
     {
@@ -49,7 +62,7 @@
             "Water Temple Lowered Water Levels": "can_play(Zeldas_Lullaby)",
             "Water Temple North Basement": "
                 (Iron_Boots or can_play(Zeldas_Lullaby)) and
-                (Longshot or (logic_water_boss_key_region and Hover_Boots)) and
+                (Longshot or (logic_water_north_basement and Hover_Boots)) and
                 (Small_Key_Water_Temple, 4)"
         }
     },
@@ -143,7 +156,7 @@
         },
         "exits": {
             "Water Temple Boss Key Chest Room": "
-                (Small_Key_Water_Temple, 5) and 
+                (Small_Key_Water_Temple, 5) and
                 (logic_water_bk_jump_dive or Iron_Boots) and
                 (logic_water_north_basement_ledge_jump or Hover_Boots or
                     (has_explosives and Progressive_Strength_Upgrade))"
@@ -154,6 +167,8 @@
         "dungeon": "Water Temple",
         "locations": {
             "Water Temple Boss Key Chest": "True",
+            "Water Temple Boss Key Pot 1": "True",
+            "Water Temple Boss Key Pot 2": "True",
             "Fairy Pot": "has_bottle"
         }
     },
@@ -192,6 +207,7 @@
             "Water Temple River Recovery Heart 3": "True",
             "Water Temple River Recovery Heart 4": "True",
             "Water Temple River Pot 1": "True",
+            "Water Temple River Pot 2": "True",
             "Water Temple GS River": "
                 (Iron_Boots and (Zora_Tunic or logic_fewer_tunic_requirements)) or
                 (logic_water_river_gs and Longshot and (Bow or has_bombchus))",
