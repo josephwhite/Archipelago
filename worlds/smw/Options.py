@@ -412,6 +412,20 @@ class SMWPlandoTexts(PlandoTexts):
     Percentage is an integer from 1 to 100, and defaults to 100 when omitted."""
     valid_keys = list(default_text_table.keys())
 
+class RingLink(Toggle):
+    """
+    Whether your in-level coin gain/loss is linked to other players
+    """
+    display_name = "Ring Link"
+
+
+class TrapLink(Toggle):
+    """
+    Whether your received traps are linked to other players
+    """
+    display_name = "Trap Link"
+
+
 smw_option_groups = [
     OptionGroup("Goal Options", [
         Goal,
@@ -462,6 +476,8 @@ smw_option_groups = [
 @dataclass
 class SMWOptions(PerGameCommonOptions):
     death_link: DeathLink
+    ring_link: RingLink
+    trap_link: TrapLink
     goal: Goal
     bosses_required: BossesRequired
     max_yoshi_egg_cap: NumberOfYoshiEggs
