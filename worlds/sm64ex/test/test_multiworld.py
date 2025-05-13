@@ -1,4 +1,4 @@
-from . import SM64MultiworldTestBase
+from .bases import SM64MultiworldTestBase
 from .. import Options
 from ..Locations import loc100Coin_table
 
