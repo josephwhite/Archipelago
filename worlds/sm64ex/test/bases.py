@@ -13,6 +13,18 @@ class SM64TestBase(WorldTestBase):
     game = "Super Mario 64"
     world: SM64World
 
+    def test_max_stars(self):
+        total_power_stars = self.world.options.amount_of_stars
+        max = 120
+        if (not self.world.options.enable_coin_stars):
+            max -= 15
+        if self.world.options.enable_move_rando:
+            for _ in self.world.options.move_rando_actions.value:
+                max -= 1
+        if self.world.options.exclamation_boxes:
+            max += 29
+        self.assertEqual(self.world.number_of_stars, min(max, total_power_stars))
+
 # Mostly based on The Witness
 class SM64MultiworldTestBase(MultiworldTestBase):
     options_per_world: List[Dict[str, Any]]
