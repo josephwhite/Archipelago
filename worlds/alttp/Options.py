@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from BaseClasses import MultiWorld
 from Options import Choice, Range, DeathLink, DefaultOnToggle, FreeText, ItemsAccessibility, PerGameCommonOptions, \
-    PlandoBosses, PlandoConnections, PlandoTexts, Removed, StartInventoryPool, Toggle
+    PlandoBosses, PlandoConnections, PlandoTexts, Removed, StartInventoryPool, Toggle, OptionGroup
 from .EntranceShuffle import default_connections, default_dungeon_connections, \
     inverted_default_connections, inverted_default_dungeon_connections
 from .Text import TextTable
@@ -741,6 +741,93 @@ class ALttPPlandoTexts(PlandoTexts):
     Percentage is an integer from 1 to 100, and defaults to 100 when omitted."""
     valid_keys = TextTable.valid_keys
 
+alttp_option_groups = [
+    OptionGroup("Goal", [
+        Goal,
+        CrystalsGanon,
+        TriforcePiecesMode,
+        TriforcePiecesPercentage,
+        TriforcePiecesRequired,
+        TriforcePiecesAvailable,
+        TriforcePiecesExtra,
+    ]),
+    OptionGroup("Open", [
+        Mode,
+        OpenPyramid,
+        CrystalsTower,
+        MiseryMireMedallion,
+        TurtleRockMedallion,
+    ]),
+    OptionGroup("Shuffles", [
+        EnemyShuffle,
+        BushShuffle,
+        LTTPBosses,
+        EntranceShuffle,
+        EntranceShuffleSeed,
+        PotShuffle,
+        ShuffleCapacityUpgrades,
+        ShufflePrizes,
+        BeemizerTotalChance,
+        BeemizerTrapChance,
+    ]),
+    OptionGroup("Logic", [
+        GlitchesRequired,
+        DarkRoomLogic,
+        ItemPool,
+        ItemFunctionality,
+        Progressive,
+        GlitchBoots,
+        BomblessStart,
+        RetroBow,
+        RetroCaves,
+    ]),
+    OptionGroup("Shops", [
+        ShopItemSlots,
+        RandomizeShopInventories,
+        ShuffleShopInventories,
+        IncludeWitchHut,
+        RandomizeShopPrices,
+        RandomizeCostTypes,
+        ShopPriceModifier,
+    ]),
+    OptionGroup("Dungeon Items", [
+        big_key_shuffle,
+        small_key_shuffle,
+        key_drop_shuffle,
+        compass_shuffle,
+        map_shuffle,
+        RestrictBossItem,
+        DungeonCounters
+    ]),
+    OptionGroup("Combat", [
+        EnemyHealth,
+        EnemyDamage,
+        KillableThieves,
+        TileShuffle,
+        Swordless,
+    ]),
+    OptionGroup("Miscellaneous", [
+        QuickSwap,
+        Timer,
+        CountdownStartTime,
+        RedClockTime,
+        BlueClockTime,
+        GreenClockTime,
+    ]),
+    OptionGroup("Visuals & Sound", [
+        OWPalette,
+        UWPalette,
+        HUDPalette,
+        SwordPalette,
+        ShieldPalette,
+        HeartBeep,
+        HeartColor,
+        ReduceFlashing,
+        MenuSpeed,
+        Music,
+        TriforceHud,
+    ]),
+]
 
 @dataclass
 class ALTTPOptions(PerGameCommonOptions):

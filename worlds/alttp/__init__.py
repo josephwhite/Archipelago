@@ -13,7 +13,7 @@ from .EntranceShuffle import link_entrances, link_inverted_entrances, plando_con
 from .InvertedRegions import create_inverted_regions, mark_dark_world_regions
 from .ItemPool import generate_itempool, difficulties
 from .Items import item_init_table, item_name_groups, item_table, GetBeemizerItem
-from .Options import ALTTPOptions, small_key_shuffle
+from .Options import ALTTPOptions, small_key_shuffle, alttp_option_groups
 from .Regions import lookup_name_to_id, create_regions, mark_light_world_regions, lookup_vanilla_location_to_entrance, \
     is_main_entrance, key_drop_data
 from .Rom import LocalRom, patch_rom, patch_race_rom, check_enemizer, patch_enemizer, apply_rom_settings, \
@@ -122,6 +122,7 @@ class ALTTPWeb(WebWorld):
 
     tutorials = [setup_en, setup_de, setup_es, setup_fr, msu, msu_es, msu_fr, plando, oof_sound]
     game_info_languages = ["en", "fr"]
+    option_groups = alttp_option_groups
 
 
 class ALTTPWorld(World):
