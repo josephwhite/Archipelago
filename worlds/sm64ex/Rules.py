@@ -5,7 +5,8 @@ from ..generic.Rules import add_rule, set_rule
 from .Locations import location_table
 from .Options import SM64Options
 from .Regions import connect_regions, SM64Levels, sm64_level_to_paintings, sm64_paintings_to_level,\
-sm64_level_to_secrets, sm64_secrets_to_level, sm64_entrances_to_level, sm64_level_to_entrances
+sm64_level_to_secrets, sm64_secrets_to_level, sm64_entrances_to_level, sm64_level_to_entrances,\
+valid_move_randomizer_start_courses
 from .Items import action_item_data_table
 
 def shuffle_dict_keys(world, dictionary: dict) -> dict:
@@ -28,11 +29,6 @@ def fix_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, invalid_r
 def set_rules(world, options: SM64Options, player: int, area_connections: dict, star_costs: dict, move_rando_bitvec: int):
     randomized_level_to_paintings = sm64_level_to_paintings.copy()
     randomized_level_to_secrets = sm64_level_to_secrets.copy()
-    valid_move_randomizer_start_courses = [
-        "Bob-omb Battlefield", "Jolly Roger Bay", "Cool, Cool Mountain",
-        "Big Boo's Haunt", "Lethal Lava Land", "Shifting Sand Land",
-        "Dire, Dire Docks", "Snowman's Land"
-    ]  # Excluding WF, HMC, WDW, TTM, THI, TTC, and RR
 
     if options.area_rando > options.area_rando.option_Off:  # Some randomization is happening, randomize Courses
         randomized_level_to_paintings = shuffle_dict_keys(world,sm64_level_to_paintings)
