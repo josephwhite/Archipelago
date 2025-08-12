@@ -5,7 +5,7 @@
     Downloads run-time dependencies.
     .PARAMETER Setup
     Build setup with innosetup.
-    .PARAMETER GWEWrite
+    .PARAMETER GWEnv
     Enables setting enviornment variables for GitHub Workflows.
 #>
 
@@ -16,7 +16,7 @@ param(
     [Parameter()]
     [switch]$Setup,
     [Parameter()]
-    [switch]$GWEWrite
+    [switch]$GWEnv
 )
 
 $ARCHIPELAGO_ENEMIZER_VERSION = "7.1"
@@ -62,7 +62,6 @@ Write-Output "Upgrading pip..."
 python -m pip install --upgrade pip
 
 python setup.py build_exe --yes
-
 if ( $? -eq $false ) {
     Write-Error "setup.py failed!"
     exit 1
@@ -71,7 +70,7 @@ if ( $? -eq $false ) {
 $NAME="$(ls build | Select-String -Pattern 'exe')".Split('.',2)[1]
 $ZIP_NAME = "Archipelago_$NAME.7z"
 Write-Output "$NAME -> $ZIP_NAME"
-if ($GWEWrite) {
+if ($GWEnv) {
     Write-Output "ZIP_NAME=$ZIP_NAME" >> $Env:GITHUB_ENV
 }
 
@@ -88,10 +87,11 @@ if ($Sign) {
         Write-Error "Building setup failed!"
         exit 1
     }
-    if ($GWEWrite) {
+    if ($GWEnv) {
         $contents = Get-ChildItem -Path "setups/*.exe" -Force -Recurse
         $SETUP_NAME=$contents[0].Name
         Write-Output "SETUP_NAME=$SETUP_NAME" >> $Env:GITHUB_ENV
     }
 }
+
 exit 0
