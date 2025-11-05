@@ -51,41 +51,44 @@ nodebuster_regions_all: Dict[str, List[str]] = {
 
 every_region: Dict[str,Dict[str,List[str]]] = {
     "regions": {
-    "Menu": ["Upgrade Tree"],
-    # Bit Regions
-    "Damage1Root": ["Damage1Entr"],
-    # Node Regions
-    "Potency": ["PotencyEntr"],
-    "Pulse Bolts": ["PulseBoltsEntr"],
-    "Skilled Salvager": [],
-    "Sapper": [],
-    "Scaling Regeneration": ["ScalingRegenEntr"],
-    "Anti-Purple": [],
-    "Blood Armor": ["BloodArmorEntr"],
-    "Auto-Collect": [],
-    "Crypto Mine": ["CryptoMineEntr"],
-    "Milestones": ["MilestonesEntr"],
-    "Spawn Exploders": [],
 
-    # Node Regions off of netcoin
-    "Thundering": [],
-    "Pulser Pursuit": [],
-    "Pulse Thumper": [],
-    "Unending Parasite": [],
+        "Menu": ["Upgrade Tree"],
 
-    # Netcoint Regions
-    "Bolt Lethality": [],
-    "Drainer": [],
-    "Blood Visage": [],
-    "Processor Acquisition": [],
-    "Auto Pulser": ["AutoPulserEntr"],
-    "Netblade": ["NetbladeEntr"],
-    "Big Crit": [],
-    "Overloaded": [],
+        # Bit Regions
+        "Damage1Root": ["Damage1Entr"],
 
-    # Netcoin Regions off of main.
-    "Transplant": ["TransplantEntr"],
-    "Net Armor": []
+        # Node Regions
+        "Potency": ["PotencyEntr"],
+        "Pulse Bolts": ["PulseBoltsEntr"],
+        "Skilled Salvager": [],
+        "Sapper": [],
+        "Scaling Regeneration": ["ScalingRegenEntr"],
+        "Anti-Purple": [],
+        "Blood Armor": ["BloodArmorEntr"],
+        "Auto-Collect": [],
+        "Crypto Mine": ["CryptoMineEntr"],
+        "Milestones": ["MilestonesEntr"],
+        "Spawn Exploders": [],
+
+        # Node Regions off of netcoin
+        "Thundering": [],
+        "Pulser Pursuit": [],
+        "Pulse Thumper": [],
+        "Unending Parasite": [],
+
+        # Netcoint Regions
+        "Bolt Lethality": [],
+        "Drainer": [],
+        "Blood Visage": [],
+        "Processor Acquisition": [],
+        "Auto Pulser": ["AutoPulserEntr"],
+        "Netblade": ["NetbladeEntr"],
+        "Big Crit": [],
+        "Overloaded": [],
+
+        # Netcoin Regions off of main.
+        "Transplant": ["TransplantEntr"],
+        "Net Armor": []
     },
 
     "mandatory_regions": {
@@ -105,17 +108,17 @@ every_region: Dict[str,Dict[str,List[str]]] = {
     },
 
     "milestone_regions":{
-    "Red": [],
-    "Blue": [],
-    "Yellow": []
+        "Red": [],
+        "Blue": [],
+        "Yellow": []
     },
 
     "crypto_regions":{
-    "Levels": []
+        "Levels": []
     },
 
     "boss_regions":{
-    "Boss Drops": []
+        "Boss Drops": []
     }
 }
 

@@ -61,7 +61,7 @@ def get_rules_lookup(world, player: int):
                 "Lifesteal1-2": lambda state: has_access_to_blue_enemies(world, state, player),
                 "Lifesteal1-3": lambda state: has_access_to_blue_enemies(world, state, player),
                 "Lifesteal1-4": lambda state: has_access_to_blue_enemies(world, state, player),
-                "Lifesteal1,5": lambda state: has_access_to_blue_enemies(world, state, player),
+                "Lifesteal1-5": lambda state: has_access_to_blue_enemies(world, state, player),
                 "Salvaging2-1": lambda state: has_access_to_blue_enemies(world, state, player),
                 "PulseBolts-1": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MaxHealthHeal1-1": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -101,7 +101,7 @@ def get_rules_lookup(world, player: int):
                 "MovingPulserSize1-3": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MovingPulserSize1-4": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MovingPulserSize1-5": lambda state: has_access_to_blue_enemies(world, state, player),
-                "MoveingPulserSize1-6": lambda state: has_access_to_blue_enemies(world, state, player),
+                "MovingPulserSize1-6": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MaxHealthToArmor1-1": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MaxHealthToArmor1-2": lambda state: has_access_to_blue_enemies(world, state, player),
                 "MaxHealthToArmor1-3": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -208,7 +208,7 @@ def set_rules(self) -> None:
     #    multiworld.get_location(location_name, player).access_rule = rule
         #set_rule(multiworld.get_location(location_name, player),rules_lookup["locations"][location_name])
 
-    visualize_regions(multiworld.get_region("Menu",player), "my_world.puml")
+    visualize_regions(multiworld.get_region("Menu",player), "nodebuster_world.puml")
 
     #for region in multiworld.get_regions(player):
     #    if region.name in rules_lookup["regions"]:

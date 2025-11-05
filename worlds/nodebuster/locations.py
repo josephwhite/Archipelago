@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import List
 
 from BaseClasses import Location
 
@@ -25,24 +25,30 @@ def get_crypto_locations() -> List:
 
 
 damage_1_locations = [
-    "Damage1-1", "Damage1-2", "Damage1-3", "Damage1-4",
-    "Damage1-5", "Damage1-6", "Damage1-7", "Damage1-8",
-    "Damage1-9", "Damage1-10", "Damage1-11", "Damage1-12",
-    "Damage1-13", "Damage1-14", "Damage1-15","Health1-1",
-    "Health1-2", "Health1-3", "Health1-4", "Health1-5",
-    "Health1-6", "Health1-7", "Health1-8", "Health1-9",
-    "Health1-10", "SpawnRate1-1", "SpawnRate1-2", "SpawnRate1-3",
-    "SpawnRate1-4", "SpawnRate1-5", "SpawnRate1-6", "SpawnRate1-7",
+    "Damage1-1", "Damage1-2", "Damage1-3", "Damage1-4", "Damage1-5", "Damage1-6", "Damage1-7",
+    "Damage1-8", "Damage1-9", "Damage1-10", "Damage1-11", "Damage1-12", "Damage1-13", "Damage1-14", "Damage1-15",
+
+    "Health1-1", "Health1-2", "Health1-3", "Health1-4", "Health1-5", "Health1-6", "Health1-7", "Health1-8",
+    "Health1-9", "Health1-10",
+
+    "SpawnRate1-1", "SpawnRate1-2", "SpawnRate1-3", "SpawnRate1-4", "SpawnRate1-5", "SpawnRate1-6", "SpawnRate1-7",
     "SpawnRate1-8", "SpawnRate1-9", "SpawnRate1-10", "SpawnRate1-11",
     "SpawnRate1-12", "SpawnRate1-13", "SpawnRate1-14", "SpawnRate1-15",
+
     "Armor1-1", "Armor1-2", "Armor1-3", "Armor1-4", "Armor1-5", "Armor1-6",
-    "Armor1-7", "Armor1-8", "Armor1-9", "Armor1-10", "BitBoost1-1", "Size1-1",
-    "Size1-2", "Size1-3", "Size1-4", "Size1-5", "Size1-6", "Size1-7", "Size1-8",
-    "Size1-9", "Size1-10", "BossArmor1-1", "BossArmor1-2", "BossArmor1-3",
-    "BossArmor1-4", "BossArmor1-5", "BossArmor1-6", "BossArmor1-7", "BossArmor1-8",
-    "BossArmor1-9", "BossArmor1-10", "HealthRegen1-1", "HealthRegen1-2",
-    "HealthRegen1-3", "HealthRegen1-4", "HealthRegen1-5", "NodeFinder1-1",
-    "NodeFinder1-2", "NodeFinder1-3", "NodeFinder1-4", "NodeFinder1-5",
+    "Armor1-7", "Armor1-8", "Armor1-9", "Armor1-10",
+
+    "BitBoost1-1",
+    "Size1-1", "Size1-2", "Size1-3", "Size1-4", "Size1-5", "Size1-6", "Size1-7", "Size1-8",
+    "Size1-9", "Size1-10",
+
+    "BossArmor1-1", "BossArmor1-2", "BossArmor1-3", "BossArmor1-4", "BossArmor1-5", "BossArmor1-6", "BossArmor1-7",
+    "BossArmor1-8", "BossArmor1-9", "BossArmor1-10",
+
+    "HealthRegen1-1", "HealthRegen1-2", "HealthRegen1-3", "HealthRegen1-4", "HealthRegen1-5",
+
+    "NodeFinder1-1", "NodeFinder1-2", "NodeFinder1-3", "NodeFinder1-4", "NodeFinder1-5",
+
     "Salvaging1-1", "Salvaging1-2", "Salvaging1-3", "Salvaging1-4",
     "Salvaging1-5", "DamagePerEnemy1-1", "DamagePerEnemy1-2", "DamagePerEnemy1-3",
     "DamagePerEnemy1-4", "DamagePerEnemy1-5", "BossDamage1-1", "BossDamage1-2",
@@ -75,26 +81,35 @@ damage_1_locations = [
     "Armor6-9", "Armor6-10", "Armor6-11", "Armor6-12", "Armor6-13", "Armor6-14",
     "Armor6-15", "Armor6-16", "Armor6-17", "Armor6-18", "Armor6-19", "Armor6-20",
     "Armor6-21", "Armor6-22", "Armor6-23", "Armor6-24", "Armor6-25", "Armor6-26",
-    "Armor6-27", "Armor6-28", "Armor6-29", "Armor6-30", "BossDamage2-1",
-    "BossDamage2-2", "BossDamage2-3", "BossDamage2-4", "BossDamage2-5",
-    "BossDamage2-6", "BossDamage2-7", "BossDamage2-8", "BossDamage2-9",
-    "BossDamage2-10","Size3-1", "Size3-2", "Size3-3","FocusArmor1-1", "FocusArmor1-2", "FocusArmor1-3",
-    "FocusArmor1-4", "FocusArmor1-5"
+    "Armor6-27", "Armor6-28", "Armor6-29", "Armor6-30",
+    "BossDamage2-1", "BossDamage2-2", "BossDamage2-3", "BossDamage2-4", "BossDamage2-5",
+    "BossDamage2-6", "BossDamage2-7", "BossDamage2-8", "BossDamage2-9", "BossDamage2-10",
+
+    "Size3-1", "Size3-2", "Size3-3",
+
+    "FocusArmor1-1", "FocusArmor1-2", "FocusArmor1-3", "FocusArmor1-4", "FocusArmor1-5"
+
 ]
 
 potency_locations = [
-    "Damage3-1",
-    "Damage3-2", "Damage3-3", "Damage3-4", "Damage3-5", "Damage3-6", "Damage3-7",
-    "Damage3-8", "Damage3-9", "Damage3-10", "Undamaged1-1", "Undamaged1-2",
-    "Undamaged1-3", "Undamaged1-4", "Undamaged1-5", "Undamaged1-6", "Execute1-1",
-    "Execute1-2", "Execute1-3", "Execute1-4", "Execute1-5", "Execute1-6",
-    "CritChance1-1", "CritChance1-2", "CritChance1-3", "CritChance1-4",
-    "CritChance1-5", "CritChance1-6", "CritChance1-7", "CritChance1-8",
-    "CritChance1-9", "CritChance1-10","Damage4-1", "Damage4-2", "Damage4-3",
-    "CritDamage1-1", "CritDamage1-2", "CritDamage1-3",
-    "CritDamage1-4", "CritDamage1-5", "CritDamage1-6", "CritDamage1-7",
-    "CritDamage1-8", "CritDamage1-9", "CritDamage1-10","Undamaged2-1", "Undamaged2-2", "Undamaged2-3",
-    "Undamaged2-4", "Execute2-1", "Execute2-2", "Execute2-3", "Execute2-4"
+    "Damage3-1", "Damage3-2", "Damage3-3", "Damage3-4", "Damage3-5", "Damage3-6", "Damage3-7",
+    "Damage3-8", "Damage3-9", "Damage3-10",
+
+    "Undamaged1-1", "Undamaged1-2", "Undamaged1-3", "Undamaged1-4", "Undamaged1-5", "Undamaged1-6",
+
+    "Execute1-1", "Execute1-2", "Execute1-3", "Execute1-4", "Execute1-5", "Execute1-6",
+
+    "CritChance1-1", "CritChance1-2", "CritChance1-3", "CritChance1-4", "CritChance1-5",
+    "CritChance1-6", "CritChance1-7", "CritChance1-8", "CritChance1-9", "CritChance1-10",
+
+    "Damage4-1", "Damage4-2", "Damage4-3",
+
+    "CritDamage1-1", "CritDamage1-2", "CritDamage1-3", "CritDamage1-4", "CritDamage1-5", "CritDamage1-6",
+    "CritDamage1-7", "CritDamage1-8", "CritDamage1-9", "CritDamage1-10",
+
+    "Undamaged2-1", "Undamaged2-2", "Undamaged2-3", "Undamaged2-4",
+
+    "Execute2-1", "Execute2-2", "Execute2-3", "Execute2-4"
 ]
 
 pulse_bolts_locations = [
@@ -102,8 +117,10 @@ pulse_bolts_locations = [
     "PulseBoltDamage1-2", "PulseBoltDamage1-3", "PulseBoltDamage1-4",
     "PulseBoltDamage1-5", "PulseBoltDamage1-6", "PulseBoltDamage1-7",
     "PulseBoltDamage1-8", "PulseBoltDamage1-9", "PulseBoltDamage1-10",
+
     "PulseBoltCount1-1", "PulseBoltCount1-2", "PulseBoltCount1-3",
     "PulseBoltCount1-4", "PulseBoltCount1-5","PulseBoltExplode-1",
+
     "PulseBoltCount2-1"
 ]
 
@@ -112,8 +129,9 @@ skilled_salvager_locations = [
 ]
 
 sapper_locations = [
-    "Lifesteal1-1", "Lifesteal1-2",
-    "Lifesteal1-3", "Lifesteal1-4", "Lifesteal1-5", "DropHeal1-1"
+    "Lifesteal1-1", "Lifesteal1-2", "Lifesteal1-3", "Lifesteal1-4", "Lifesteal1-5",
+
+    "DropHeal1-1"
 ]
 
 scaling_regeneration_locations = [
@@ -159,9 +177,8 @@ thundering_locations = [
 ]
 
 pulser_pursuit_locations = [
-    "MovingPulserSpeed1-1",
-    "MovingPulserSpeed1-2", "MovingPulserSpeed1-3", "MovingPulserSpeed1-4",
-    "MovingPulserSpeed1-5"
+    "MovingPulserSpeed1-1", "MovingPulserSpeed1-2", "MovingPulserSpeed1-3",
+    "MovingPulserSpeed1-4", "MovingPulserSpeed1-5"
     
 ]
 
@@ -290,13 +307,11 @@ crypto_mine_levels = [
     "CryptoLevel-34","CryptoLevel-35","CryptoLevel-36"
 ]
 
-
 goal_locations = [
     "Virus Released"
 ]
 
-
-regions_to_locations: Dict[str, List[str]] = {
+regions_to_locations: dict[str, List[str]] = {
     "Menu": [],
     "Damage1Root": damage_1_locations,
     "Potency": potency_locations,
