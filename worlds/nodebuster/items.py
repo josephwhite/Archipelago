@@ -160,7 +160,7 @@ junk_items: List[ItemDict] = [
 ]
 
 goal_items: List[ItemDict] = [
-    { "name": "Virus Deployed", "count":1,"classification": ItemClassification.progression}
+    { "name": "Virus Deployed", "count":0,"classification": ItemClassification.progression}
 ]
 
 progressive_items: List[ItemDict] = [
@@ -182,3 +182,6 @@ progressive_items_exclude_list: List[str] = [
     "Infinity1","Infinity2","Infinity3","Infinity4","Infinity5","Infinity6","Infinity7","Infinity8","Infinity9",
     "Reds500","Blues10","Reds2k","Blues100","Reds4k","Blues200","Reds6k","Blues300","Reds8k","Blues500","Reds10k","Blues800","Yellows5","Reds15k","Blues1.2k","Yellows10","Reds20k","Blues1.6k","Yellows15","Reds30k","Blues2k","Reds50k","Blues4k","Reds100k","Blues8k"
 ]
+
+all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + junk_items + progressive_items + goal_items
+all_items_to_id = {item["name"]: i + base_id for i, item in enumerate(all_items)}

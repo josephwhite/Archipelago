@@ -3,6 +3,7 @@ from BaseClasses import CollectionState
 
 nodebuster_regions_all: Dict[str, List[str]] = {
     "Menu": ["Upgrade Tree"],
+    "Upgrade Tree": ["Damage1Root", "Boss Drops"],
     # Bit Regions
     #"Upgrades": ["Milestones"],
     "Damage1Root": ["Potency","Pulse Bolts","Skilled Salvager","Sapper","Scaling Regeneration",
@@ -17,15 +18,15 @@ nodebuster_regions_all: Dict[str, List[str]] = {
     "Anti-Purple": [],
     "Blood Armor": ["Blood Visage"],
     "Auto-Collect": [],
-    "Crypto Mine": ["Processor Acquisition"],
-    "Milestones": [],
+    "Crypto Mine": ["Processor Acquisition", "Crypto Levels"],
+    "Milestones": ["Red", "Blue", "Yellow"],
     "Spawn Exploders": [],
 
     # Node Regions off of netcoin
     "Thundering": [],
     "Pulser Pursuit": [],
     "Pulse Thumper": [],
-    "Unending Parasite": [],
+    "Unending Parasite": ["Epilogue"],
 
     # Netcoint Regions
     "Bolt Lethality": [],
@@ -41,12 +42,17 @@ nodebuster_regions_all: Dict[str, List[str]] = {
     "Transplant": ["Unending Parasite"],
     "Net Armor": [],
 
-    "Upgrade Tree": ["Damage1Root"]
 
+    "Boss Drops": [],
     # Milestone Regions
-    #"Red": [],
-    #"Blue": [],
-    #"Yellow": []
+    "Red": [],
+    "Blue": [],
+    "Yellow": [],
+
+    # Cryto Regions
+    "Crypto Levels": [],
+
+    "Epilogue": []
 }
 
 every_region: Dict[str,Dict[str,List[str]]] = {

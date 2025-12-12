@@ -313,6 +313,7 @@ goal_locations = [
 
 regions_to_locations: dict[str, List[str]] = {
     "Menu": [],
+    "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
     "Potency": potency_locations,
     "Pulse Bolts": pulse_bolts_locations,
@@ -355,6 +356,9 @@ regions_to_locations: dict[str, List[str]] = {
     "Boss Drops": boss_locations,
 
     # Crypto Mine Levels
-    "Levels": crypto_mine_levels,
-    "Epilogue": []
+    "Crypto Levels": crypto_mine_levels,
+    "Epilogue": goal_locations
 }
+
+all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations()+ goal_locations
+all_locations_to_id = {location: i + base_id for i, location in enumerate(all_locations)}
