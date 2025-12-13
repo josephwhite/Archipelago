@@ -356,8 +356,5 @@ class NodebusterWorld(World):
     def fill_slot_data(self) -> dict[str, Any]:
         return self.options.as_dict(
             "death_link",
-            "goal",
-            "milestone",
-            "crypto",
-            "bossdrops"
+            "goal"
         )
