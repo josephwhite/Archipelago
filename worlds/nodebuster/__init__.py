@@ -51,7 +51,7 @@ class NodebusterWeb(WebWorld):
 
     tutorials = [guide_en]
 
-    bug_report_page = "https://github.com/Emerald836/Archipelago-Nodebuster/issues"
+    bug_report_page = "https://github.com/josephwhite/Emerlads-Nodebuster_AP_Mod/issues"
 
 
 class NodebusterWorld(World):
