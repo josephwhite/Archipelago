@@ -9,6 +9,10 @@ else:
     NodebusterWorld = object
 
 
+def has_boss_drops(world:"NodebusterWorld", state: CollectionState, player: int, count: int) -> bool:
+    return state.has("Boss Drop", player, count)
+
+
 def has_crypto_mine(world:"NodebusterWorld", state: CollectionState, player: int) -> bool:
     return state.has("CryptoMine", player)
 
@@ -311,6 +315,25 @@ def get_location_rules_lookup(world, player: int):
         "AutoCollect-6": lambda state: has_access_to_blue_enemies(world, state, player),
         "AutoCollect-7": lambda state: has_access_to_blue_enemies(world, state, player),
         "AutoCollect-8": lambda state: has_access_to_blue_enemies(world, state, player),
+        # Boss Drop progressive order
+        "AttackSpeed1-1": lambda state: has_boss_drops(world, state, player, 1),
+        "AttackSpeed2-1": lambda state: has_boss_drops(world, state, player, 2),
+        "SpawnRate2-1": lambda state: has_boss_drops(world, state, player, 3),
+        "DropHeal1-1": lambda state: has_boss_drops(world, state, player, 4),
+        "Size2-1": lambda state: has_boss_drops(world, state, player, 5),
+        "Size3-1": lambda state: has_boss_drops(world, state, player, 6),
+        "MovingPulserSize2-1": lambda state: has_boss_drops(world, state, player, 7),
+        "PulseBoltCount2-1": lambda state: has_boss_drops(world, state, player, 8),
+        "Infinity1-1": lambda state: has_boss_drops(world, state, player, 9),
+        "Infinity2-1": lambda state: has_boss_drops(world, state, player, 10),
+        "Infinity3-1": lambda state: has_boss_drops(world, state, player, 11),
+        "Infinity4-1": lambda state: has_boss_drops(world, state, player, 12),
+        "Infinity5-1": lambda state: has_boss_drops(world, state, player, 13),
+        "Infinity6-1": lambda state: has_boss_drops(world, state, player, 14),
+        "Infinity7-1": lambda state: has_boss_drops(world, state, player, 15),
+        "Infinity8-1": lambda state: has_boss_drops(world, state, player, 16),
+        "Infinity9-1": lambda state: has_boss_drops(world, state, player, 17),
+        # Goal
         "Virus Released": lambda state: can_release_virus(world, state, player),
     }
     return rules_lookup
