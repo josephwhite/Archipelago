@@ -17,7 +17,7 @@ class Goal(Choice):
 
 
 class ProgressiveItems(Toggle):
-    """Removes a large portion of items in the pool and replaces them with progressive versions for the respective upgrade.
+    """Replaces a large portion of items in the pool with progressive versions for the respective upgrade.
     WARNING!!! This setting is in very early development. And as such may cause SOFTLOCKS!"""
 
     display_name = "Progressive Items"

@@ -5,7 +5,6 @@ from worlds.AutoWorld import WebWorld, World
 
 from . import rules
 from .items import (
-    NodebusterItemData,
     NodebusterItem,
     base_id,
     boss_drop_items,
@@ -14,7 +13,8 @@ from .items import (
     milestone_items,
     progressive_items,
     progressive_items_exclude_list,
-    upgrade_items,
+    upgrade_items, all_items_to_id,
+    all_items
 )
 from .locations import (
     NodebusterLocation,
@@ -22,7 +22,8 @@ from .locations import (
     get_crypto_locations,
     get_locations,
     get_milestone_locations,
-    regions_to_locations,
+    regions_to_locations, all_locations_to_id, crypto_mine_levels, red_locations, yellow_locations, blue_locations,
+    boss_locations,
 )
 from .Options import NodebusterOptions
 from .regions import (
@@ -33,7 +34,7 @@ from .regions import (
     every_region,
     nodebuster_regions_all,
 )
-from .rules import set_all_rules
+from .rules import set_all_rules, set_nodebuster_lmao_rules
 
 
 class NodebusterWeb(WebWorld):
@@ -59,14 +60,12 @@ class NodebusterWorld(World):
     """
     game = "Nodebuster"
     web = NodebusterWeb()
-    options_dataclass = Options.NodebusterOptions
-    options: Options.NodebusterOptions
+    options_dataclass = NodebusterOptions
+    options: NodebusterOptions
     topology_present = True
-    rule = rules
-    all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + junk_items + progressive_items
-    all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations()
-    item_name_to_id = {item["name"]: i + base_id for i, item in enumerate(all_items)}
-    location_name_to_id = {location: i + base_id for i, location in enumerate(all_locations)}
+    #rule = rules
+    item_name_to_id = all_items_to_id
+    location_name_to_id = all_locations_to_id
 
     item_name_groups = {
         "Damage Increase": {
@@ -102,85 +101,171 @@ class NodebusterWorld(World):
         }
     }
 
+    def generate_basic(self):
+        self.multiworld.get_location("Virus Released", self.player).place_locked_item(self.create_item("Virus Deployed"))
+
+        if not self.options.crypto:
+            for cml in crypto_mine_levels:
+                self.multiworld.get_location(cml, self.player).place_locked_item(self.create_item("CryptoLevel"))
+
+        if not self.options.milestone:
+            if self.options.progressiveItems:
+                for red in red_locations:
+                    self.multiworld.get_location(red, self.player).place_locked_item(self.create_item("Progressive Milestone Reward"))
+                for blue in blue_locations:
+                    self.multiworld.get_location(blue, self.player).place_locked_item(self.create_item("Progressive Milestone Reward"))
+                for yellow in yellow_locations:
+                    self.multiworld.get_location(yellow, self.player).place_locked_item(self.create_item("Progressive Milestone Reward"))
+            else:
+                for red in red_locations:
+                    self.multiworld.get_location(red, self.player).place_locked_item(self.create_item(red))
+                for blue in blue_locations:
+                    self.multiworld.get_location(blue, self.player).place_locked_item(self.create_item(blue))
+                for yellow in yellow_locations:
+                    self.multiworld.get_location(yellow, self.player).place_locked_item(self.create_item(yellow))
+
+        if not self.options.bossdrops:
+            for boss in boss_locations:
+                self.multiworld.get_location(boss, self.player).place_locked_item(self.create_item("Boss Drop"))
+
+
     def create_item(self, name: str) -> Item:
         item_id = self.item_name_to_id[name]
-        item_data = self.all_items[item_id - base_id]
+        item_data = all_items[item_id - base_id]
         return NodebusterItem(name, item_data["classification"], item_id, self.player)
 
 
-
     def create_regions(self) -> None:
+        # Create Regions
+        for region, connected_regions in nodebuster_regions_all.items():
+            r = Region(region, self.player, self.multiworld)
+            for i in regions_to_locations[region]:
+                loc = NodebusterLocation(self.player, i, self.location_name_to_id.get(i, None), r)
+                r.locations.append(loc)
+            self.multiworld.regions.append(r)
+        # Connect Regions
+        for region, connected_regions in nodebuster_regions_all.items():
+            r = self.multiworld.get_region(region, self.player)
+            for conn in connected_regions:
+                c = self.multiworld.get_region(conn, self.player)
+                r.connect(c)
+
+    def create_regions_broken(self) -> None:
         used_regions = every_region
         for region_name, exits in used_regions["regions"].items():
             r = Region(region_name, self.player,self.multiworld)
             for exit_name in exits:
-                if not self.options.milestone:
-                    if exit_name in used_regions["milestone_regions"]:
-                        continue
+                #if not self.options.milestone:
+                #    if exit_name in used_regions["milestone_regions"]:
+                #        continue
+                #if not self.options.crypto:
+                #    if exit_name in used_regions["crypto_regions"]:
+                #        continue
+                #if self.options.bossdrops <= 0:
+                #    if exit_name in used_regions["boss_regions"]:
+                #        continue
+                r.exits.append(Entrance(self.player, exit_name, r))
+            self.multiworld.regions.append(r)
+
+        #if self.options.milestone:
+        #    for region_name, exits in used_regions["milestone_regions"].items():
+        #        r = Region(region_name, self.player,self.multiworld)
+        #        for exit_name in exits:
+        #            if not self.options.crypto:
+        #                if exit_name in used_regions["crypto_regions"]:
+        #                    continue
+        #            if self.options.bossdrops <= 0:
+        #                if exit_name in used_regions["boss_regions"]:
+        #                    continue
+        #            r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+        #        self.multiworld.regions.append(r)
+        for region_name, exits in used_regions["milestone_regions"].items():
+            r = Region(region_name, self.player,self.multiworld)
+            for exit_name in exits:
                 if not self.options.crypto:
                     if exit_name in used_regions["crypto_regions"]:
                         continue
                 if self.options.bossdrops <= 0:
                     if exit_name in used_regions["boss_regions"]:
                         continue
-                r.exits.append(Entrance(self.player, exit_name, r))
+                r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
             self.multiworld.regions.append(r)
 
-        if self.options.milestone:
-            for region_name, exits in used_regions["milestone_regions"].items():
-                r = Region(region_name, self.player,self.multiworld)
-                for exit_name in exits:
-                    if not self.options.crypto:
-                        if exit_name in used_regions["crypto_regions"]:
-                            continue
-                    if self.options.bossdrops <= 0:
-                        if exit_name in used_regions["boss_regions"]:
-                            continue
-                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
-                self.multiworld.regions.append(r)
-
-
-        if self.options.crypto:
-            for region_name, exits in used_regions["crypto_regions"].items():
-                r = Region(region_name, self.player, self.multiworld)
-                for exit_name in exits:
-                    if not self.options.milestone:
-                        if exit_name in used_regions["milestone_regions"]:
-                            continue
-                    if self.options.bossdrops <= 0:
-                        if exit_name in used_regions["boss_regions"]:
-                            continue
-                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
-                self.multiworld.regions.append(r)
-
-
-
-        if self.options.bossdrops > 0:
-            for region_name, exits in used_regions["boss_regions"].items():
-                r = Region(region_name, self.player, self.multiworld)
-                for exit_name in exits:
-                    if not self.options.milestone:
-                        if exit_name in used_regions["milestone_regions"]:
-                            continue
-                    if not self.options.crypto:
-                        if exit_name in used_regions["crypto_regions"]:
-                            continue
-                    r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
-                self.multiworld.regions.append(r)
-
-
-
-        for entr_name, region  in used_regions["mandatory_regions"].items():
-            for region_name in region:
+        #if self.options.crypto:
+        #    for region_name, exits in used_regions["crypto_regions"].items():
+        #        r = Region(region_name, self.player, self.multiworld)
+        #        for exit_name in exits:
+        #            if not self.options.milestone:
+        #                if exit_name in used_regions["milestone_regions"]:
+        #                    continue
+        #            if self.options.bossdrops <= 0:
+        #                if exit_name in used_regions["boss_regions"]:
+        #                    continue
+        #            r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+        #        self.multiworld.regions.append(r)
+        for region_name, exits in used_regions["crypto_regions"].items():
+            r = Region(region_name, self.player, self.multiworld)
+            for exit_name in exits:
                 if not self.options.milestone:
-                    if region_name in used_regions["milestone_regions"]:
-                        continue
-                if not self.options.crypto:
-                    if region_name in used_regions["crypto_regions"]:
+                    if exit_name in used_regions["milestone_regions"]:
                         continue
                 if self.options.bossdrops <= 0:
-                    if region_name in used_regions["boss_regions"]:
+                    if exit_name in used_regions["boss_regions"]:
                         continue
+                r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+            self.multiworld.regions.append(r)
+
+
+        #if self.options.bossdrops > 0:
+        #    for region_name, exits in used_regions["boss_regions"].items():
+        #        r = Region(region_name, self.player, self.multiworld)
+        #        for exit_name in exits:
+        #            if not self.options.milestone:
+        #                if exit_name in used_regions["milestone_regions"]:
+        #                    continue
+        #            if not self.options.crypto:
+        #                if exit_name in used_regions["crypto_regions"]:
+        #                    continue
+        #            r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+        #        self.multiworld.regions.append(r)
+        for region_name, exits in used_regions["boss_regions"].items():
+            r = Region(region_name, self.player, self.multiworld)
+            for exit_name in exits:
+                #if not self.options.milestone:
+                #    if exit_name in used_regions["milestone_regions"]:
+                #        continue
+                #if not self.options.crypto:
+                #    if exit_name in used_regions["crypto_regions"]:
+                #        continue
+                r.exits.append(Entrance(self.player, exit_name, r, 0, EntranceType.TWO_WAY))
+            self.multiworld.regions.append(r)
+
+
+        #for entr_name, region  in used_regions["mandatory_regions"].items():
+        #    for region_name in region:
+        #        if not self.options.milestone:
+        #            if region_name in used_regions["milestone_regions"]:
+        #                continue
+        #        if not self.options.crypto:
+        #            if region_name in used_regions["crypto_regions"]:
+        #                continue
+        #        if self.options.bossdrops <= 0:
+        #            if region_name in used_regions["boss_regions"]:
+        #                continue
+        #        e = self.multiworld.get_entrance(entr_name, self.player)
+        #        r = self.multiworld.get_region(region_name, self.player)
+        #        e.connect(r)
+        for entr_name, region in used_regions["mandatory_regions"].items():
+            for region_name in region:
+                #if not self.options.milestone:
+                #    if region_name in used_regions["milestone_regions"]:
+                #        continue
+                #if not self.options.crypto:
+                #    if region_name in used_regions["crypto_regions"]:
+                #        continue
+                #if self.options.bossdrops <= 0:
+                #    if region_name in used_regions["boss_regions"]:
+                #        continue
                 e = self.multiworld.get_entrance(entr_name, self.player)
                 r = self.multiworld.get_region(region_name, self.player)
                 e.connect(r)
@@ -216,14 +301,17 @@ class NodebusterWorld(World):
          #   })
 
     def create_items(self) -> None:
-        for item in self.all_items:
+        for item in all_items:
             if not self.options.milestone:
                 if item in milestone_items:
+                    item["count"] = 0
                     continue
                 if item["name"] == "Progressive Milestone Reward":
+                    item["count"] = 0
                     continue
             if not self.options.crypto:
                 if item in crypto_level_items:
+                    item["count"] = 0
                     continue
             if not self.options.progressiveItems:
                 if item in progressive_items:
@@ -234,6 +322,7 @@ class NodebusterWorld(World):
             match self.options.bossdrops:
                 case 0:
                     if item in boss_drop_items:
+                        item["count"] = 0
                         continue
                 case 1:
                     if item["name"] == "Boss Drop":
@@ -259,20 +348,13 @@ class NodebusterWorld(World):
         #junk = len(self.all_locations) - len(self.all_items)
         #self.multiworld.itempool += [self.create_item("Nothing") for _ in range(junk)]
 
-    set_rules = rules.set_rules
 
-
-   # def set_rules(self) -> None:
-        #rules
-        #rules.NodebusterRules(self).set_all_rules()
-
+    def set_rules(self):
+        set_nodebuster_lmao_rules(self)
 
 
     def fill_slot_data(self) -> dict[str, Any]:
         return self.options.as_dict(
             "death_link",
-            "goal",
-            "milestone",
-            "crypto",
-            "bossdrops"
+            "goal"
         )
