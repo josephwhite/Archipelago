@@ -60,8 +60,8 @@ class NodebusterWorld(World):
     """
     game = "Nodebuster"
     web = NodebusterWeb()
-    options_dataclass = Options.NodebusterOptions
-    options: Options.NodebusterOptions
+    options_dataclass = NodebusterOptions
+    options: NodebusterOptions
     topology_present = True
     #rule = rules
     item_name_to_id = all_items_to_id
