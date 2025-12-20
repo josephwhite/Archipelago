@@ -118,31 +118,31 @@ upgrade_items: List[ItemDict] = [
 ]
 
 milestone_items: List[ItemDict] = [
-    { "name": "Reds500", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues10", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds2k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues100", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds4k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues200", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds6k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues300", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds8k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues500", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds10k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues800", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Yellows5", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds15k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues1.2k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Yellows10", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds20k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues1.6k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Yellows15", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds30k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues2k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds50k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues4k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Reds100k", "count":1 ,"classification": ItemClassification.useful},
-    { "name": "Blues8k", "count":1 ,"classification": ItemClassification.useful},
+    { "name": "Reds500", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues10", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds2k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues100", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds4k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues200", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds6k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues300", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds8k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues500", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds10k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues800", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Yellows5", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds15k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues1.2k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Yellows10", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds20k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues1.6k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Yellows15", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds30k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues2k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds50k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues4k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Reds100k", "count":1 ,"classification": ItemClassification.filler},
+    { "name": "Blues8k", "count":1 ,"classification": ItemClassification.filler},
 ]
 
 crypto_level_items: List[ItemDict] = [
@@ -169,8 +169,11 @@ progressive_items: List[ItemDict] = [
     { "name": "Progressive Regen", "count":41,"classification":ItemClassification.useful},
     { "name": "Progressive SpawnRate", "count":33,"classification":ItemClassification.useful},
     { "name": "Progressive Armor", "count":134,"classification":ItemClassification.useful},
-    { "name": "Progressive Infinity", "count":9,"classification":ItemClassification.useful},
-    { "name": "Progressive Milestone Reward", "count":25,"classification":ItemClassification.useful},
+    { "name": "Progressive Infinity", "count":9,"classification":ItemClassification.progression},
+    #{ "name": "Progressive Milestone Reward", "count":25,"classification":ItemClassification.filler},
+    { "name": "Progressive Red Milestone Reward", "count":11,"classification":ItemClassification.filler},
+    { "name": "Progressive Blue Milestone Reward", "count":11,"classification":ItemClassification.filler},
+    { "name": "Progressive Yellow Milestone Reward", "count":3,"classification":ItemClassification.filler},
 ]
 
 progressive_items_exclude_list: List[str] = [
@@ -187,7 +190,16 @@ progressive_items_exclude_list: List[str] = [
     # Progressive Infinity
     "Infinity1","Infinity2","Infinity3","Infinity4","Infinity5","Infinity6","Infinity7","Infinity8","Infinity9",
     # Progressive Milestone Reward
-    "Reds500","Blues10","Reds2k","Blues100","Reds4k","Blues200","Reds6k","Blues300","Reds8k","Blues500","Reds10k","Blues800","Yellows5","Reds15k","Blues1.2k","Yellows10","Reds20k","Blues1.6k","Yellows15","Reds30k","Blues2k","Reds50k","Blues4k","Reds100k","Blues8k"
+    #"Reds500","Blues10","Reds2k","Blues100","Reds4k","Blues200","Reds6k","Blues300","Reds8k","Blues500","Reds10k","Blues800","Yellows5","Reds15k","Blues1.2k","Yellows10","Reds20k","Blues1.6k","Yellows15","Reds30k","Blues2k","Reds50k","Blues4k","Reds100k","Blues8k"
+    # Progressive Red Milestone Reward
+    "Reds500", "Reds2k", "Reds4k", "Reds6k", "Reds8k",
+    "Reds10k", "Reds15k", "Reds20k", "Reds30k", "Reds50k", "Reds100k",
+    # Progressive Blue Milestone Reward
+    "Blues10", "Blues100", "Blues200", "Blues300", "Blues500",
+    "Blues800","Blues1.2k", "Blues1.6k", "Blues2k", "Blues4k", "Blues8k",
+    # Progressive Yellow Milestone Reward
+    "Yellows5", "Yellows10", "Yellows15",
+
 ]
 
 all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + junk_items + progressive_items + goal_items
