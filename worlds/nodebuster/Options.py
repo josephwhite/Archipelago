@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from Options import Toggle, Choice, DeathLinkMixin, StartInventoryPool, PerGameCommonOptions, DefaultOnToggle
 
 
-
 class Goal(Choice):
     """Defines the goal to accomplish in order to complete the randomizer.
        
@@ -29,10 +28,12 @@ class CryptoMine(Toggle):
 
     display_name = "Crypto Mine"
 
+
 class Milestones(Toggle):
     """Adds the Milestones Rewards and Locations to the item pool"""
 
     display_name = "Milestones"
+
 
 class BossDrops(Choice):
     """Randomize Boss Drops

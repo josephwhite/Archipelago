@@ -1,6 +1,6 @@
 from typing import Any
 
-from BaseClasses import Entrance, EntranceType, Item, ItemClassification, Region, Tutorial
+from BaseClasses import Item, Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 
 from . import rules
@@ -26,15 +26,8 @@ from .locations import (
     boss_locations,
 )
 from .Options import NodebusterOptions
-from .regions import (
-    _add_boss_regions,
-    _add_crypto_regions,
-    _add_milestone_regions,
-    _add_milestone_regions,
-    every_region,
-    nodebuster_regions_all,
-)
-from .rules import set_all_rules, set_nodebuster_lmao_rules
+from .regions import every_region, nodebuster_regions_all
+from .rules import set_nodebuster_rules
 
 
 class NodebusterWeb(WebWorld):
@@ -62,7 +55,7 @@ class NodebusterWorld(World):
     web = NodebusterWeb()
     options_dataclass = NodebusterOptions
     options: NodebusterOptions
-    topology_present = True
+    topology_present = False
     #rule = rules
     item_name_to_id = all_items_to_id
     location_name_to_id = all_locations_to_id
@@ -223,7 +216,7 @@ class NodebusterWorld(World):
         #self.multiworld.itempool += [self.create_item("Nothing") for _ in range(junk)]
 
     def set_rules(self):
-        set_nodebuster_lmao_rules(self)
+        set_nodebuster_rules(self)
 
     def fill_slot_data(self) -> dict[str, Any]:
         return self.options.as_dict(

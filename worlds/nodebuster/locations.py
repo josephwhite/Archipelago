@@ -5,20 +5,52 @@ from BaseClasses import Location
 base_id = 268000
 
 
-
 class NodebusterLocation(Location):
     game: str = "Nodebuster"
 
 
 def get_locations() -> List:
-    return damage_1_locations + potency_locations + pulse_bolts_locations + skilled_salvager_locations + sapper_locations + scaling_regeneration_locations + anti_purple_locations + blood_armor_locations + auto_collect_locations + crypto_mine_locations + milestone_locations + spawn_exploders_locations + thundering_locations + pulser_pursuit_locations + pulse_thumper_locations + unending_parasite_locations + bolt_lethality_locations + drainer_locations + blood_visage_locations + processor_acquisition_locations + auto_pulser_locations + netblade_locations + big_crit_locations + overloaded_location + transplant_locations + net_armor_locations
+    locations = []
+    locations += damage_1_locations
+    locations += potency_locations
+    locations += pulse_bolts_locations
+    locations += skilled_salvager_locations
+    locations += sapper_locations
+    locations += scaling_regeneration_locations
+    locations += anti_purple_locations
+    locations += blood_armor_locations
+    locations += auto_collect_locations
+    locations += crypto_mine_locations
+    locations += milestone_locations
+    locations += spawn_exploders_locations
+    locations += thundering_locations
+    locations += pulser_pursuit_locations
+    locations += pulse_thumper_locations
+    locations += unending_parasite_locations
+    locations += bolt_lethality_locations
+    locations += drainer_locations
+    locations += blood_visage_locations
+    locations += processor_acquisition_locations
+    locations += auto_pulser_locations
+    locations += netblade_locations
+    locations += big_crit_locations
+    locations += overloaded_location
+    locations += transplant_locations
+    locations += net_armor_locations
+    return locations
 
 
 def get_milestone_locations() -> List:
-    return red_locations + blue_locations + yellow_locations
+    milestone_reward_locations = []
+    milestone_reward_locations += red_locations
+    milestone_reward_locations += blue_locations
+    milestone_reward_locations += yellow_locations
+    return milestone_reward_locations
+
 
 def get_boss_locations() -> List:
     return boss_locations
+
 
 def get_crypto_locations() -> List:
     return crypto_mine_levels
@@ -58,7 +90,7 @@ damage_1_locations = [
     "BonusDropChance1-3", "BonusDropChance1-4", "BonusDropChance1-5",
     "Health2-1", "Health2-2", "Health2-3", "Health2-4",
     "Health2-5", "Health2-6", "Health2-7", "Health2-8", "Armor2-1", "Armor2-2",
-    "Armor2-3", "Armor2-4", "Armor2-5","Damage2-1", "Damage2-2",
+    "Armor2-3", "Armor2-4", "Armor2-5", "Damage2-1", "Damage2-2",
     "Damage2-3", "Damage2-4", "Damage2-5", "Damage2-6", "Damage2-7", "Damage2-8",
     "Damage2-9", "Damage2-10", "PickupRadius1-1", "PickupRadius1-2",
     "PickupRadius1-3", "PickupRadius1-4", "PickupRadius1-5", "HealthRegen2-1",
@@ -67,15 +99,15 @@ damage_1_locations = [
     "ArmorPerEnemy1-4", "ArmorPerEnemy1-5", "ArmorPerEnemy1-6", "ArmorPerEnemy1-7",
     "ArmorPerEnemy1-8", "ArmorPerEnemy1-9", "ArmorPerEnemy1-10", "Armor3-1",
     "Armor3-2", "Armor3-3", "Armor3-4", "Armor3-5", "Armor3-6", "Armor3-7",
-    "Armor3-8", "Armor3-9", "Armor3-10","Health3-1", "Health3-2",
+    "Armor3-8", "Armor3-9", "Armor3-10", "Health3-1", "Health3-2",
     "Health3-3", "Health3-4", "Health3-5", "Health3-6", "Health3-7", "Health3-8",
-    "Health3-9", "Health3-10","Armor4-1", "Armor4-2", "Armor4-3",
+    "Health3-9", "Health3-10", "Armor4-1", "Armor4-2", "Armor4-3",
     "Armor4-4", "Armor4-5", "Armor4-6", "Armor4-7", "Armor4-8", "Armor4-9",
-    "Armor4-10","SpawnRate3-1", "SpawnRate3-2",
+    "Armor4-10", "SpawnRate3-1", "SpawnRate3-2",
     "SpawnRate3-3", "SpawnRate3-4", "SpawnRate3-5", "Armor5-1", "Armor5-2",
     "Armor5-3", "Armor5-4", "Armor5-5", "Armor5-6", "Armor5-7", "Armor5-8",
     "Armor5-9", "Armor5-10", "Armor5-11", "Armor5-12", "Armor5-13", "Armor5-14",
-    "Armor5-15", "Armor5-16", "Armor5-17", "Armor5-18", "Armor5-19", "Armor5-20","Size2-1",
+    "Armor5-15", "Armor5-16", "Armor5-17", "Armor5-18", "Armor5-19", "Armor5-20", "Size2-1",
     "Armor6-1", "Armor6-2",
     "Armor6-3", "Armor6-4", "Armor6-5", "Armor6-6", "Armor6-7", "Armor6-8",
     "Armor6-9", "Armor6-10", "Armor6-11", "Armor6-12", "Armor6-13", "Armor6-14",
@@ -119,7 +151,7 @@ pulse_bolts_locations = [
     "PulseBoltDamage1-8", "PulseBoltDamage1-9", "PulseBoltDamage1-10",
 
     "PulseBoltCount1-1", "PulseBoltCount1-2", "PulseBoltCount1-3",
-    "PulseBoltCount1-4", "PulseBoltCount1-5","PulseBoltExplode-1",
+    "PulseBoltCount1-4", "PulseBoltCount1-5", "PulseBoltExplode-1",
 
     "PulseBoltCount2-1"
 ]
@@ -166,7 +198,7 @@ milestone_locations = [
 ]
 
 spawn_exploders_locations = [
-    "ExplodersChance-1","ExplodersSize-1",
+    "ExplodersChance-1", "ExplodersSize-1",
     "ExplodersSize-2", "ExplodersSize-3", "ExplodersSize-4", "ExplodersSize-5"
 ]
 
@@ -179,20 +211,20 @@ thundering_locations = [
 pulser_pursuit_locations = [
     "MovingPulserSpeed1-1", "MovingPulserSpeed1-2", "MovingPulserSpeed1-3",
     "MovingPulserSpeed1-4", "MovingPulserSpeed1-5"
-    
+
 ]
 
 pulse_thumper_locations = [
     "MovingPulserSize1-1",
     "MovingPulserSize1-2", "MovingPulserSize1-3", "MovingPulserSize1-4",
-    "MovingPulserSize1-5", "MovingPulserSize1-6","MovingPulserSize2-1",
+    "MovingPulserSize1-5", "MovingPulserSize1-6", "MovingPulserSize2-1",
     "MovingPulserAttackSpeed1-1",
     "MovingPulserAttackSpeed1-2", "MovingPulserAttackSpeed1-3",
     "MovingPulserAttackSpeed1-4", "MovingPulserAttackSpeed1-5"
 ]
 
 unending_parasite_locations = [
-    "StealMaxHealth1-1","StealMaxHealth2-1","Health6-1",
+    "StealMaxHealth1-1", "StealMaxHealth2-1", "Health6-1",
     "Health6-2", "Health6-3", "Health6-4", "Health6-5", "StealMaxHealth3-1",
     "Health7-1", "Health7-2", "Health7-3", "Health7-4",
     "Health7-5", "Infinity1-1", "Infinity2-1", "Infinity3-1", "Infinity4-1",
@@ -213,7 +245,7 @@ drainer_locations = [
 ]
 
 blood_visage_locations = [
-    "MaxHealthToArmor2-1","RampingArmor1-1", "RampingArmor1-2",
+    "MaxHealthToArmor2-1", "RampingArmor1-1", "RampingArmor1-2",
     "RampingArmor1-3", "RampingArmor1-4", "RampingArmor1-5"
 ]
 
@@ -231,10 +263,10 @@ netblade_locations = [
     "Damage5-3", "Damage5-4", "Damage5-5",
     "RampingDamage1-1", "RampingDamage1-2", "RampingDamage1-3",
     "LightningChance1-1", "LightningChance1-2", "LightningChance1-3",
-    "LightningChance1-4", "LightningChance1-5","LightningChainCount1-1",
+    "LightningChance1-4", "LightningChance1-5", "LightningChainCount1-1",
     "LightningChainCount1-2", "LightningChainCount1-3", "LightningChainCount1-4",
     "LightningChainCount1-5", "LightningChainCount1-6", "LightningChainCount1-7",
-    "LightningChainCount1-8","MaxHealthToDamage1-1"
+    "LightningChainCount1-8", "MaxHealthToDamage1-1"
 ]
 
 big_crit_locations = [
@@ -249,8 +281,8 @@ overloaded_location = [
 transplant_locations = [
     "Health4-1",
     "Health4-2", "Health4-3", "Health4-4", "Health4-5", "Health4-6", "Health4-7",
-    "Health4-8", "Health4-9", "Health4-10","Health5-1",
-    "Health5-2", "Health5-3","MaxHealthHeal2-1",
+    "Health4-8", "Health4-9", "Health4-10", "Health5-1",
+    "Health5-2", "Health5-3", "MaxHealthHeal2-1",
     "MaxHealthHeal2-2", "MaxHealthHeal2-3", "MaxHealthHeal2-4",
     "MaxHealthHeal2-5"
 ]
@@ -261,11 +293,12 @@ net_armor_locations = [
 ]
 
 blue_locations = [
-    "Blues10","Blues100","Blues200","Blues300","Blues500","Blues800","Blues1.2k","Blues1.6k","Blues2k","Blues4k","Blues8k"
+    "Blues10", "Blues100", "Blues200", "Blues300", "Blues500", "Blues800", "Blues1.2k", "Blues1.6k", "Blues2k",
+    "Blues4k", "Blues8k"
 ]
 
 yellow_locations = [
-    "Yellows5","Yellows10","Yellows15"
+    "Yellows5", "Yellows10", "Yellows15"
 ]
 
 red_locations = [
@@ -280,31 +313,31 @@ red_locations = [
     "Reds30k",
     "Reds50k",
     "Reds100k"
-    
+
 ]
 
 boss_locations = [
     "Boss-0",
-    "Boss-1","Boss-2","Boss-3","Boss-4","Boss-5",
-    "Boss-6","Boss-7","Boss-8","Boss-9","Boss-10",
-    "Boss-11","Boss-12","Boss-13","Boss-14","Boss-15",
-    "Boss-16","Boss-17","Boss-18","Boss-19","Boss-20",
-    "Boss-21","Boss-22","Boss-23","Boss-24","Boss-25"
+    "Boss-1", "Boss-2", "Boss-3", "Boss-4", "Boss-5",
+    "Boss-6", "Boss-7", "Boss-8", "Boss-9", "Boss-10",
+    "Boss-11", "Boss-12", "Boss-13", "Boss-14", "Boss-15",
+    "Boss-16", "Boss-17", "Boss-18", "Boss-19", "Boss-20",
+    "Boss-21", "Boss-22", "Boss-23", "Boss-24", "Boss-25"
 ]
 
 crypto_mine_levels = [
-    "CryptoLevel-1","CryptoLevel-2","CryptoLevel-3",
-    "CryptoLevel-4","CryptoLevel-5","CryptoLevel-6",
-    "CryptoLevel-7","CryptoLevel-8","CryptoLevel-9",
-    "CryptoLevel-10","CryptoLevel-11","CryptoLevel-12",
-    "CryptoLevel-13","CryptoLevel-14","CryptoLevel-15",
-    "CryptoLevel-16","CryptoLevel-17","CryptoLevel-18",
-    "CryptoLevel-19","CryptoLevel-20","CryptoLevel-21",
-    "CryptoLevel-22","CryptoLevel-23","CryptoLevel-24",
-    "CryptoLevel-25","CryptoLevel-26","CryptoLevel-27",
-    "CryptoLevel-28","CryptoLevel-29","CryptoLevel-30",
-    "CryptoLevel-31","CryptoLevel-32","CryptoLevel-33",
-    "CryptoLevel-34","CryptoLevel-35","CryptoLevel-36"
+    "CryptoLevel-1", "CryptoLevel-2", "CryptoLevel-3",
+    "CryptoLevel-4", "CryptoLevel-5", "CryptoLevel-6",
+    "CryptoLevel-7", "CryptoLevel-8", "CryptoLevel-9",
+    "CryptoLevel-10", "CryptoLevel-11", "CryptoLevel-12",
+    "CryptoLevel-13", "CryptoLevel-14", "CryptoLevel-15",
+    "CryptoLevel-16", "CryptoLevel-17", "CryptoLevel-18",
+    "CryptoLevel-19", "CryptoLevel-20", "CryptoLevel-21",
+    "CryptoLevel-22", "CryptoLevel-23", "CryptoLevel-24",
+    "CryptoLevel-25", "CryptoLevel-26", "CryptoLevel-27",
+    "CryptoLevel-28", "CryptoLevel-29", "CryptoLevel-30",
+    "CryptoLevel-31", "CryptoLevel-32", "CryptoLevel-33",
+    "CryptoLevel-34", "CryptoLevel-35", "CryptoLevel-36"
 ]
 
 goal_locations = [
@@ -342,7 +375,7 @@ regions_to_locations: dict[str, List[str]] = {
     "Netblade": netblade_locations,
     "Big Crit": big_crit_locations,
     "Overloaded": overloaded_location,
-    
+
     # Netcoin Regions off of main.
     "Transplant": transplant_locations,
     "Net Armor": net_armor_locations,
@@ -360,5 +393,5 @@ regions_to_locations: dict[str, List[str]] = {
     "Epilogue": goal_locations
 }
 
-all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations()+ goal_locations
+all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations() + goal_locations
 all_locations_to_id = {location: i + base_id for i, location in enumerate(all_locations)}
