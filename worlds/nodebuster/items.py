@@ -174,12 +174,19 @@ progressive_items: List[ItemDict] = [
 ]
 
 progressive_items_exclude_list: List[str] = [
+    # Progressive Damage
     "Damage1","DamagePerEnemy1","BossDamage1","Damage2","Damage3","Undamaged1","Execute1","Damage4","BossDamage2","CritDamage1","Damage5","Undamaged2","Execute2","RampingDamage1","CritDamage2","MaxHealthToDamage1",
+    # Progressive Health
     "Health1","Health2","Health3","Health4","Health5","Health6","Health7",
+    # Progressive Regen
     "HealthRegen1","Salvaging1","Lifesteal1","HealthRegen2","Salvaging2","DropHeal1","MaxHealthHeal1","Lifesteal2","Lifesteal3","StealMaxHealth1","MaxHealthHeal2","StealMaxHealth2","StealMaxHealth3",
+    # Progressive SpawnRate
     "SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4","NodeFinder1","YellowSpawn1","YellowSpawn2",
+    # Progressive Armor
     "Armor1","BossArmor1","Armor2","ArmorPerEnemy1","Armor3","Armor4","BossArmor2","Armor5","Armor6","MaxHealthToArmor1","Armor7","FocusArmor1","MaxHealthToArmor2","RampingArmor1",
+    # Progressive Infinity
     "Infinity1","Infinity2","Infinity3","Infinity4","Infinity5","Infinity6","Infinity7","Infinity8","Infinity9",
+    # Progressive Milestone Reward
     "Reds500","Blues10","Reds2k","Blues100","Reds4k","Blues200","Reds6k","Blues300","Reds8k","Blues500","Reds10k","Blues800","Yellows5","Reds15k","Blues1.2k","Yellows10","Reds20k","Blues1.6k","Yellows15","Reds30k","Blues2k","Reds50k","Blues4k","Reds100k","Blues8k"
 ]
 
