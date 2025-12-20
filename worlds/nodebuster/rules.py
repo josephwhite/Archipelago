@@ -17,12 +17,8 @@ def has_crypto_mine(world: "NodebusterWorld", state: CollectionState, player: in
     return state.has("CryptoMine", player)
 
 
-def has_access_to_red_enemies(world: "NodebusterWorld", state: CollectionState, player: int):
-    return True
-
-
 def has_access_to_blue_enemies(world: "NodebusterWorld", state: CollectionState, player: int) -> bool:
-    return state.has("NodeFinder1", player) or state.has("Progressive SpawnRate", player, 15)
+    return state.has_any(["NodeFinder1", "Progressive Blue Spawn"], player)
 
 
 def has_milestones_upgrade(world: "NodebusterWorld", state: CollectionState, player: int) -> bool:
@@ -34,8 +30,7 @@ def has_access_to_net_and_nodes(world: "NodebusterWorld", state: CollectionState
 
 
 def has_access_to_yellow_enemies(world: "NodebusterWorld", state: CollectionState, player: int) -> bool:
-    return state.has("YellowSpawn1", player) or state.has("YellowSpawn2", player) or state.has("Progressive SpawnRate",
-                                                                                               player, 26)
+    return state.has_any(["YellowSpawn1", "YellowSpawn2", "Progressive Yellow Spawn"], player)
 
 
 def has_all_infinities(world: "NodebusterWorld", state: CollectionState, player: int) -> bool:
@@ -246,7 +241,7 @@ def set_nodebuster_rules(world: NodebusterWorld) -> None:
 
     if world.options.goal == "release_virus_with_infinity":
         multiworld.completion_condition[player] = lambda state: (
-            released_virus(world, state, player) and has_all_infinities(world, state, player)
+                released_virus(world, state, player) and has_all_infinities(world, state, player)
         )
     else:
         multiworld.completion_condition[player] = lambda state: (

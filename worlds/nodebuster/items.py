@@ -167,7 +167,9 @@ progressive_items: List[ItemDict] = [
     { "name": "Progressive Damage", "count":110,"classification":ItemClassification.useful},
     { "name": "Progressive Health", "count":51,"classification":ItemClassification.useful},
     { "name": "Progressive Regen", "count":41,"classification":ItemClassification.useful},
-    { "name": "Progressive SpawnRate", "count":33,"classification":ItemClassification.useful},
+    { "name": "Progressive SpawnRate", "count":26,"classification":ItemClassification.useful},
+    { "name": "Progressive Blue Spawn", "count":5,"classification":ItemClassification.progression},
+    { "name": "Progressive Yellow Spawn", "count":2,"classification":ItemClassification.progression},
     { "name": "Progressive Armor", "count":134,"classification":ItemClassification.useful},
     { "name": "Progressive Infinity", "count":9,"classification":ItemClassification.progression},
     #{ "name": "Progressive Milestone Reward", "count":25,"classification":ItemClassification.filler},
@@ -179,12 +181,17 @@ progressive_items: List[ItemDict] = [
 progressive_items_exclude_list: List[str] = [
     # Progressive Damage
     "Damage1","DamagePerEnemy1","BossDamage1","Damage2","Damage3","Undamaged1","Execute1","Damage4","BossDamage2","CritDamage1","Damage5","Undamaged2","Execute2","RampingDamage1","CritDamage2","MaxHealthToDamage1",
+
     # Progressive Health
     "Health1","Health2","Health3","Health4","Health5","Health6","Health7",
     # Progressive Regen
     "HealthRegen1","Salvaging1","Lifesteal1","HealthRegen2","Salvaging2","DropHeal1","MaxHealthHeal1","Lifesteal2","Lifesteal3","StealMaxHealth1","MaxHealthHeal2","StealMaxHealth2","StealMaxHealth3",
     # Progressive SpawnRate
-    "SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4","NodeFinder1","YellowSpawn1","YellowSpawn2",
+    "SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4",
+    # Progressive Blue Spawn
+    "NodeFinder1",
+    # Progressive Yellow Spawn
+    "YellowSpawn1","YellowSpawn2",
     # Progressive Armor
     "Armor1","BossArmor1","Armor2","ArmorPerEnemy1","Armor3","Armor4","BossArmor2","Armor5","Armor6","MaxHealthToArmor1","Armor7","FocusArmor1","MaxHealthToArmor2","RampingArmor1",
     # Progressive Infinity

@@ -26,7 +26,7 @@ from .locations import (
     boss_locations,
 )
 from .Options import NodebusterOptions
-from .regions import every_region, nodebuster_regions_all
+from .regions import nodebuster_regions_all
 from .rules import set_nodebuster_rules
 
 
