@@ -18,7 +18,7 @@ class ItemDict(TypedDict):
 
 
 upgrade_items: List[ItemDict] = [
-    { "name": "Damage1", "count": 15, 'classification': ItemClassification.useful},
+    { "name": "Damage1", "count": 15, 'classification': ItemClassification.progression},
 { "name": "Health1", "count": 10, 'classification': ItemClassification.useful},
 { "name": "SpawnRate1", "count": 15, 'classification': ItemClassification.useful},
 { "name": "Armor1", "count": 10,'classification': ItemClassification.useful},
@@ -65,7 +65,7 @@ upgrade_items: List[ItemDict] = [
 { "name": "Size2", "count": 1 ,'classification': ItemClassification.useful},
 { "name": "CryptoMine", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Health4", "count": 10 ,'classification': ItemClassification.useful},
-{ "name": "YellowSpawn1", "count": 1 ,'classification': ItemClassification.useful},
+{ "name": "YellowSpawn1", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Armor6", "count": 30 ,'classification': ItemClassification.useful},
 { "name": "BossDamage2", "count": 10 ,'classification': ItemClassification.useful},
 { "name": "Lifesteal2", "count": 3 ,'classification': ItemClassification.useful},
@@ -113,7 +113,7 @@ upgrade_items: List[ItemDict] = [
 { "name": "Infinity8", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Infinity9", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "Laboratory", "count": 1,'classification': ItemClassification.progression },
-{ "name": "YellowSpawn2", "count": 1 ,'classification': ItemClassification.useful},
+{ "name": "YellowSpawn2", "count": 1 ,'classification': ItemClassification.progression},
 { "name": "AutoCollect", "count": 8 ,'classification': ItemClassification.useful}
 ]
 
@@ -164,7 +164,8 @@ goal_items: List[ItemDict] = [
 ]
 
 progressive_items: List[ItemDict] = [
-    { "name": "Progressive Damage", "count":110,"classification":ItemClassification.useful},
+    { "name": "Progressive Damage", "count":92,"classification":ItemClassification.progression},
+    { "name": "Progressive Critical Damage", "count":18,"classification":ItemClassification.useful},
     { "name": "Progressive Health", "count":51,"classification":ItemClassification.useful},
     { "name": "Progressive Regen", "count":41,"classification":ItemClassification.useful},
     { "name": "Progressive SpawnRate", "count":26,"classification":ItemClassification.useful},
@@ -180,8 +181,9 @@ progressive_items: List[ItemDict] = [
 
 progressive_items_exclude_list: List[str] = [
     # Progressive Damage
-    "Damage1","DamagePerEnemy1","BossDamage1","Damage2","Damage3","Undamaged1","Execute1","Damage4","BossDamage2","CritDamage1","Damage5","Undamaged2","Execute2","RampingDamage1","CritDamage2","MaxHealthToDamage1",
-
+    "Damage1","DamagePerEnemy1","BossDamage1","Damage2","Damage3","Undamaged1","Execute1","Damage4","BossDamage2","Damage5","Undamaged2","Execute2","RampingDamage1","MaxHealthToDamage1",
+    # Progressive Critical Damage
+    "CritDamage1", "CritDamage2",
     # Progressive Health
     "Health1","Health2","Health3","Health4","Health5","Health6","Health7",
     # Progressive Regen
