@@ -1,5 +1,3 @@
-from typing import List
-
 from BaseClasses import Location
 
 base_id = 268000
@@ -9,7 +7,7 @@ class NodebusterLocation(Location):
     game: str = "Nodebuster"
 
 
-def get_locations() -> List:
+def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
     locations += potency_locations
@@ -40,7 +38,7 @@ def get_locations() -> List:
     return locations
 
 
-def get_milestone_locations() -> List:
+def get_milestone_locations() -> list[str]:
     milestone_reward_locations = []
     milestone_reward_locations += red_locations
     milestone_reward_locations += blue_locations
@@ -48,11 +46,11 @@ def get_milestone_locations() -> List:
     return milestone_reward_locations
 
 
-def get_boss_locations() -> List:
+def get_boss_locations() -> list[str]:
     return boss_locations
 
 
-def get_crypto_locations() -> List:
+def get_crypto_locations() -> list[str]:
     return crypto_mine_levels
 
 
@@ -344,7 +342,7 @@ goal_locations = [
     "Virus Released"
 ]
 
-regions_to_locations: dict[str, List[str]] = {
+regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
@@ -393,5 +391,5 @@ regions_to_locations: dict[str, List[str]] = {
     "Epilogue": goal_locations
 }
 
-all_locations = get_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations() + goal_locations
+all_locations = get_upgrade_tree_locations() + get_milestone_locations() + get_crypto_locations() + get_boss_locations() + goal_locations
 all_locations_to_id = {location: i + base_id for i, location in enumerate(all_locations)}

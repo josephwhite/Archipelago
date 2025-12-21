@@ -116,7 +116,7 @@ class NodebusterWorld(World):
                 self.multiworld.get_location(cml, self.player).place_locked_item(self.create_item("CryptoLevel"))
 
         if not self.options.milestone:
-            if self.options.progressiveItems:
+            if self.options.progressiveitems:
                 for red in red_locations:
                     self.multiworld.get_location(red, self.player).place_locked_item(
                         self.create_item("Progressive Red Milestone Reward"))
@@ -180,7 +180,7 @@ class NodebusterWorld(World):
                 if item in crypto_level_items:
                     item["count"] = 0
                     continue
-            if not self.options.progressiveItems:
+            if not self.options.progressiveitems:
                 if item in progressive_items:
                     continue
             else:

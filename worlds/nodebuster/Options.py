@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, DeathLinkMixin, StartInventoryPool, PerGameCommonOptions, DefaultOnToggle
+from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions
 
 
 class Goal(Choice):
     """Defines the goal to accomplish in order to complete the randomizer.
-       
+
     - Release Virus.
     - Release Virus with all 9 infinity upgrades unlocked.
     """
@@ -23,7 +23,7 @@ class ProgressiveItems(Toggle):
 
 
 class CryptoMine(Toggle):
-    """Adds all of the 36 levels of the CryptoMine into the pool.
+    """Adds the 36 levels of the CryptoMine into the pool.
     When you level up the crypto mine, instead of speeding up the crypto mine it will instead give you a randomized item from the pool."""
 
     display_name = "Crypto Mine"
@@ -37,8 +37,8 @@ class Milestones(Toggle):
 
 class BossDrops(Choice):
     """Randomize Boss Drops
-    Enabling this setting in any capacity could prevent you from being able to beat the game due upgrades being trapped behind bosses that are to strong.
-    
+    Enabling this setting in any capacity could prevent you from being able to beat the game due upgrades being trapped behind bosses that are too strong.
+
     - None - No boss drops will be randomized.
     - Necessary Only - All boss drops are randomized but only 18 cores and 8 filler items.
     - All 26 - All 26 levels of boss drops will be randomized."""
@@ -55,4 +55,4 @@ class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     crypto: CryptoMine
     milestone: Milestones
     bossdrops: BossDrops
-    progressiveItems: ProgressiveItems
+    progressiveitems: ProgressiveItems

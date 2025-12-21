@@ -50,7 +50,7 @@ def released_virus(world: "NodebusterWorld", state: CollectionState, player: int
     return state.has("Virus Deployed", player)
 
 
-def get_location_rules_lookup(world, player: int):
+def get_location_rules_lookup(world, player: int) -> dict:
     rules_lookup = {
         "Milestones-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "Reds500": lambda state: has_milestones_upgrade(world, state, player),
@@ -60,8 +60,6 @@ def get_location_rules_lookup(world, player: int):
         "Reds4k": lambda state: has_milestones_upgrade(world, state, player),
         "Blues200": lambda state: has_milestones_upgrade(world, state, player),
         "Reds6k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues300": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds8k": lambda state: has_milestones_upgrade(world, state, player),
         "Blues300": lambda state: has_milestones_upgrade(world, state, player),
         "Reds8k": lambda state: has_milestones_upgrade(world, state, player),
         "Blues500": lambda state: has_milestones_upgrade(world, state, player),
@@ -186,7 +184,7 @@ def get_location_rules_lookup(world, player: int):
     return rules_lookup
 
 
-def get_region_rules_lookup(world, player: int):
+def get_region_rules_lookup(world, player: int) -> dict:
     rules_lookup = {
         # Bits
         # Node
