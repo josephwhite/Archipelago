@@ -50,7 +50,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Thundering": [],
     "Pulser Pursuit": [],
     "Pulse Thumper": [],
-    "Unending Parasite": ["Epilogue"],
+    "Unending Parasite": ["Infinity"],
     # Netcoin Regions
     "Bolt Lethality": [],
     "Drainer": [],
@@ -70,5 +70,6 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Yellow": [],
     # Cryto Regions
     "Crypto Levels": [],
+    "Infinity": ["Epilogue"],
     "Epilogue": [],
 }

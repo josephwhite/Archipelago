@@ -199,6 +199,7 @@ def get_region_rules_lookup(world, player: int) -> dict:
         "Crypto Mine": lambda state: has_access_to_blue_enemies(world, state, player),
         "Milestones": lambda state: has_access_to_blue_enemies(world, state, player),
         "Spawn Exploders": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Infinity": lambda state: has_access_to_blue_enemies(world, state, player),
         # Node off of Netcoin
         "Thundering": lambda state: has_access_to_net_and_nodes(world, state, player),
         "Pulser Pursuit": lambda state: has_access_to_net_and_nodes(world, state, player),

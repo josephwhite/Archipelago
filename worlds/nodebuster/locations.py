@@ -35,6 +35,7 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += overloaded_location
     locations += transplant_locations
     locations += net_armor_locations
+    locations += infinity_locations
     return locations
 
 
@@ -224,8 +225,12 @@ pulse_thumper_locations = [
 unending_parasite_locations = [
     "StealMaxHealth1-1", "StealMaxHealth2-1", "Health6-1",
     "Health6-2", "Health6-3", "Health6-4", "Health6-5", "StealMaxHealth3-1",
-    "Health7-1", "Health7-2", "Health7-3", "Health7-4",
-    "Health7-5", "Infinity1-1", "Infinity2-1", "Infinity3-1", "Infinity4-1",
+    "Health7-1", "Health7-2", "Health7-3", "Health7-4", "Health7-5",
+
+]
+
+infinity_locations = [
+    "Infinity1-1", "Infinity2-1", "Infinity3-1", "Infinity4-1",
     "Infinity5-1", "Infinity6-1", "Infinity7-1", "Infinity8-1", "Infinity9-1",
     "Laboratory-1", "YellowSpawn2-1"
 ]
@@ -363,6 +368,7 @@ regions_to_locations: dict[str, list[str]] = {
     "Pulser Pursuit": pulser_pursuit_locations,
     "Pulse Thumper": pulse_thumper_locations,
     "Unending Parasite": unending_parasite_locations,
+    "Infinity": infinity_locations,
 
     # Netcoint Regions
     "Bolt Lethality": bolt_lethality_locations,
