@@ -11,10 +11,9 @@ from .items import (
     crypto_level_items,
     junk_items,
     milestone_items,
-    progressive_items,
     progressive_items_exclude_list,
     upgrade_items, all_items_to_id,
-    all_items
+    all_items, progressive_item_map
 )
 from .locations import (
     NodebusterLocation,
@@ -143,7 +142,7 @@ class NodebusterWorld(World):
                 self.multiworld.get_location(cml, self.player).place_locked_item(self.create_item("CryptoLevel"))
 
         if not self.options.milestone:
-            if self.options.progressiveitems:
+            if self.options.progressive_items:
                 for red in red_locations:
                     self.multiworld.get_location(red, self.player).place_locked_item(
                         self.create_item("Progressive Red Milestone Reward"))
@@ -187,30 +186,54 @@ class NodebusterWorld(World):
 
     def create_items(self) -> None:
         junk_count = 0
+        progressive_item_keys = list(progressive_item_map.keys())
         for item in all_items:
-            if not self.options.milestone:
-                if item in milestone_items:
-                    continue
-                if item["name"] == "Progressive Milestone Reward":
-                    continue
-                elif item["name"] == "Progressive Red Milestone Reward":
-                    continue
-                elif item["name"] == "Progressive Blue Milestone Reward":
-                    continue
-                elif item["name"] == "Progressive Yellow Milestone Reward":
-                    continue
             if not self.options.crypto:
                 if item in crypto_level_items:
+                    #item["count"] = 0
+                    #print(f'{item["name"]} skipped')
                     continue
-            if not self.options.progressiveitems:
-                if item in progressive_items:
+
+            if not self.options.milestone:
+                if item in milestone_items:
+                    #print(f'{item["name"]} skipped')
+                    #item["count"] = 0
                     continue
-            else:
+                if self.options.progressive_items == 1:
+                    if item["name"] == "Progressive Milestone Reward":
+                        #print(f'{item["name"]} skipped')
+                        #item["count"] = 0
+                        continue
+                    elif item["name"] == "Progressive Red Milestone Reward":
+                        #item["count"] = 0
+                        #print(f'{item["name"]} skipped')
+                        continue
+                    elif item["name"] == "Progressive Blue Milestone Reward":
+                        #item["count"] = 0
+                        #print(f'{item["name"]} skipped')
+                        continue
+                    elif item["name"] == "Progressive Yellow Milestone Reward":
+                        #item["count"] = 0
+                        #print(f'{item["name"]} skipped')
+                        continue
+
+            if self.options.progressive_items == 0:
+                # Milestone Option should be the filter for Progressive Milestone Rewards
+                if item["name"] in progressive_item_keys:
+                    #item["count"] = 0
+                    #print(f'{item["name"]} skipped')
+                    continue
+            elif self.options.progressive_items == 1:
                 if item["name"] in progressive_items_exclude_list:
+                    #item["count"] = 0
+                    #print(f'{item["name"]} skipped')
                     continue
+
             match self.options.bossdrops:
                 case 0:
                     if item in boss_drop_items:
+                        item["count"] = 0
+                        #print(f'{item["name"]} skipped')
                         continue
                 case 1:
                     if item["name"] == "Boss Drop":
@@ -218,9 +241,12 @@ class NodebusterWorld(World):
                 case 2:
                     if item["name"] == "Boss Drop":
                         item["count"] = 26
+
+            # Add items to the pool
             for _ in range(item["count"]):
                 new_item = self.create_item(item["name"])
                 self.multiworld.itempool.append(new_item)
+                #print(f'{item["name"]} created {_}')
 
         # Handle junk items needed for the pool
         if self.options.bossdrops == 1:
