@@ -69,15 +69,28 @@ def has_power_from_prog(world: NodebusterWorld, state: CollectionState, player: 
     return power_calc >= thresh
 
 
-def has_spawnrate_and_damageperenemy(world: NodebusterWorld, state: CollectionState, player: int):
+def can_grind_red_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     return (
-            state.has_any(["Progressive SpawnRate","SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4"], player)
-            and (
-                    state.has("DamagePerEnemy1", player)
-                    or state.has("Progressive Damage", player, 16)
-            )
+        has_milestones_upgrade(world, state, player)
+        and can_beat_boss13(world, state, player)
+        and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
     )
 
+def can_grind_blue_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+            has_milestones_upgrade(world, state, player)
+            and can_beat_boss13(world, state, player)
+            and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
+            and has_power_from_prog(world, state, player, "Progressive Blue Spawn", 5)
+    )
+
+def can_grind_yellow_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+            has_milestones_upgrade(world, state, player)
+            and can_beat_boss13(world, state, player)
+            and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
+            and has_power_from_prog(world, state, player, "Progressive Yellow Spawn", 2)
+    )
 
 def can_beat_boss0(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     # Damage1 = 10
@@ -544,21 +557,21 @@ def get_location_rules_lookup(world, player: int) -> dict:
         "Blues300": lambda state: has_milestones_upgrade(world, state, player),
         "Reds8k": lambda state: has_milestones_upgrade(world, state, player),
         "Blues500": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds10k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues800": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows5": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds15k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues1.2k": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows10": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds20k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues1.6k": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows15": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds30k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues2k": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds50k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues4k": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds100k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues8k": lambda state: has_milestones_upgrade(world, state, player),
+        "Reds10k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues800": lambda state: can_grind_blue_milestones(world, state, player),
+        "Yellows5": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds15k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues1.2k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Yellows10": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds20k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues1.6k": lambda state:can_grind_blue_milestones(world, state, player),
+        "Yellows15": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds30k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues2k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Reds50k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues4k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Reds100k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues8k": lambda state: can_grind_blue_milestones(world, state, player),
         "NodeFinder1-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "ExplodersChance-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "Lifesteal1-1": lambda state: has_access_to_blue_enemies(world, state, player),

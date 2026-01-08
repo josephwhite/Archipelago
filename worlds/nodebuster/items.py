@@ -170,7 +170,7 @@ progressive_items: list[ItemDict] = [
     {"name": "Progressive Health", "count": 51, "classification": ItemClassification.progression},
     {"name": "Progressive Regen", "count": 25, "classification": ItemClassification.progression},
     {"name": "Progressive Lifesteal", "count": 16, "classification": ItemClassification.progression},
-    {"name": "Progressive SpawnRate", "count": 26, "classification": ItemClassification.useful},
+    {"name": "Progressive SpawnRate", "count": 26, "classification": ItemClassification.progression},
     {"name": "Progressive Blue Spawn", "count": 5, "classification": ItemClassification.progression},
     {"name": "Progressive Yellow Spawn", "count": 2, "classification": ItemClassification.progression},
     {"name": "Progressive Armor", "count": 116, "classification": ItemClassification.progression},
