@@ -68,6 +68,10 @@ def has_power_from_prog(world: NodebusterWorld, state: CollectionState, player: 
     #print(f'{group} has {power_calc} power from {prog_power} items with {power_from_just_progressive} power, is it more than {thresh}?')
     return power_calc >= thresh
 
+def can_start_red_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+            has_milestones_upgrade(world, state, player)
+    )
 
 def can_grind_red_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     return (
@@ -76,12 +80,24 @@ def can_grind_red_milestones(world: NodebusterWorld, state: CollectionState, pla
         and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
     )
 
+def can_start_blue_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+        has_milestones_upgrade(world, state, player)
+        and has_access_to_blue_enemies(world, state, player)
+    )
+
 def can_grind_blue_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     return (
             has_milestones_upgrade(world, state, player)
             and can_beat_boss13(world, state, player)
             and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
             and has_power_from_prog(world, state, player, "Progressive Blue Spawn", 5)
+    )
+
+def can_start_yellow_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+        has_milestones_upgrade(world, state, player)
+        and has_access_to_yellow_enemies(world, state, player)
     )
 
 def can_grind_yellow_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
@@ -738,9 +754,9 @@ def get_region_rules_lookup(world, player: int) -> dict:
         "Net Armor": lambda state: has_crypto_mine(world, state, player),
         "Crypto Levels": lambda state: has_crypto_mine(world, state, player),
         # Milestones
-        "Red Milestones": lambda state: has_milestones_upgrade(world, state, player),
-        "Blue Milestones": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellow Milestones": lambda state: has_milestones_upgrade(world, state, player),
+        "Red Milestones": lambda state: can_start_red_milestones(world, state, player),
+        "Blue Milestones": lambda state: can_start_blue_milestones(world, state, player),
+        "Yellow Milestones": lambda state: can_start_yellow_milestones(world, state, player),
     }
     return rules_lookup
 
