@@ -750,6 +750,7 @@ def get_region_rules_lookup(world, player: int) -> dict:
         "Auto Pulser": lambda state: has_crypto_mine(world, state, player),
         "Netblade": lambda state: has_crypto_mine(world, state, player),
         "Big Crit": lambda state: has_crypto_mine(world, state, player),
+        "Overloaded": lambda state: has_crypto_mine(world, state, player),
         "Transplant": lambda state: has_crypto_mine(world, state, player),
         "Net Armor": lambda state: has_crypto_mine(world, state, player),
         "Crypto Levels": lambda state: has_crypto_mine(world, state, player),
