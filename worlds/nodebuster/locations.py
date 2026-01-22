@@ -25,6 +25,7 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += pulser_pursuit_locations
     locations += pulse_thumper_locations
     locations += unending_parasite_locations
+    locations += parasite_evolution_locations
     locations += bolt_lethality_locations
     locations += drainer_locations
     locations += blood_visage_locations
@@ -34,6 +35,11 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += big_crit_locations
     locations += overloaded_location
     locations += transplant_locations
+    locations += blood_injection_locations
+    locations += instant_repair_locations
+    locations += insatiable_locations
+    locations += indomitable_locations
+    locations += beyond_locations
     locations += net_armor_locations
     locations += infinity_locations
     return locations
@@ -161,7 +167,6 @@ skilled_salvager_locations = [
 
 sapper_locations = [
     "Lifesteal1-1", "Lifesteal1-2", "Lifesteal1-3", "Lifesteal1-4", "Lifesteal1-5",
-
     "DropHeal1-1"
 ]
 
@@ -223,10 +228,23 @@ pulse_thumper_locations = [
 ]
 
 unending_parasite_locations = [
-    "StealMaxHealth1-1", "StealMaxHealth2-1", "Health6-1",
-    "Health6-2", "Health6-3", "Health6-4", "Health6-5", "StealMaxHealth3-1",
-    "Health7-1", "Health7-2", "Health7-3", "Health7-4", "Health7-5",
+    "StealMaxHealth1-1"
+]
 
+parasite_evolution_locations = [
+    "StealMaxHealth2-1"
+]
+
+insatiable_locations = [
+    "StealMaxHealth3-1"
+]
+
+indomitable_locations = [
+    "Health6-1", "Health6-2", "Health6-3", "Health6-4", "Health6-5",
+]
+
+beyond_locations = [
+    "Health7-1", "Health7-2", "Health7-3", "Health7-4", "Health7-5",
 ]
 
 infinity_locations = [
@@ -282,12 +300,17 @@ overloaded_location = [
 ]
 
 transplant_locations = [
-    "Health4-1",
-    "Health4-2", "Health4-3", "Health4-4", "Health4-5", "Health4-6", "Health4-7",
-    "Health4-8", "Health4-9", "Health4-10", "Health5-1",
-    "Health5-2", "Health5-3", "MaxHealthHeal2-1",
-    "MaxHealthHeal2-2", "MaxHealthHeal2-3", "MaxHealthHeal2-4",
-    "MaxHealthHeal2-5"
+    "Health4-1", "Health4-2", "Health4-3", "Health4-4", "Health4-5",
+    "Health4-6", "Health4-7", "Health4-8", "Health4-9", "Health4-10"
+]
+
+blood_injection_locations = [
+    "Health5-1", "Health5-2", "Health5-3",
+]
+
+instant_repair_locations = [
+    "MaxHealthHeal2-1", "MaxHealthHeal2-2", "MaxHealthHeal2-3",
+    "MaxHealthHeal2-4", "MaxHealthHeal2-5"
 ]
 
 net_armor_locations = [
@@ -368,9 +391,13 @@ regions_to_locations: dict[str, list[str]] = {
     "Pulser Pursuit": pulser_pursuit_locations,
     "Pulse Thumper": pulse_thumper_locations,
     "Unending Parasite": unending_parasite_locations,
+    "Parasite Evolution": parasite_evolution_locations,
+    "Insatiable": insatiable_locations,
+    "Indomitable": indomitable_locations,
+    "Beyond": beyond_locations,
     "Infinity": infinity_locations,
 
-    # Netcoint Regions
+    # Netcoin Regions
     "Bolt Lethality": bolt_lethality_locations,
     "Drainer": drainer_locations,
     "Blood Visage": blood_visage_locations,
@@ -382,6 +409,8 @@ regions_to_locations: dict[str, list[str]] = {
 
     # Netcoin Regions off of main.
     "Transplant": transplant_locations,
+    "Blood Injection": blood_injection_locations,
+    "Instant Repair": instant_repair_locations,
     "Net Armor": net_armor_locations,
 
     # Milestone Regions
