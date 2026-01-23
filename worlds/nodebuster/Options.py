@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions
+from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions, Range
 
 
 class Goal(Choice):
@@ -54,6 +54,60 @@ class BossDrops(Choice):
     default = 0
 
 
+class TrapFillPercentage(Range):
+    """
+    Replace a percentage of junk items in the item pool with random traps.
+    """
+    display_name = "Trap Fill Percentage"
+    range_start = 0
+    range_end = 100
+    default = 0
+
+
+class CameraShakeTrapWeight(Choice):
+    """
+    Likelihood of a receiving a trap which activates an intense shaky camera visual effect for a short period of time.
+    """
+    display_name = "Camera Shake Trap Weight"
+    option_none = 0
+    option_low = 1
+    option_medium = 2
+    option_high = 3
+    default = 2
+
+
+class CRTTrapWeight(Choice):
+    """
+    Likelihood of a receiving a trap which activates an intense CRT visual effect for a short period of time.
+    """
+    display_name = "CRT Trap Weight"
+    option_none = 0
+    option_low = 1
+    option_medium = 2
+    option_high = 3
+    default = 2
+
+
+class GlitchTrapWeight(Choice):
+    """
+    Likelihood of a receiving a trap which activates an intense glitchy visual effect for a short period of time.
+    """
+    display_name = "Glitch Trap Weight"
+    option_none = 0
+    option_low = 1
+    option_medium = 2
+    option_high = 3
+    default = 2
+
+
+
+class TrapLink(Toggle):
+    """
+    Whether your received traps are linked to other players.
+    """
+    display_name = "Trap Link"
+
+
 @dataclass
 class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     goal: Goal
@@ -61,3 +115,8 @@ class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     milestone: Milestones
     bossdrops: BossDrops
     progressive_items: ProgressiveItems
+    trap_fill_percentage: TrapFillPercentage
+    camera_shake_trap_weight: CameraShakeTrapWeight
+    crt_trap_weight: CRTTrapWeight
+    glitch_trap_weight: GlitchTrapWeight
+    trap_link: TrapLink
