@@ -1,3 +1,4 @@
+import math
 from typing import Any
 
 from BaseClasses import Item, Region, Tutorial
@@ -13,7 +14,7 @@ from .items import (
     milestone_items,
     progressive_items_exclude_list,
     upgrade_items, all_items_to_id,
-    all_items, progressive_item_map
+    all_items, progressive_item_map, trap_items
 )
 from .locations import (
     NodebusterLocation,
@@ -186,6 +187,7 @@ class NodebusterWorld(World):
 
     def create_items(self) -> None:
         junk_count = 0
+        trap_count = 0
         progressive_item_keys = list(progressive_item_map.keys())
         for item in all_items:
             if not self.options.crypto:
@@ -248,13 +250,27 @@ class NodebusterWorld(World):
                 self.multiworld.itempool.append(new_item)
                 #print(f'{item["name"]} created {_}')
 
-        # Handle junk items needed for the pool
+        # Count junk/trap items needed for the pool
         if self.options.bossdrops == 1:
             junk_count = junk_count + 8
 
+        trap_weights = []
+        trap_weights += (["Camera Shake Trap"] * self.options.camera_shake_trap_weight.value)
+        trap_weights += (["CRT Trap"] * self.options.crt_trap_weight.value)
+        trap_weights += (["Glitch Trap"] * self.options.glitch_trap_weight.value)
+
+        if len(trap_weights) != 0:
+            trap_count = math.ceil(junk_count * (self.options.trap_fill_percentage.value / 100.0))
+            junk_count = junk_count - trap_count
+
         possible_junk_items = [i["name"] for i in junk_items]
+        possible_trap_items = [i["name"] for i in trap_items]
+
         junk_pool = [self.create_item(self.random.choice(possible_junk_items)) for _ in range(junk_count)]
+        trap_pool = [self.create_item(self.random.choice(possible_trap_items)) for _ in range(trap_count)]
+
         self.multiworld.itempool += junk_pool
+        self.multiworld.itempool += trap_pool
 
     def get_filler_item_name(self):
         item = self.multiworld.random.choice(junk_items)
@@ -266,6 +282,20 @@ class NodebusterWorld(World):
     def fill_slot_data(self) -> dict[str, Any]:
         data = self.options.as_dict(
             "death_link",
+            "trap_link",
             "goal"
         )
+        data["active_traps"] = self.output_active_traps()
         return data
+
+    def output_active_traps(self) -> dict[int, int]:
+        """
+        Serialize trap weights for slot data.
+        :return:
+        """
+        active_trap_data = {
+            0: self.options.camera_shake_trap_weight.value,
+            1: self.options.crt_trap_weight.value,
+            2: self.options.glitch_trap_weight.value
+        }
+        return active_trap_data

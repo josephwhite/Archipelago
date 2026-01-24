@@ -152,6 +152,12 @@ boss_drop_items: list[ItemDict] = [
     {"name": "Boss Drop", "count": 26, "classification": ItemClassification.progression},
 ]
 
+trap_items: list[ItemDict] = [
+    {"name": "Camera Shake Trap", "count": 0, "classification": ItemClassification.trap},
+    {"name": "CRT Trap", "count": 0, "classification": ItemClassification.trap},
+    {"name": "Glitch Trap", "count": 0, "classification": ItemClassification.trap},
+]
+
 junk_items: list[ItemDict] = [
     {"name": "Extra Bits", "count": 0, "classification": ItemClassification.filler},
     {"name": "Extra Nodes", "count": 0, "classification": ItemClassification.filler},
@@ -368,7 +374,7 @@ progressive_item_map: dict = {
     }
 }
 
-all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + progressive_items + goal_items + junk_items
+all_items = upgrade_items + milestone_items + crypto_level_items + boss_drop_items + progressive_items + goal_items + trap_items +junk_items
 all_items_to_id = {item["name"]: i + base_id for i, item in enumerate(all_items)}
 
 
