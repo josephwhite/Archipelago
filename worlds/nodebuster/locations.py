@@ -10,6 +10,7 @@ class NodebusterLocation(Location):
 def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
+    locations += focus_armor_locations
     locations += potency_locations
     locations += pulse_bolts_locations
     locations += skilled_salvager_locations
@@ -123,9 +124,10 @@ damage_1_locations = [
     "BossDamage2-6", "BossDamage2-7", "BossDamage2-8", "BossDamage2-9", "BossDamage2-10",
 
     "Size3-1", "Size3-2", "Size3-3",
+]
 
+focus_armor_locations = [
     "FocusArmor1-1", "FocusArmor1-2", "FocusArmor1-3", "FocusArmor1-4", "FocusArmor1-5"
-
 ]
 
 potency_locations = [
@@ -374,6 +376,7 @@ regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
+    "Focus Armor": focus_armor_locations,
     "Potency": potency_locations,
     "Pulse Bolts": pulse_bolts_locations,
     "Skilled Salvager": skilled_salvager_locations,

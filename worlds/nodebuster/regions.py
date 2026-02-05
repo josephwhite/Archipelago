@@ -22,6 +22,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
         "Net Armor",
         "Transplant",
         "Overloaded",
+        "Focus Armor",
     ],
     # Node Regions
     "Potency": [
@@ -46,6 +47,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
         "Yellow Milestones",
     ],
     "Spawn Exploders": [],
+    "Focus Armor": [],
     # Node Regions off of netcoin
     "Thundering": [],
     "Pulser Pursuit": [],
