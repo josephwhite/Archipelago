@@ -67,7 +67,9 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Big Crit": [],
     "Overloaded": [],
     # Netcoin Regions off of main.
-    "Transplant": ["Unending Parasite"],
+    "Transplant": ["Blood Injection"],
+    "Blood Injection": ["Instant Repair", "Unending Parasite"],
+    "Instant Repair": [],
     "Net Armor": [],
     # Battle
     "Boss Drops": ["Prestige 0"],
