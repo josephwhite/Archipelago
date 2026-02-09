@@ -5,10 +5,19 @@ from Utils import visualize_regions
 from .items import progressive_item_to_vanilla, progressive_item_map, get_power_from_vanilla_items, get_power_from_progressive_item
 
 if TYPE_CHECKING:
-    from . import NodebusterWorld
+    from . import NodebusterWorld, NodebusterLocation
 else:
     NodebusterWorld = object
 
+
+def reached_location(location: str, world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    result = False
+    try:
+        loc = world.get_location(location)
+        result = loc in state.locations_checked
+    except KeyError:
+        pass
+    return result
 
 def has_boss_drops(world: NodebusterWorld, state: CollectionState, player: int, count: int) -> bool:
     return state.has("Boss Drop", player, count)
@@ -762,6 +771,24 @@ def get_region_rules_lookup(world, player: int) -> dict:
     return rules_lookup
 
 
+def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
+    '''
+    Create rules for regions based on the upgrade node connections and unlock logic.
+
+    :param world:
+    :param player:
+    :return:
+    '''
+    rules_lookup = {
+        "Finishing Blow": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 17),
+        "Beyond": lambda state: has_power_from_prog(world, state, player, "Progressive Health", 265936),
+        "Infesting": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 950),
+        "Overloaded": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1450),
+        "Net Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+    }
+    return rules_lookup
+
+
 def set_nodebuster_rules(world: NodebusterWorld) -> None:
     player = world.player
     multiworld = world.multiworld
@@ -772,6 +799,12 @@ def set_nodebuster_rules(world: NodebusterWorld) -> None:
 
     region_rules_lookup = get_region_rules_lookup(world, player)
     for region_name, rule in region_rules_lookup.items():
+        r = world.get_region(region_name)
+        for loc in r.locations:
+            add_rule(loc, rule)
+
+    upgrade_connection_rules = get_upgrade_connection_rules_lookup(world, player)
+    for region_name, rule in upgrade_connection_rules.items():
         r = world.get_region(region_name)
         for loc in r.locations:
             add_rule(loc, rule)

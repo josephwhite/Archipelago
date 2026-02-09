@@ -286,9 +286,9 @@ progressive_item_map: dict = {
     },
 
     "Progressive SpawnRate": {
-        "SpawnRate1": {"start": 0, "count": 15, "power": 50},
-        "SpawnRate2": {"start": 15, "count": 1, "power": 200},
-        "SpawnRate3": {"start": 16, "count": 5, "power": 100},
+        "SpawnRate1": {"start": 0, "count": 15, "power": 50}, #max pow= 750
+        "SpawnRate2": {"start": 15, "count": 1, "power": 200},#max pow= 950
+        "SpawnRate3": {"start": 16, "count": 5, "power": 100},#max pow= 1450
         "SpawnRate4": {"start": 21, "count": 5, "power": 400},
     },
 

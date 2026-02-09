@@ -10,16 +10,22 @@ class NodebusterLocation(Location):
 def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
+    locations += node_boost_locations
+    locations += node_finder_locations
+    locations += infesting_locations
+    locations += bit_armor_locations
     locations += domain_expansion_locations
     locations += byte_armor_locations
     locations += colossus_slayer_locations
     locations += big_locations
     locations += focus_armor_locations
     locations += potency_locations
+    locations += finishing_blow_locations
     locations += pulse_bolts_locations
     locations += skilled_salvager_locations
     locations += sapper_locations
     locations += scaling_regeneration_locations
+    locations += super_armor_locations
     locations += anti_purple_locations
     locations += blood_armor_locations
     locations += auto_collect_locations
@@ -73,14 +79,15 @@ damage_1_locations = [
     "Health1-1", "Health1-2", "Health1-3", "Health1-4", "Health1-5", "Health1-6", "Health1-7", "Health1-8",
     "Health1-9", "Health1-10",
 
-    "SpawnRate1-1", "SpawnRate1-2", "SpawnRate1-3", "SpawnRate1-4", "SpawnRate1-5", "SpawnRate1-6", "SpawnRate1-7",
-    "SpawnRate1-8", "SpawnRate1-9", "SpawnRate1-10", "SpawnRate1-11",
-    "SpawnRate1-12", "SpawnRate1-13", "SpawnRate1-14", "SpawnRate1-15",
+    "SpawnRate1-1", "SpawnRate1-2", "SpawnRate1-3", "SpawnRate1-4", "SpawnRate1-5",
+    "SpawnRate1-6", "SpawnRate1-7", "SpawnRate1-8", "SpawnRate1-9", "SpawnRate1-10",
+    "SpawnRate1-11", "SpawnRate1-12", "SpawnRate1-13", "SpawnRate1-14", "SpawnRate1-15",
 
     "Armor1-1", "Armor1-2", "Armor1-3", "Armor1-4", "Armor1-5", "Armor1-6",
     "Armor1-7", "Armor1-8", "Armor1-9", "Armor1-10",
 
     "BitBoost1-1",
+
     "Size1-1", "Size1-2", "Size1-3", "Size1-4", "Size1-5", "Size1-6", "Size1-7", "Size1-8",
     "Size1-9", "Size1-10",
 
@@ -89,22 +96,18 @@ damage_1_locations = [
 
     "HealthRegen1-1", "HealthRegen1-2", "HealthRegen1-3", "HealthRegen1-4", "HealthRegen1-5",
 
-    "NodeFinder1-1", "NodeFinder1-2", "NodeFinder1-3", "NodeFinder1-4", "NodeFinder1-5",
-
     "Salvaging1-1", "Salvaging1-2", "Salvaging1-3", "Salvaging1-4",
     "Salvaging1-5",
 
     "DamagePerEnemy1-1", "DamagePerEnemy1-2", "DamagePerEnemy1-3",
     "DamagePerEnemy1-4", "DamagePerEnemy1-5",
 
-    "BossDamage1-1", "BossDamage1-2",
-    "BossDamage1-3", "BossDamage1-4", "BossDamage1-5", "BossDamage1-6",
-    "BossDamage1-7", "BossDamage1-8", "BossDamage1-9", "BossDamage1-10",
+    "BossDamage1-1", "BossDamage1-2", "BossDamage1-3", "BossDamage1-4", "BossDamage1-5",
+    "BossDamage1-6", "BossDamage1-7", "BossDamage1-8", "BossDamage1-9", "BossDamage1-10",
 
     "AttackSpeed1-1",
 
-    "BonusDropChance1-1", "BonusDropChance1-2",
-    "BonusDropChance1-3", "BonusDropChance1-4", "BonusDropChance1-5",
+    "BonusDropChance1-1", "BonusDropChance1-2", "BonusDropChance1-3", "BonusDropChance1-4", "BonusDropChance1-5",
 
     "Health2-1", "Health2-2", "Health2-3", "Health2-4",
     "Health2-5", "Health2-6", "Health2-7", "Health2-8",
@@ -125,8 +128,6 @@ damage_1_locations = [
 
     "SpawnRate2-1",
 
-    "NodeBoost1-1",
-
     "ArmorPerEnemy1-1", "ArmorPerEnemy1-2", "ArmorPerEnemy1-3",
     "ArmorPerEnemy1-4", "ArmorPerEnemy1-5", "ArmorPerEnemy1-6", "ArmorPerEnemy1-7",
     "ArmorPerEnemy1-8", "ArmorPerEnemy1-9", "ArmorPerEnemy1-10", "Armor3-1",
@@ -136,18 +137,35 @@ damage_1_locations = [
     "Health3-1", "Health3-2",
     "Health3-3", "Health3-4", "Health3-5", "Health3-6", "Health3-7", "Health3-8",
     "Health3-9", "Health3-10",
+]
 
-    "Armor4-1", "Armor4-2", "Armor4-3",
-    "Armor4-4", "Armor4-5", "Armor4-6", "Armor4-7", "Armor4-8", "Armor4-9",
-    "Armor4-10",
+super_armor_locations = [
+    "Armor4-1", "Armor4-2", "Armor4-3", "Armor4-4", "Armor4-5",
+    "Armor4-6", "Armor4-7", "Armor4-8", "Armor4-9", "Armor4-10",
+]
 
+node_finder_locations = [
+    "NodeFinder1-1", "NodeFinder1-2", "NodeFinder1-3", "NodeFinder1-4", "NodeFinder1-5",
+]
+
+node_boost_locations = [
+    "NodeBoost1-1",
+]
+
+milestone_locations = [
+    "Milestones-1"
+]
+
+infesting_locations = [
     "SpawnRate3-1", "SpawnRate3-2",
     "SpawnRate3-3", "SpawnRate3-4", "SpawnRate3-5",
+]
 
-    "Armor5-1", "Armor5-2",
-    "Armor5-3", "Armor5-4", "Armor5-5", "Armor5-6", "Armor5-7", "Armor5-8",
-    "Armor5-9", "Armor5-10", "Armor5-11", "Armor5-12", "Armor5-13", "Armor5-14",
-    "Armor5-15", "Armor5-16", "Armor5-17", "Armor5-18", "Armor5-19", "Armor5-20",
+bit_armor_locations = [
+    "Armor5-1", "Armor5-2", "Armor5-3", "Armor5-4", "Armor5-5",
+    "Armor5-6", "Armor5-7", "Armor5-8", "Armor5-9", "Armor5-10",
+    "Armor5-11", "Armor5-12", "Armor5-13", "Armor5-14", "Armor5-15",
+    "Armor5-16", "Armor5-17", "Armor5-18", "Armor5-19", "Armor5-20",
 ]
 
 domain_expansion_locations = [
@@ -193,7 +211,9 @@ potency_locations = [
     "CritDamage1-7", "CritDamage1-8", "CritDamage1-9", "CritDamage1-10",
 
     "Undamaged2-1", "Undamaged2-2", "Undamaged2-3", "Undamaged2-4",
+]
 
+finishing_blow_locations = [
     "Execute2-1", "Execute2-2", "Execute2-3", "Execute2-4"
 ]
 
@@ -245,9 +265,7 @@ crypto_mine_locations = [
     "CryptoMine-1"
 ]
 
-milestone_locations = [
-    "Milestones-1"
-]
+
 
 spawn_exploders_locations = [
     "ExplodersChance-1", "ExplodersSize-1",
@@ -422,8 +440,11 @@ regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
+    "Node Finder": node_finder_locations,
+    "Node Boost": node_boost_locations,
     "Focus Armor": focus_armor_locations,
     "Potency": potency_locations,
+    "Finishing Blow": finishing_blow_locations,
     "Pulse Bolts": pulse_bolts_locations,
     "Skilled Salvager": skilled_salvager_locations,
     "Sapper": sapper_locations,
@@ -431,6 +452,9 @@ regions_to_locations: dict[str, list[str]] = {
     "Anti-Purple": anti_purple_locations,
     "Blood Armor": blood_armor_locations,
     "Domain Expansion": domain_expansion_locations,
+    "Infesting": infesting_locations,
+    "Super Armor": super_armor_locations,
+    "Bit Armor": bit_armor_locations,
     "Byte Armor": byte_armor_locations,
     "Colossus Slayer": colossus_slayer_locations,
     "B.I.G.": big_locations,
