@@ -20,6 +20,12 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += big_locations
     locations += focus_armor_locations
     locations += potency_locations
+    locations += last_strike_locations
+    locations += crit_chance_locations
+    locations += nodeblade_locations
+    locations += crit_damage_locations
+    locations += first_strike_locations
+    locations += ambush_locations
     locations += finishing_blow_locations
     locations += pulse_bolts_locations
     locations += bolt_damage_locations
@@ -48,6 +54,7 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += processor_acquisition_locations
     locations += auto_pulser_locations
     locations += netblade_locations
+    locations += bloodblade_locations
     locations += big_crit_locations
     locations += overloaded_location
     locations += transplant_locations
@@ -197,19 +204,31 @@ focus_armor_locations = [
 potency_locations = [
     "Damage3-1", "Damage3-2", "Damage3-3", "Damage3-4", "Damage3-5",
     "Damage3-6", "Damage3-7", "Damage3-8", "Damage3-9", "Damage3-10",
+]
 
+first_strike_locations = [
     "Undamaged1-1", "Undamaged1-2", "Undamaged1-3", "Undamaged1-4", "Undamaged1-5", "Undamaged1-6",
+]
 
+last_strike_locations = [
     "Execute1-1", "Execute1-2", "Execute1-3", "Execute1-4", "Execute1-5", "Execute1-6",
+]
 
+crit_chance_locations = [
     "CritChance1-1", "CritChance1-2", "CritChance1-3", "CritChance1-4", "CritChance1-5",
     "CritChance1-6", "CritChance1-7", "CritChance1-8", "CritChance1-9", "CritChance1-10",
+]
 
+nodeblade_locations = [
     "Damage4-1", "Damage4-2", "Damage4-3",
+]
 
+crit_damage_locations = [
     "CritDamage1-1", "CritDamage1-2", "CritDamage1-3", "CritDamage1-4", "CritDamage1-5",
     "CritDamage1-6", "CritDamage1-7", "CritDamage1-8", "CritDamage1-9", "CritDamage1-10",
+]
 
+ambush_locations = [
     "Undamaged2-1", "Undamaged2-2", "Undamaged2-3", "Undamaged2-4",
 ]
 
@@ -359,8 +378,10 @@ netblade_locations = [
 
     "LightningChainCount1-1", "LightningChainCount1-2", "LightningChainCount1-3", "LightningChainCount1-4",
     "LightningChainCount1-5", "LightningChainCount1-6", "LightningChainCount1-7", "LightningChainCount1-8",
+]
 
-    "MaxHealthToDamage1-1"
+bloodblade_locations = [
+    "MaxHealthToDamage1-1",
 ]
 
 big_crit_locations = [
@@ -450,6 +471,12 @@ regions_to_locations: dict[str, list[str]] = {
     "Node Boost": node_boost_locations,
     "Focus Armor": focus_armor_locations,
     "Potency": potency_locations,
+    "Last Strike": last_strike_locations,
+    "Crit Chance": crit_chance_locations,
+    "Nodeblade": nodeblade_locations,
+    "Crit Damage": crit_damage_locations,
+    "First Strike": first_strike_locations,
+    "Ambush": ambush_locations,
     "Finishing Blow": finishing_blow_locations,
     "Pulse Bolts": pulse_bolts_locations,
     "Bolt Damage": bolt_damage_locations,
@@ -492,6 +519,7 @@ regions_to_locations: dict[str, list[str]] = {
     "Processor Acquisition": processor_acquisition_locations,
     "Auto Pulser": auto_pulser_locations,
     "Netblade": netblade_locations,
+    "Bloodblade": bloodblade_locations,
     "Big Crit": big_crit_locations,
     "Overloaded": overloaded_location,
 

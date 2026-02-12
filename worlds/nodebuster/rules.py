@@ -735,6 +735,7 @@ def get_region_rules_lookup(world, player: int) -> dict:
         # Bits
         # Node
         "Potency": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Nodeblade": lambda state: has_access_to_blue_enemies(world, state, player),
         "Pulse Bolts": lambda state: has_access_to_blue_enemies(world, state, player),
         "Skilled Salvager": lambda state: has_access_to_blue_enemies(world, state, player),
         "Sapper": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -780,6 +781,8 @@ def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
     :return:
     '''
     rules_lookup = {
+        # Damage1 sprawls at 1
+        "Potency": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 31),
         "Finishing Blow": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 17),
         "Beyond": lambda state: has_power_from_prog(world, state, player, "Progressive Health", 265936),
         "Infesting": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 950),

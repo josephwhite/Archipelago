@@ -226,8 +226,8 @@ progressive_items_exclude_list: list[str] = [
 
 progressive_item_map: dict = {
     "Progressive Damage": {
-        "Damage1": {"start": 0, "count": 15, "power": 1},
-        "Damage2": {"start": 15, "count": 10, "power": 3},
+        "Damage1": {"start": 0, "count": 15, "power": 1},   #max solo/cm pow= 15/15
+        "Damage2": {"start": 15, "count": 10, "power": 3},  #max solo/cm pow= 30/45
         "Damage3": {"start": 25, "count": 10, "power": 6},
         "Damage4": {"start": 35, "count": 3, "power": 25},
         "Damage5": {"start": 38, "count": 5, "power": 100},
@@ -286,9 +286,9 @@ progressive_item_map: dict = {
     },
 
     "Progressive SpawnRate": {
-        "SpawnRate1": {"start": 0, "count": 15, "power": 50}, #max pow= 750
-        "SpawnRate2": {"start": 15, "count": 1, "power": 200},#max pow= 950
-        "SpawnRate3": {"start": 16, "count": 5, "power": 100},#max pow= 1450
+        "SpawnRate1": {"start": 0, "count": 15, "power": 50}, #max solo/cm pow= 750/750
+        "SpawnRate2": {"start": 15, "count": 1, "power": 200},#max solo/cm pow= 200/950
+        "SpawnRate3": {"start": 16, "count": 5, "power": 100},#max solo/cm pow= 500/1450
         "SpawnRate4": {"start": 21, "count": 5, "power": 400},
     },
 

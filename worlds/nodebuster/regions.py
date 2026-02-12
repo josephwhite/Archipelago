@@ -23,11 +23,19 @@ nodebuster_regions_all: dict[str, list[str]] = {
     ],
     # Node Regions
     "Potency": [
-        "Big Crit",
-        "Netblade",
-        "Auto Pulser",
-        "Finishing Blow",
+        "First Strike",
+        "Nodeblade",
+        "Crit Chance",
     ],
+    "First Strike": ["Last Strike", "Ambush"],
+    "Last Strike": ["Finishing Blow"],
+    "Nodeblade": [
+        "Auto Pulser",
+        "Netblade",
+    ],
+    "Crit Chance": ["Crit Damage"],
+    "Crit Damage": ["Big Crit"],
+    "Ambush": [],
     "Finishing Blow": [],
     "Pulse Bolts": ["Bolt Damage", "Bolt Count"],
     "Bolt Damage": ["Bolt Burst"],
@@ -73,7 +81,8 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Blood Visage": [],
     "Processor Acquisition": [],
     "Auto Pulser": ["Pulser Pursuit", "Pulse Thumper"],
-    "Netblade": ["Thundering"],
+    "Netblade": ["Bloodblade", "Thundering"],
+    "Bloodblade": [],
     "Big Crit": [],
     "Overloaded": [],
     # Netcoin Regions off of main.
