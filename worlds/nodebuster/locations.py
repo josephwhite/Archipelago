@@ -22,8 +22,13 @@ def get_upgrade_tree_locations() -> list[str]:
     locations += potency_locations
     locations += finishing_blow_locations
     locations += pulse_bolts_locations
+    locations += bolt_damage_locations
+    locations += bolt_count_locations
+    locations += bolt_burst_locations
+    locations += bolt_barrage_locations
     locations += skilled_salvager_locations
     locations += sapper_locations
+    locations += patcher_locations
     locations += scaling_regeneration_locations
     locations += super_armor_locations
     locations += anti_purple_locations
@@ -214,14 +219,22 @@ finishing_blow_locations = [
 
 pulse_bolts_locations = [
     "PulseBolts-1",
+]
 
+bolt_damage_locations = [
     "PulseBoltDamage1-1", "PulseBoltDamage1-2", "PulseBoltDamage1-3", "PulseBoltDamage1-4", "PulseBoltDamage1-5",
     "PulseBoltDamage1-6", "PulseBoltDamage1-7", "PulseBoltDamage1-8", "PulseBoltDamage1-9", "PulseBoltDamage1-10",
+]
 
+bolt_count_locations = [
     "PulseBoltCount1-1", "PulseBoltCount1-2", "PulseBoltCount1-3", "PulseBoltCount1-4", "PulseBoltCount1-5",
+]
 
+bolt_burst_locations = [
     "PulseBoltExplode-1",
+]
 
+bolt_barrage_locations = [
     "PulseBoltCount2-1",
 ]
 
@@ -231,8 +244,10 @@ skilled_salvager_locations = [
 
 sapper_locations = [
     "Lifesteal1-1", "Lifesteal1-2", "Lifesteal1-3", "Lifesteal1-4", "Lifesteal1-5",
+]
 
-    "DropHeal1-1"
+patcher_locations = [
+    "DropHeal1-1",
 ]
 
 scaling_regeneration_locations = [
@@ -322,8 +337,9 @@ drainer_locations = [
 ]
 
 blood_visage_locations = [
-    "MaxHealthToArmor2-1", "RampingArmor1-1", "RampingArmor1-2",
-    "RampingArmor1-3", "RampingArmor1-4", "RampingArmor1-5",
+    "MaxHealthToArmor2-1",
+
+    "RampingArmor1-1", "RampingArmor1-2", "RampingArmor1-3", "RampingArmor1-4", "RampingArmor1-5",
 ]
 
 processor_acquisition_locations = [
@@ -331,8 +347,7 @@ processor_acquisition_locations = [
 ]
 
 auto_pulser_locations = [
-    "MovingPulser1-1", "MovingPulser1-2", "MovingPulser1-3", "MovingPulser1-4",
-    "MovingPulser1-5"
+    "MovingPulser1-1", "MovingPulser1-2", "MovingPulser1-3", "MovingPulser1-4", "MovingPulser1-5",
 ]
 
 netblade_locations = [
@@ -437,8 +452,13 @@ regions_to_locations: dict[str, list[str]] = {
     "Potency": potency_locations,
     "Finishing Blow": finishing_blow_locations,
     "Pulse Bolts": pulse_bolts_locations,
+    "Bolt Damage": bolt_damage_locations,
+    "Bolt Count": bolt_count_locations,
+    "Bolt Burst": bolt_burst_locations,
+    "Bolt Barrage": bolt_barrage_locations,
     "Skilled Salvager": skilled_salvager_locations,
     "Sapper": sapper_locations,
+    "Patcher": patcher_locations,
     "Scaling Regeneration": scaling_regeneration_locations,
     "Anti-Purple": anti_purple_locations,
     "Blood Armor": blood_armor_locations,

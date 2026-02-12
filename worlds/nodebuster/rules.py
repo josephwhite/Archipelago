@@ -785,6 +785,11 @@ def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
         "Infesting": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 950),
         "Overloaded": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1450),
         "Net Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+        "Bolt Damage": lambda state: state.has("PulseBolts", player),
+        "Bolt Count": lambda state: state.has("PulseBolts", player),
+        "Bolt Burst": lambda state: state.has("PulseBoltDamage1", player),
+        "Bolt Barrage": lambda state: state.has("PulseBoltCount2", player),
+        "Bolt Lethality": lambda state: state.has_any(["PulseBoltExplode", "PulseBoltCount2"], player),
     }
     return rules_lookup
 
