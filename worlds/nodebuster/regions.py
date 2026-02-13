@@ -9,18 +9,23 @@ nodebuster_regions_all: dict[str, list[str]] = {
     # Bit Regions
     "Damage1Root": [
         "Potency",
+        "Better Endurance",
+        "Antivirus",
         "Pulse Bolts",
         "Skilled Salvager",
         "Sapper",
-        "Scaling Regeneration",
-        "Super Armor",
         "Colossus Slayer",
         "Node Finder",
         "Net Armor",
-        "Transplant",
         "Infesting",
         "Focus Armor",
     ],
+    "Better Endurance": ["Big Heart", "Self-Repair"],
+    "Big Heart": ["Transplant"],
+    "Self-Repair": ["Scaling Regeneration"],
+    "Antivirus": ["Bolster", "Swarm Defense System"],
+    "Swarm Defense System": [],
+    "Bolster": ["Super Armor"],
     # Node Regions
     "Potency": [
         "First Strike",

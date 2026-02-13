@@ -10,6 +10,12 @@ class NodebusterLocation(Location):
 def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
+    locations += antivirus_locations
+    locations += swarm_defense_system_locations
+    locations += bolster_locations
+    locations += better_endurance_locations
+    locations += self_repair_locations
+    locations += big_heart_locations
     locations += node_boost_locations
     locations += node_finder_locations
     locations += infesting_locations
@@ -121,30 +127,42 @@ damage_1_locations = [
 
     "BonusDropChance1-1", "BonusDropChance1-2", "BonusDropChance1-3", "BonusDropChance1-4", "BonusDropChance1-5",
 
-    "Health2-1", "Health2-2", "Health2-3", "Health2-4",
-    "Health2-5", "Health2-6", "Health2-7", "Health2-8",
-
-    "Armor2-1", "Armor2-2", "Armor2-3", "Armor2-4", "Armor2-5",
-
     "Damage2-1", "Damage2-2", "Damage2-3", "Damage2-4", "Damage2-5",
     "Damage2-6", "Damage2-7", "Damage2-8", "Damage2-9", "Damage2-10",
 
     "PickupRadius1-1", "PickupRadius1-2", "PickupRadius1-3", "PickupRadius1-4", "PickupRadius1-5",
 
-    "HealthRegen2-1",
-
     "AttackSpeed2-1",
 
     "SpawnRate2-1",
+]
 
+antivirus_locations = [
+    "Armor2-1", "Armor2-2", "Armor2-3", "Armor2-4", "Armor2-5",
+]
+
+swarm_defense_system_locations = [
     "ArmorPerEnemy1-1", "ArmorPerEnemy1-2", "ArmorPerEnemy1-3", "ArmorPerEnemy1-4", "ArmorPerEnemy1-5",
     "ArmorPerEnemy1-6", "ArmorPerEnemy1-7", "ArmorPerEnemy1-8", "ArmorPerEnemy1-9", "ArmorPerEnemy1-10",
+]
 
-    "Armor3-1", "Armor3-2", "Armor3-3", "Armor3-4", "Armor3-5",
-    "Armor3-6", "Armor3-7", "Armor3-8", "Armor3-9", "Armor3-10",
+better_endurance_locations = [
+    "Health2-1", "Health2-2", "Health2-3", "Health2-4",
+    "Health2-5", "Health2-6", "Health2-7", "Health2-8",
+]
 
+self_repair_locations = [
+    "HealthRegen2-1"
+]
+
+big_heart_locations = [
     "Health3-1", "Health3-2", "Health3-3", "Health3-4", "Health3-5",
     "Health3-6", "Health3-7", "Health3-8", "Health3-9", "Health3-10",
+]
+
+bolster_locations = [
+    "Armor3-1", "Armor3-2", "Armor3-3", "Armor3-4", "Armor3-5",
+    "Armor3-6", "Armor3-7", "Armor3-8", "Armor3-9", "Armor3-10",
 ]
 
 super_armor_locations = [
@@ -467,6 +485,12 @@ regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
+    "Antivirus": antivirus_locations,
+    "Swarm Defense System": swarm_defense_system_locations,
+    "Bolster": bolster_locations,
+    "Better Endurance": better_endurance_locations,
+    "Self-Repair": self_repair_locations,
+    "Big Heart": big_heart_locations,
     "Node Finder": node_finder_locations,
     "Node Boost": node_boost_locations,
     "Focus Armor": focus_armor_locations,
