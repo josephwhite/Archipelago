@@ -10,6 +10,17 @@ class NodebusterLocation(Location):
 def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
+    locations += repair_tool_locations
+    locations += salvaging_locations
+    locations += connection_buster_locations
+    locations += giant_slayer_locations
+    locations += repeating_locations
+    locations += bit_boost_locations
+    locations += plundering_locations
+    locations += proficiency_locations
+    locations += magnet_locations
+    locations += repeat_repeating_locations
+    locations += swarming_locations
     locations += antivirus_locations
     locations += swarm_defense_system_locations
     locations += bolster_locations
@@ -105,7 +116,7 @@ damage_1_locations = [
     "Armor1-1", "Armor1-2", "Armor1-3", "Armor1-4", "Armor1-5",
     "Armor1-6", "Armor1-7", "Armor1-8", "Armor1-9", "Armor1-10",
 
-    "BitBoost1-1",
+
 
     "Size1-1", "Size1-2", "Size1-3", "Size1-4", "Size1-5",
     "Size1-6", "Size1-7", "Size1-8", "Size1-9", "Size1-10",
@@ -113,27 +124,51 @@ damage_1_locations = [
 
     "BossArmor1-1", "BossArmor1-2", "BossArmor1-3", "BossArmor1-4", "BossArmor1-5",
     "BossArmor1-6", "BossArmor1-7", "BossArmor1-8", "BossArmor1-9", "BossArmor1-10",
+]
 
+repair_tool_locations = [
     "HealthRegen1-1", "HealthRegen1-2", "HealthRegen1-3", "HealthRegen1-4", "HealthRegen1-5",
+]
 
+salvaging_locations = [
     "Salvaging1-1", "Salvaging1-2", "Salvaging1-3", "Salvaging1-4", "Salvaging1-5",
+]
 
+connection_buster_locations = [
     "DamagePerEnemy1-1", "DamagePerEnemy1-2", "DamagePerEnemy1-3", "DamagePerEnemy1-4", "DamagePerEnemy1-5",
+]
 
+giant_slayer_locations = [
     "BossDamage1-1", "BossDamage1-2", "BossDamage1-3", "BossDamage1-4", "BossDamage1-5",
     "BossDamage1-6", "BossDamage1-7", "BossDamage1-8", "BossDamage1-9", "BossDamage1-10",
+]
 
+repeating_locations = [
     "AttackSpeed1-1",
+]
 
+bit_boost_locations =[
+    "BitBoost1-1",
+]
+
+plundering_locations = [
     "BonusDropChance1-1", "BonusDropChance1-2", "BonusDropChance1-3", "BonusDropChance1-4", "BonusDropChance1-5",
+]
 
+proficiency_locations = [
     "Damage2-1", "Damage2-2", "Damage2-3", "Damage2-4", "Damage2-5",
     "Damage2-6", "Damage2-7", "Damage2-8", "Damage2-9", "Damage2-10",
+]
 
+magnet_locations = [
     "PickupRadius1-1", "PickupRadius1-2", "PickupRadius1-3", "PickupRadius1-4", "PickupRadius1-5",
+]
 
+repeat_repeating_locations = [
     "AttackSpeed2-1",
+]
 
+swarming_locations = [
     "SpawnRate2-1",
 ]
 
@@ -485,6 +520,17 @@ regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
+    "Repair Tool": repair_tool_locations,
+    "Salvaging": salvaging_locations,
+    "Connection Buster": connection_buster_locations,
+    "Giant Slayer": giant_slayer_locations,
+    "Repeating": repeating_locations,
+    "Bit Boost": bit_boost_locations,
+    "Plundering": plundering_locations,
+    "Proficiency": proficiency_locations,
+    "Magnet": magnet_locations,
+    "Repeat-Repeating": repeat_repeating_locations,
+    "Swarming": swarming_locations,
     "Antivirus": antivirus_locations,
     "Swarm Defense System": swarm_defense_system_locations,
     "Bolster": bolster_locations,
