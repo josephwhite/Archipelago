@@ -10,6 +10,11 @@ class NodebusterLocation(Location):
 def get_upgrade_tree_locations() -> list[str]:
     locations = []
     locations += damage_1_locations
+    locations += endurance_locations
+    locations += crowding_locations
+    locations += firewall_locations
+    locations += influence_locations
+    locations += boss_guard_locations
     locations += repair_tool_locations
     locations += salvaging_locations
     locations += connection_buster_locations
@@ -105,23 +110,30 @@ damage_1_locations = [
     "Damage1-1", "Damage1-2", "Damage1-3", "Damage1-4", "Damage1-5",
     "Damage1-6", "Damage1-7", "Damage1-8", "Damage1-9", "Damage1-10",
     "Damage1-11", "Damage1-12", "Damage1-13", "Damage1-14", "Damage1-15",
+]
 
+endurance_locations = [
     "Health1-1", "Health1-2", "Health1-3", "Health1-4", "Health1-5",
     "Health1-6", "Health1-7", "Health1-8", "Health1-9", "Health1-10",
+]
 
+crowding_locations = [
     "SpawnRate1-1", "SpawnRate1-2", "SpawnRate1-3", "SpawnRate1-4", "SpawnRate1-5",
     "SpawnRate1-6", "SpawnRate1-7", "SpawnRate1-8", "SpawnRate1-9", "SpawnRate1-10",
     "SpawnRate1-11", "SpawnRate1-12", "SpawnRate1-13", "SpawnRate1-14", "SpawnRate1-15",
+]
 
+firewall_locations = [
     "Armor1-1", "Armor1-2", "Armor1-3", "Armor1-4", "Armor1-5",
     "Armor1-6", "Armor1-7", "Armor1-8", "Armor1-9", "Armor1-10",
+]
 
-
-
+influence_locations = [
     "Size1-1", "Size1-2", "Size1-3", "Size1-4", "Size1-5",
     "Size1-6", "Size1-7", "Size1-8", "Size1-9", "Size1-10",
+]
 
-
+boss_guard_locations = [
     "BossArmor1-1", "BossArmor1-2", "BossArmor1-3", "BossArmor1-4", "BossArmor1-5",
     "BossArmor1-6", "BossArmor1-7", "BossArmor1-8", "BossArmor1-9", "BossArmor1-10",
 ]
@@ -520,6 +532,11 @@ regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
     "Damage1Root": damage_1_locations,
+    "Endurance": endurance_locations,
+    "Crowding": crowding_locations,
+    "Firewall": firewall_locations,
+    "Influence": influence_locations,
+    "Boss Guard": boss_guard_locations,
     "Repair Tool": repair_tool_locations,
     "Salvaging": salvaging_locations,
     "Connection Buster": connection_buster_locations,
