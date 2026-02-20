@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions
+from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions, Range, OptionGroup, DeathLink
 
 
 class Goal(Choice):
@@ -25,11 +25,20 @@ class ProgressiveItems(Toggle):
 
 class CryptoMine(Toggle):
     """
-    Adds the 36 levels of the CryptoMine into the pool.
+    Adds all 36 levels of the CryptoMine into the pool.
     When you level up the crypto mine, instead of speeding up the crypto mine it will instead give you a randomized item from the pool.
     """
-
     display_name = "Crypto Mine"
+
+
+class AdditionalCryptoMineLevels(Range):
+    """
+    Adds additional levels to the CryptoMine.
+    """
+    display_name = "Additional Crypto Mine Levels"
+    range_start = 0
+    range_end = 100
+    default = 0
 
 
 class Milestones(Toggle):
@@ -58,6 +67,45 @@ class BossDrops(Choice):
 class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     goal: Goal
     crypto: CryptoMine
+    #addl_crypto: AdditionalCryptoMineLevels
     milestone: Milestones
     bossdrops: BossDrops
     progressive_items: ProgressiveItems
+
+
+nodebuster_options_groups = [
+    OptionGroup("Goal Options", [
+        Goal,
+    ]),
+    OptionGroup("Gameplay Options", [
+        DeathLink,
+        ProgressiveItems,
+    ]),
+    OptionGroup("Logic Options", [
+        CryptoMine,
+        AdditionalCryptoMineLevels,
+        Milestones,
+        BossDrops,
+    ]),
+]
+
+nodebuster_minsanity_options = {
+    "goal": Goal.option_release_virus,
+    "crypto": CryptoMine.option_false,
+    "milestone": Milestones.option_false,
+    "bossdrops": BossDrops.option_none,
+    "progressive_items": ProgressiveItems.option_false,
+}
+
+nodebuster_maxsanity_options = {
+    "goal": Goal.option_release_virus_with_infinity,
+    "crypto": CryptoMine.option_true,
+    "milestone": Milestones.option_true,
+    "bossdrops": BossDrops.option_all_26,
+    "progressive_items": ProgressiveItems.option_false,
+}
+
+nodebuster_options_presets = {
+    "Minsanity": nodebuster_minsanity_options,
+    "Maxsanity": nodebuster_maxsanity_options,
+}

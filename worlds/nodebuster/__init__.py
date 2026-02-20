@@ -1,6 +1,7 @@
 from typing import Any
 
-from BaseClasses import Item, Region, Tutorial
+from BaseClasses import Entrance, EntranceType, Item, ItemClassification, Region, Tutorial
+from WebHostLib.misc import WebWorldTheme
 from worlds.AutoWorld import WebWorld, World
 
 from . import rules
@@ -23,13 +24,13 @@ from .locations import (
     regions_to_locations, all_locations_to_id, crypto_mine_levels, red_locations, yellow_locations, blue_locations,
     boss_locations,
 )
-from .Options import NodebusterOptions
+from .Options import NodebusterOptions, nodebuster_options_groups, nodebuster_options_presets
 from .regions import nodebuster_regions_all
 from .rules import set_nodebuster_rules
 
 
 class NodebusterWeb(WebWorld):
-    theme = "dirt"
+    theme = WebWorldTheme.PARTY_TIME
 
     guide_en = Tutorial(
         "Multiworld Setup Guide",
@@ -41,7 +42,8 @@ class NodebusterWeb(WebWorld):
     )
 
     tutorials = [guide_en]
-
+    option_groups = nodebuster_options_groups
+    options_presets = nodebuster_options_presets
     bug_report_page = "https://github.com/josephwhite/Emerlads-Nodebuster_AP_Mod/issues"
 
 
