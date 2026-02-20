@@ -4,6 +4,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
     ],
     "Upgrade Tree": [
         "Damage1Root",
+        "Milestone Page",
         "Boss Drops",
     ],
     # Bit Regions
@@ -90,6 +91,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
         "Milestones",
         "Spawn Exploders",
     ],
+    "Milestones": [],
     "Node Boost": [],
     "Spawn Exploders": [],
     "Focus Armor": [],
@@ -101,9 +103,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Parasite Evolution": ["Indomitable", "Insatiable"],
     "Insatiable": [],
     "Indomitable": ["Beyond"],
-    "Beyond": ["Infinity"],
-
-
+    "Beyond" : ["Infinity"],
     # Netcoin Regions
     "Bolt Lethality": [],
     "Drainer": [],
@@ -148,7 +148,7 @@ nodebuster_regions_all: dict[str, list[str]] = {
     "Prestige 24": ["Prestige 25"],
     "Prestige 25": [],
     # Milestone Regions
-    "Milestones": [
+    "Milestone Page": [
         "Red Milestones",
         "Blue Milestones",
         "Yellow Milestones",

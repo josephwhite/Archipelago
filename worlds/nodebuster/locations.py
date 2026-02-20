@@ -363,8 +363,8 @@ spawn_exploders_locations = [
 ]
 
 thundering_locations = [
-    "LightningDamage1-1", "LightningDamage1-2", "LightningDamage1-3", "LightningDamage1-4", "LightningDamage1-5",
-    "LightningDamage1-6", "LightningDamage1-7", "LightningDamage1-8",
+    "LightningDamage1-1", "LightningDamage1-2", "LightningDamage1-3", "LightningDamage1-4",
+    "LightningDamage1-5", "LightningDamage1-6", "LightningDamage1-7", "LightningDamage1-8",
 ]
 
 pulser_pursuit_locations = [
@@ -373,13 +373,13 @@ pulser_pursuit_locations = [
 ]
 
 pulse_thumper_locations = [
-    "MovingPulserSize1-1", "MovingPulserSize1-2", "MovingPulserSize1-3", "MovingPulserSize1-4",
-    "MovingPulserSize1-5", "MovingPulserSize1-6",
+    "MovingPulserSize1-1", "MovingPulserSize1-2", "MovingPulserSize1-3",
+    "MovingPulserSize1-4", "MovingPulserSize1-5", "MovingPulserSize1-6",
 
     "MovingPulserSize2-1",
 
     "MovingPulserAttackSpeed1-1", "MovingPulserAttackSpeed1-2",
-    "MovingPulserAttackSpeed1-3","MovingPulserAttackSpeed1-4", "MovingPulserAttackSpeed1-5",
+    "MovingPulserAttackSpeed1-3", "MovingPulserAttackSpeed1-4", "MovingPulserAttackSpeed1-5",
 ]
 
 unending_parasite_locations = [
@@ -403,9 +403,13 @@ beyond_locations = [
 ]
 
 infinity_locations = [
-    "Infinity1-1", "Infinity2-1", "Infinity3-1", "Infinity4-1",
-    "Infinity5-1", "Infinity6-1", "Infinity7-1", "Infinity8-1", "Infinity9-1",
-    "Laboratory-1", "YellowSpawn2-1",
+    "Infinity1-1", "Infinity2-1", "Infinity3-1",
+    "Infinity4-1", "Infinity5-1", "Infinity6-1",
+    "Infinity7-1", "Infinity8-1", "Infinity9-1",
+
+    "Laboratory-1",
+
+    "YellowSpawn2-1",
 ]
 
 bolt_lethality_locations = [
@@ -531,6 +535,7 @@ goal_locations = [
 regions_to_locations: dict[str, list[str]] = {
     "Menu": [],
     "Upgrade Tree": [],
+    "Milestone Page": [],
     "Damage1Root": damage_1_locations,
     "Endurance": endurance_locations,
     "Crowding": crowding_locations,

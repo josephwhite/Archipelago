@@ -228,9 +228,9 @@ progressive_item_map: dict = {
     "Progressive Damage": {
         "Damage1": {"start": 0, "count": 15, "power": 1},   #max solo/cm pow= 15/15
         "Damage2": {"start": 15, "count": 10, "power": 3},  #max solo/cm pow= 30/45
-        "Damage3": {"start": 25, "count": 10, "power": 6},
-        "Damage4": {"start": 35, "count": 3, "power": 25},
-        "Damage5": {"start": 38, "count": 5, "power": 100},
+        "Damage3": {"start": 25, "count": 10, "power": 6},  #max solo/cm pow= 60/105
+        "Damage4": {"start": 35, "count": 3, "power": 25},  #max solo/cm pow= 75/180
+        "Damage5": {"start": 38, "count": 5, "power": 100}, #max solo/cm pow= 500/680
     },
 
     "Progressive Additional Damage": {
@@ -278,18 +278,18 @@ progressive_item_map: dict = {
     },
 
     "Progressive Lifesteal": {
-        "Salvaging1": {"start": 0, "count": 5, "power": 1},
-        "Lifesteal1": {"start": 5, "count": 5, "power": 50},
-        "Salvaging2": {"start": 10, "count": 1, "power": 8},
-        "Lifesteal2": {"start": 11, "count": 3, "power": 1000},
-        "Lifesteal3": {"start": 14, "count": 2, "power": 5000},
+        "Salvaging1": {"start": 0, "count": 5, "power": 1},     #max solo/cm pow= 5/5
+        "Lifesteal1": {"start": 5, "count": 5, "power": 50},    #max solo/cm pow= 250/255
+        "Salvaging2": {"start": 10, "count": 1, "power": 8},    #max solo/cm pow= 8/263
+        "Lifesteal2": {"start": 11, "count": 3, "power": 1000}, #max solo/cm pow= 3000/3263
+        "Lifesteal3": {"start": 14, "count": 2, "power": 5000}, #max solo/cm pow= 10000/13263
     },
 
     "Progressive SpawnRate": {
-        "SpawnRate1": {"start": 0, "count": 15, "power": 50}, #max solo/cm pow= 750/750
-        "SpawnRate2": {"start": 15, "count": 1, "power": 200},#max solo/cm pow= 200/950
-        "SpawnRate3": {"start": 16, "count": 5, "power": 100},#max solo/cm pow= 500/1450
-        "SpawnRate4": {"start": 21, "count": 5, "power": 400},
+        "SpawnRate1": {"start": 0, "count": 15, "power": 50},  #max solo/cm pow= 750/750
+        "SpawnRate2": {"start": 15, "count": 1, "power": 200}, #max solo/cm pow= 200/950
+        "SpawnRate3": {"start": 16, "count": 5, "power": 100}, #max solo/cm pow= 500/1450
+        "SpawnRate4": {"start": 21, "count": 5, "power": 400}, #max solo/cm pow= 2000/3450
     },
 
     "Progressive Blue Spawn": {
