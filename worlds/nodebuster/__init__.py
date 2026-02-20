@@ -24,7 +24,7 @@ from .locations import (
     regions_to_locations, all_locations_to_id, crypto_mine_levels, red_locations, yellow_locations, blue_locations,
     boss_locations,
 )
-from .Options import NodebusterOptions, nodebuster_options_groups
+from .Options import NodebusterOptions, nodebuster_options_groups, nodebuster_options_presets
 from .regions import nodebuster_regions_all
 from .rules import set_nodebuster_rules
 
@@ -43,6 +43,7 @@ class NodebusterWeb(WebWorld):
 
     tutorials = [guide_en]
     option_groups = nodebuster_options_groups
+    options_presets = nodebuster_options_presets
     bug_report_page = "https://github.com/josephwhite/Emerlads-Nodebuster_AP_Mod/issues"
 
 
