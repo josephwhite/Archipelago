@@ -1,7 +1,6 @@
-from BaseClasses import ItemClassification
-from typing import TypedDict, List
+from typing import TypedDict
 
-from BaseClasses import Item
+from BaseClasses import Item, ItemClassification
 
 base_id = 268000
 

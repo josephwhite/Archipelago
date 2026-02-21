@@ -5,7 +5,7 @@ from Utils import visualize_regions
 from .items import progressive_item_to_vanilla, progressive_item_map, get_power_from_vanilla_items, get_power_from_progressive_item
 
 if TYPE_CHECKING:
-    from . import NodebusterWorld, NodebusterLocation
+    from . import NodebusterWorld
 else:
     NodebusterWorld = object
 
