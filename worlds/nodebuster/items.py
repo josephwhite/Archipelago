@@ -1,7 +1,6 @@
-from BaseClasses import ItemClassification
-from typing import TypedDict, List
+from typing import TypedDict
 
-from BaseClasses import Item
+from BaseClasses import Item, ItemClassification
 
 base_id = 268000
 
@@ -47,9 +46,9 @@ upgrade_items: list[ItemDict] = [
     {"name": "Armor3", "count": 10, 'classification': ItemClassification.progression},
     {"name": "DropHeal1", "count": 1, 'classification': ItemClassification.progression},
     {"name": "Health3", "count": 10, 'classification': ItemClassification.progression},
-    {"name": "PulseBolts", "count": 1, 'classification': ItemClassification.useful},
-    {"name": "PulseBoltDamage1", "count": 10, 'classification': ItemClassification.useful},
-    {"name": "PulseBoltCount1", "count": 5, 'classification': ItemClassification.useful},
+    {"name": "PulseBolts", "count": 1, 'classification': ItemClassification.progression},
+    {"name": "PulseBoltDamage1", "count": 10, 'classification': ItemClassification.progression},
+    {"name": "PulseBoltCount1", "count": 5, 'classification': ItemClassification.progression},
     {"name": "ExplodersSize", "count": 5, 'classification': ItemClassification.useful},
     {"name": "MaxHealthHeal1", "count": 10, 'classification': ItemClassification.progression},
     {"name": "Armor4", "count": 10, 'classification': ItemClassification.progression},
@@ -80,9 +79,9 @@ upgrade_items: list[ItemDict] = [
     {"name": "Armor7", "count": 5, 'classification': ItemClassification.progression},
     {"name": "FocusArmor1", "count": 5, 'classification': ItemClassification.progression},
     {"name": "StealMaxHealth1", "count": 1, 'classification': ItemClassification.progression},
-    {"name": "PulseBoltExplode", "count": 1, 'classification': ItemClassification.useful},
+    {"name": "PulseBoltExplode", "count": 1, 'classification': ItemClassification.progression},
     {"name": "MovingPulserSize2", "count": 1, 'classification': ItemClassification.useful},
-    {"name": "PulseBoltCount2", "count": 1, 'classification': ItemClassification.useful},
+    {"name": "PulseBoltCount2", "count": 1, 'classification': ItemClassification.progression},
     {"name": "PulseBoltDamage2", "count": 3, 'classification': ItemClassification.useful},
     {"name": "MovingPulserSpeed1", "count": 5, 'classification': ItemClassification.useful},
     {"name": "Undamaged2", "count": 4, 'classification': ItemClassification.progression},
@@ -170,7 +169,7 @@ progressive_items: list[ItemDict] = [
     {"name": "Progressive Health", "count": 51, "classification": ItemClassification.progression},
     {"name": "Progressive Regen", "count": 25, "classification": ItemClassification.progression},
     {"name": "Progressive Lifesteal", "count": 16, "classification": ItemClassification.progression},
-    {"name": "Progressive SpawnRate", "count": 26, "classification": ItemClassification.useful},
+    {"name": "Progressive SpawnRate", "count": 26, "classification": ItemClassification.progression},
     {"name": "Progressive Blue Spawn", "count": 5, "classification": ItemClassification.progression},
     {"name": "Progressive Yellow Spawn", "count": 2, "classification": ItemClassification.progression},
     {"name": "Progressive Armor", "count": 116, "classification": ItemClassification.progression},
@@ -226,11 +225,11 @@ progressive_items_exclude_list: list[str] = [
 
 progressive_item_map: dict = {
     "Progressive Damage": {
-        "Damage1": {"start": 0, "count": 15, "power": 1},
-        "Damage2": {"start": 15, "count": 10, "power": 3},
-        "Damage3": {"start": 25, "count": 10, "power": 6},
-        "Damage4": {"start": 35, "count": 3, "power": 25},
-        "Damage5": {"start": 38, "count": 5, "power": 100},
+        "Damage1": {"start": 0, "count": 15, "power": 1},   #max solo/cm pow= 15/15
+        "Damage2": {"start": 15, "count": 10, "power": 3},  #max solo/cm pow= 30/45
+        "Damage3": {"start": 25, "count": 10, "power": 6},  #max solo/cm pow= 60/105
+        "Damage4": {"start": 35, "count": 3, "power": 25},  #max solo/cm pow= 75/180
+        "Damage5": {"start": 38, "count": 5, "power": 100}, #max solo/cm pow= 500/680
     },
 
     "Progressive Additional Damage": {
@@ -278,18 +277,18 @@ progressive_item_map: dict = {
     },
 
     "Progressive Lifesteal": {
-        "Salvaging1": {"start": 0, "count": 5, "power": 1},
-        "Lifesteal1": {"start": 5, "count": 5, "power": 50},
-        "Salvaging2": {"start": 10, "count": 1, "power": 8},
-        "Lifesteal2": {"start": 11, "count": 3, "power": 1000},
-        "Lifesteal3": {"start": 14, "count": 2, "power": 5000},
+        "Salvaging1": {"start": 0, "count": 5, "power": 1},     #max solo/cm pow= 5/5
+        "Lifesteal1": {"start": 5, "count": 5, "power": 50},    #max solo/cm pow= 250/255
+        "Salvaging2": {"start": 10, "count": 1, "power": 8},    #max solo/cm pow= 8/263
+        "Lifesteal2": {"start": 11, "count": 3, "power": 1000}, #max solo/cm pow= 3000/3263
+        "Lifesteal3": {"start": 14, "count": 2, "power": 5000}, #max solo/cm pow= 10000/13263
     },
 
     "Progressive SpawnRate": {
-        "SpawnRate1": {"start": 0, "count": 15, "power": 50},
-        "SpawnRate2": {"start": 15, "count": 1, "power": 200},
-        "SpawnRate3": {"start": 16, "count": 5, "power": 100},
-        "SpawnRate4": {"start": 21, "count": 5, "power": 400},
+        "SpawnRate1": {"start": 0, "count": 15, "power": 50},  #max solo/cm pow= 750/750
+        "SpawnRate2": {"start": 15, "count": 1, "power": 200}, #max solo/cm pow= 200/950
+        "SpawnRate3": {"start": 16, "count": 5, "power": 100}, #max solo/cm pow= 500/1450
+        "SpawnRate4": {"start": 21, "count": 5, "power": 400}, #max solo/cm pow= 2000/3450
     },
 
     "Progressive Blue Spawn": {

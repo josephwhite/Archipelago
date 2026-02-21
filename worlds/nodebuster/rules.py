@@ -10,6 +10,15 @@ else:
     NodebusterWorld = object
 
 
+def reached_location(location: str, world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    result = False
+    try:
+        loc = world.get_location(location)
+        result = loc in state.locations_checked
+    except KeyError:
+        pass
+    return result
+
 def has_boss_drops(world: NodebusterWorld, state: CollectionState, player: int, count: int) -> bool:
     return state.has("Boss Drop", player, count)
 
@@ -68,16 +77,45 @@ def has_power_from_prog(world: NodebusterWorld, state: CollectionState, player: 
     #print(f'{group} has {power_calc} power from {prog_power} items with {power_from_just_progressive} power, is it more than {thresh}?')
     return power_calc >= thresh
 
-
-def has_spawnrate_and_damageperenemy(world: NodebusterWorld, state: CollectionState, player: int):
+def can_start_red_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     return (
-            state.has_any(["Progressive SpawnRate","SpawnRate1","SpawnRate2","SpawnRate3","SpawnRate4"], player)
-            and (
-                    state.has("DamagePerEnemy1", player)
-                    or state.has("Progressive Damage", player, 16)
-            )
+            has_milestones_upgrade(world, state, player)
     )
 
+def can_grind_red_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+        has_milestones_upgrade(world, state, player)
+        and can_beat_boss13(world, state, player)
+        and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
+    )
+
+def can_start_blue_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+        has_milestones_upgrade(world, state, player)
+        and has_access_to_blue_enemies(world, state, player)
+    )
+
+def can_grind_blue_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+            has_milestones_upgrade(world, state, player)
+            and can_beat_boss13(world, state, player)
+            and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
+            and has_power_from_prog(world, state, player, "Progressive Blue Spawn", 5)
+    )
+
+def can_start_yellow_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+        has_milestones_upgrade(world, state, player)
+        and has_access_to_yellow_enemies(world, state, player)
+    )
+
+def can_grind_yellow_milestones(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
+    return (
+            has_milestones_upgrade(world, state, player)
+            and can_beat_boss13(world, state, player)
+            and has_power_from_prog(world, state, player, "Progressive SpawnRate", 3450)
+            and has_power_from_prog(world, state, player, "Progressive Yellow Spawn", 2)
+    )
 
 def can_beat_boss0(world: NodebusterWorld, state: CollectionState, player: int) -> bool:
     # Damage1 = 10
@@ -544,21 +582,21 @@ def get_location_rules_lookup(world, player: int) -> dict:
         "Blues300": lambda state: has_milestones_upgrade(world, state, player),
         "Reds8k": lambda state: has_milestones_upgrade(world, state, player),
         "Blues500": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds10k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues800": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows5": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds15k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues1.2k": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows10": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds20k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues1.6k": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellows15": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds30k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues2k": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds50k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues4k": lambda state: has_milestones_upgrade(world, state, player),
-        "Reds100k": lambda state: has_milestones_upgrade(world, state, player),
-        "Blues8k": lambda state: has_milestones_upgrade(world, state, player),
+        "Reds10k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues800": lambda state: can_grind_blue_milestones(world, state, player),
+        "Yellows5": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds15k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues1.2k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Yellows10": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds20k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues1.6k": lambda state:can_grind_blue_milestones(world, state, player),
+        "Yellows15": lambda state: can_grind_yellow_milestones(world, state, player),
+        "Reds30k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues2k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Reds50k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues4k": lambda state: can_grind_blue_milestones(world, state, player),
+        "Reds100k": lambda state: can_grind_red_milestones(world, state, player),
+        "Blues8k": lambda state: can_grind_blue_milestones(world, state, player),
         "NodeFinder1-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "ExplodersChance-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "Lifesteal1-1": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -619,11 +657,6 @@ def get_location_rules_lookup(world, player: int) -> dict:
         "MovingPulserSpeed1-4": lambda state: has_access_to_blue_enemies(world, state, player),
         "MovingPulserSpeed1-5": lambda state: has_access_to_blue_enemies(world, state, player),
         "StealMaxHealth2-1": lambda state: has_access_to_blue_enemies(world, state, player),
-        "Health6-1": lambda state: has_access_to_blue_enemies(world, state, player),
-        "Health6-2": lambda state: has_access_to_blue_enemies(world, state, player),
-        "Health6-3": lambda state: has_access_to_blue_enemies(world, state, player),
-        "Health6-4": lambda state: has_access_to_blue_enemies(world, state, player),
-        "Health6-5": lambda state: has_access_to_blue_enemies(world, state, player),
         "LightningDamage1-1": lambda state: has_access_to_blue_enemies(world, state, player),
         "LightningDamage1-2": lambda state: has_access_to_blue_enemies(world, state, player),
         "LightningDamage1-3": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -697,6 +730,7 @@ def get_region_rules_lookup(world, player: int) -> dict:
         # Bits
         # Node
         "Potency": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Nodeblade": lambda state: has_access_to_blue_enemies(world, state, player),
         "Pulse Bolts": lambda state: has_access_to_blue_enemies(world, state, player),
         "Skilled Salvager": lambda state: has_access_to_blue_enemies(world, state, player),
         "Sapper": lambda state: has_access_to_blue_enemies(world, state, player),
@@ -707,12 +741,19 @@ def get_region_rules_lookup(world, player: int) -> dict:
         "Crypto Mine": lambda state: has_access_to_blue_enemies(world, state, player),
         "Milestones": lambda state: has_access_to_blue_enemies(world, state, player),
         "Spawn Exploders": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Unending Parasite": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Bolt Burst": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Pulser Pursuit": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Pulse Thumper": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Parasite Evolution": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Indomitable": lambda state: has_access_to_blue_enemies(world, state, player),
+        "Thundering": lambda state: has_access_to_blue_enemies(world, state, player),
         "Infinity": lambda state: has_access_to_blue_enemies(world, state, player),
         # Node off of Netcoin
-        "Thundering": lambda state: has_access_to_net_and_nodes(world, state, player),
-        "Pulser Pursuit": lambda state: has_access_to_net_and_nodes(world, state, player),
-        "Pulse Thumper": lambda state: has_access_to_net_and_nodes(world, state, player),
-        "Unending Parasite": lambda state: has_access_to_net_and_nodes(world, state, player),
+        #"Thundering": lambda state: has_access_to_net_and_nodes(world, state, player),
+        #"Pulser Pursuit": lambda state: has_access_to_net_and_nodes(world, state, player),
+        #"Pulse Thumper": lambda state: has_access_to_net_and_nodes(world, state, player),
+        #"Unending Parasite": lambda state: has_access_to_net_and_nodes(world, state, player),
         # Netcoin
         "Bolt Lethality": lambda state: has_crypto_mine(world, state, player),
         "Drainer": lambda state: has_crypto_mine(world, state, player),
@@ -721,13 +762,80 @@ def get_region_rules_lookup(world, player: int) -> dict:
         "Auto Pulser": lambda state: has_crypto_mine(world, state, player),
         "Netblade": lambda state: has_crypto_mine(world, state, player),
         "Big Crit": lambda state: has_crypto_mine(world, state, player),
+        "Overloaded": lambda state: has_crypto_mine(world, state, player),
         "Transplant": lambda state: has_crypto_mine(world, state, player),
         "Net Armor": lambda state: has_crypto_mine(world, state, player),
         "Crypto Levels": lambda state: has_crypto_mine(world, state, player),
         # Milestones
-        "Red Milestones": lambda state: has_milestones_upgrade(world, state, player),
-        "Blue Milestones": lambda state: has_milestones_upgrade(world, state, player),
-        "Yellow Milestones": lambda state: has_milestones_upgrade(world, state, player),
+        "Milestone Page": lambda state: has_milestones_upgrade(world, state, player),
+        "Red Milestones": lambda state: can_start_red_milestones(world, state, player),
+        "Blue Milestones": lambda state: can_start_blue_milestones(world, state, player),
+        "Yellow Milestones": lambda state: can_start_yellow_milestones(world, state, player),
+    }
+    return rules_lookup
+
+
+def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
+    '''
+    Create rules for regions based on the upgrade node connections and unlock logic.
+
+    :param world:
+    :param player:
+    :return:
+    '''
+    rules_lookup = {
+        "Endurance": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 1),
+        "Connection Buster": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 1),
+        "Crowding": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 1),
+        "Firewall": lambda state: has_power_from_prog(world, state, player, "Progressive Health", 1),
+        "Repair Tool": lambda state: has_power_from_prog(world, state, player, "Progressive Health", 1),
+        "Potency": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 31),
+        "Nodeblade": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 91),
+        "First Strike": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 37),
+        "Crit Chance": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 37),
+        "Crit Damage": lambda state: state.has("CritChance1", player),
+        "Big Crit":lambda state: has_power_from_prog(world, state, player, "Progressive Critical Damage", 50),
+        "Netblade": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 166),
+        "Giant Slayer": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 1),
+        "Repeating": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 1),
+        "Finishing Blow": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 17),
+        "Beyond": lambda state: has_power_from_prog(world, state, player, "Progressive Health", 265936),
+        "Sapper": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 1),
+        "Skilled Salvager": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 5),
+        "Patcher": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 51),
+        "Better Endurance": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 1) or has_power_from_prog(world, state, player, "Progressive Boss Armor", 1),
+        "Drainer": lambda state: has_power_from_prog(world, state, player, "Progressive Regen", 17),
+        "Bit Boost": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
+        "Last Strike": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 6),
+        "Influence": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
+        "Swarming": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
+        "Infesting": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 950),
+        "Overloaded": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1450),
+        "Antivirus": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 10),
+        "Swarm Defense System": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 11),
+        "Bolster": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 15),
+        "Super Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 35),
+        "Anti-Purple": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 36),
+        "Bit Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 45),
+        "Byte Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 65),
+        "Blood Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+        "Net Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+        "Focus Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+        "Blood Visage": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 110),
+        "Domain Expansion": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1050),
+        "Processor Acquisition": lambda state: has_crypto_mine(world, state, player),
+        # TODO: If these upgrades are considered progressive, add these rules back
+        #"Plundering": lambda state: state.has("BitBoost1", player),
+        #"Node Finder": lambda state: state.has("BitBoost1", player),
+        #"Magnet": lambda state: state.has("Size1", player),
+        #"B.I.G.": lambda state: state.has("Size2", player),
+        #"Crypto Mine": lambda state: state.has_all("Size2", player),
+        #"Auto-Collect": lambda state: state.has("Size3", player),
+        "Bolt Damage": lambda state: state.has("PulseBolts", player),
+        "Bolt Count": lambda state: state.has("PulseBolts", player),
+        "Bolt Burst": lambda state: state.has("PulseBoltDamage1", player),
+        "Bolt Barrage": lambda state: state.has("PulseBoltCount2", player),
+        "Bolt Lethality": lambda state: state.has_any(["PulseBoltExplode", "PulseBoltCount2"], player),
     }
     return rules_lookup
 
@@ -746,13 +854,17 @@ def set_nodebuster_rules(world: NodebusterWorld) -> None:
         for loc in r.locations:
             add_rule(loc, rule)
 
-    if world.options.goal == "release_virus_with_infinity":
-        multiworld.completion_condition[player] = lambda state: (
-            released_virus(world, state, player) and has_all_infinities(world, state, player)
-        )
-    else:
-        multiworld.completion_condition[player] = lambda state: (
-            released_virus(world, state, player)
-        )
+    upgrade_connection_rules = get_upgrade_connection_rules_lookup(world, player)
+    for region_name, rule in upgrade_connection_rules.items():
+        r = world.get_region(region_name)
+        for loc in r.locations:
+            add_rule(loc, rule)
+
+    # Goal
+    virus = multiworld.get_location("Virus Released", player)
+    if world.options.goal == world.options.goal.option_release_virus_with_infinity:
+        add_rule(virus, lambda state: has_all_infinities(world, state, player))
+
+    multiworld.completion_condition[player] = lambda state: released_virus(world, state, player)
 
     # visualize_regions(multiworld.get_region("Menu", player), "nodebuster_world.puml")
