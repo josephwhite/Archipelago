@@ -793,6 +793,8 @@ def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
         "Nodeblade": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 91),
         "First Strike": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 37),
         "Crit Chance": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 37),
+        "Crit Damage": lambda state: state.has("CritChance1", player),
+        "Big Crit":lambda state: has_power_from_prog(world, state, player, "Progressive Critical Damage", 50),
         "Netblade": lambda state: has_power_from_prog(world, state, player, "Progressive Damage", 166),
         "Giant Slayer": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 1),
         "Repeating": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 1),
@@ -802,7 +804,9 @@ def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
         "Skilled Salvager": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 5),
         "Patcher": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 51),
         "Better Endurance": lambda state: has_power_from_prog(world, state, player, "Progressive Lifesteal", 1) or has_power_from_prog(world, state, player, "Progressive Boss Armor", 1),
+        "Drainer": lambda state: has_power_from_prog(world, state, player, "Progressive Regen", 17),
         "Bit Boost": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
+        "Last Strike": lambda state: has_power_from_prog(world, state, player, "Progressive Additional Damage", 6),
         "Influence": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
         "Swarming": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1),
         "Infesting": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 950),
@@ -813,10 +817,16 @@ def get_upgrade_connection_rules_lookup(world, player: int) -> dict:
         "Super Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 35),
         "Anti-Purple": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 36),
         "Bit Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 45),
+        "Byte Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 65),
+        "Blood Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
         "Net Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
+        "Focus Armor": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 95),
         "Blood Visage": lambda state: has_power_from_prog(world, state, player, "Progressive Armor", 110),
         "Domain Expansion": lambda state: has_power_from_prog(world, state, player, "Progressive SpawnRate", 1050),
-        # TODO: If Size upgrades are considered progressive, add these rules back
+        "Processor Acquisition": lambda state: has_crypto_mine(world, state, player),
+        # TODO: If these upgrades are considered progressive, add these rules back
+        #"Plundering": lambda state: state.has("BitBoost1", player),
+        #"Node Finder": lambda state: state.has("BitBoost1", player),
         #"Magnet": lambda state: state.has("Size1", player),
         #"B.I.G.": lambda state: state.has("Size2", player),
         #"Crypto Mine": lambda state: state.has_all("Size2", player),
@@ -850,13 +860,11 @@ def set_nodebuster_rules(world: NodebusterWorld) -> None:
         for loc in r.locations:
             add_rule(loc, rule)
 
-    if world.options.goal == "release_virus_with_infinity":
-        multiworld.completion_condition[player] = lambda state: (
-            released_virus(world, state, player) and has_all_infinities(world, state, player)
-        )
-    else:
-        multiworld.completion_condition[player] = lambda state: (
-            released_virus(world, state, player)
-        )
+    # Goal
+    virus = multiworld.get_location("Virus Released", player)
+    if world.options.goal == world.options.goal.option_release_virus_with_infinity:
+        add_rule(virus, lambda state: has_all_infinities(world, state, player))
+
+    multiworld.completion_condition[player] = lambda state: released_virus(world, state, player)
 
     # visualize_regions(multiworld.get_region("Menu", player), "nodebuster_world.puml")
