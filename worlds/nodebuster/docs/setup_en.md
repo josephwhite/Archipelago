@@ -3,7 +3,6 @@
 ## Required Software
 
 * [Nodebuster (Steam)](https://store.steampowered.com/app/3107330)
-    * Windows
 * [Godot 4.x Mod Loader](https://github.com/GodotModding/godot-mod-loader/releases) v7.0.1 or later
 * [Nodebuster Archipelago Mod](https://github.com/josephwhite/Emerlads-Nodebuster_AP_Mod/releases)
 
@@ -31,6 +30,10 @@
 9. Start Nodebuster once more. The game should ask you to restart.
 10. Click `yes` to restart the Nodebuster. The Archipelago mod should now be installed.
 
+### Updating Mod
+
+To update the Archipelago mod, simply replace ZIP file of the Archipelago mod in the `mods` folder.
+
 ### What to do if the Mod Loader doesn't install correctly
 
 This can happen due to either installing the wrong version of the mod loader or the launch options field wasn't filled correctly.
@@ -38,7 +41,7 @@ This can happen due to either installing the wrong version of the mod loader or 
 * Check the launch options field in the properties window of the game in Steam. If the launch options are still `--script addons/mod_loader/mod_loader_setup.gd`, remove it and try starting the game again.
 * Make sure you downloaded v7.0.1+ of the Godot 4.x Mod Loader or later.
     * More information on the Godot Mod Loader can be found on their [Wiki](https://wiki.godotmodding.com).
-* For possible platform specific details other issues: see the Godot Mod Loader Self Setup guide:
+* For possible platform specific details or other issues: see the Godot Mod Loader Self Setup guide:
     * [Wiki](https://wiki.godotmodding.com/guides/integration/mod_loader_self_setup/)
 
 ## Configuring your YAML File
