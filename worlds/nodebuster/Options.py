@@ -54,6 +54,24 @@ class BossDrops(Choice):
     default = 0
 
 
+class VagueHints(Choice):
+    """
+    Make in-game hints a bit more vague, where upgrade/milestone descriptions only tell you about a general
+    characteristic.
+
+    - Off/Full: Player Name and Item Name
+    - Class: Item Classification (Progressive/Filler/Trap/etc)
+    - Player: Player name
+    - AP: "An Archipelago Item"
+    """
+    display_name = "Vague Hints"
+    option_off = 0
+    alias_full = 0
+    option_class = 1
+    option_player = 2
+    option_ap = 3
+
+
 @dataclass
 class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     goal: Goal
@@ -61,3 +79,4 @@ class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
     milestone: Milestones
     bossdrops: BossDrops
     progressive_items: ProgressiveItems
+    vague_hints: VagueHints
