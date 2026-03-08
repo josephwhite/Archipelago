@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Toggle, Choice, DeathLinkMixin, PerGameCommonOptions
+from Options import Toggle, Choice, PerGameCommonOptions, Range, DeathLink
 
 
 class Goal(Choice):
@@ -54,10 +54,44 @@ class BossDrops(Choice):
     default = 0
 
 
+class DeathLinkAmnesty(Range):
+    """
+    Amount of Deaths to take before sending a DeathLink signal, for balancing difficulty.
+    """
+    display_name = "Death Link Amnesty"
+    range_start = 0
+    range_end = 30
+    default = 15
+
+
+class SendDeathLinkChance(Range):
+    """
+    When dying, the chance of sending a death link to another player.
+    """
+    display_name = "Send Death Link Chance"
+    range_start = 1
+    range_end = 100
+    default = 100
+
+
+class ReceiveDeathLinkChance(Range):
+    """
+    When receiving a death link, the chance of dying.
+    """
+    display_name = "Receive Death Link Chance"
+    range_start = 1
+    range_end = 100
+    default = 100
+
+
 @dataclass
-class NodebusterOptions(DeathLinkMixin, PerGameCommonOptions):
+class NodebusterOptions(PerGameCommonOptions):
     goal: Goal
     crypto: CryptoMine
     milestone: Milestones
     bossdrops: BossDrops
     progressive_items: ProgressiveItems
+    death_link: DeathLink
+    death_link_amnesty: DeathLinkAmnesty
+    send_death_link_chance: SendDeathLinkChance
+    receive_death_link_chance: ReceiveDeathLinkChance

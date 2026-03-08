@@ -265,7 +265,11 @@ class NodebusterWorld(World):
 
     def fill_slot_data(self) -> dict[str, Any]:
         data = self.options.as_dict(
+            "goal",
             "death_link",
-            "goal"
+            "death_link_amnesty",
+            "send_death_link_chance",
+            "receive_death_link_chance",
+            toggles_as_bools=False
         )
         return data
