@@ -110,6 +110,8 @@ if typing.TYPE_CHECKING:
 else:
     context_type = object
 
+# Regex pattern for text between and including brackets
+# [], [foo]
 remove_between_brackets = re.compile(r"\[.*?]")
 
 

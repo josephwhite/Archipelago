@@ -62,6 +62,7 @@ def render_markdown(path: str, img_url_base: str | None = None) -> str:
     def heading_id(text: str) -> str:
         nonlocal heading_id_count
 
+        # Regex pattern for finding text that isn't alphanumeric, a "-", or a space.
         # there is no good way to do this without regex
         s = re.sub(r"[^\w\- ]", "", text.lower()).replace(" ", "-").strip("-")
         n = heading_id_count[s]
