@@ -1,6 +1,6 @@
 from typing import Any
 
-from BaseClasses import Item, Region, Tutorial
+from BaseClasses import Item, Region, Tutorial, MultiWorld
 from worlds.AutoWorld import WebWorld, World
 
 from . import rules
@@ -25,7 +25,7 @@ from .locations import (
 )
 from .Options import NodebusterOptions
 from .regions import nodebuster_regions_all
-from .rules import set_nodebuster_rules
+from .rules import set_nodebuster_rules, set_nodebuster_connections, get_location_rules_lookup
 
 
 class NodebusterWeb(WebWorld):
@@ -56,6 +56,9 @@ class NodebusterWorld(World):
     topology_present = False
     item_name_to_id = all_items_to_id
     location_name_to_id = all_locations_to_id
+
+    def __init__(self, multiworld: "MultiWorld", player: int):
+        super().__init__(multiworld, player)
 
     item_name_groups = {
         "Damage Increase": {
@@ -175,14 +178,16 @@ class NodebusterWorld(World):
             r = Region(region, self.player, self.multiworld)
             for i in regions_to_locations[region]:
                 loc = NodebusterLocation(self.player, i, self.location_name_to_id.get(i, None), r)
+                get_location_rules_lookup(self, self.player)
                 r.locations.append(loc)
             self.multiworld.regions.append(r)
+        set_nodebuster_connections(self)
         # Connect Regions
-        for region, connected_regions in nodebuster_regions_all.items():
-            r = self.multiworld.get_region(region, self.player)
-            for conn in connected_regions:
-                c = self.multiworld.get_region(conn, self.player)
-                r.connect(c)
+        #for region, data in nodebuster_regions_all.items():
+        #    r = self.multiworld.get_region(region, self.player)
+        #    for conn in data:
+        #        c = self.multiworld.get_region(conn, self.player)
+        #        r.connect(c)
 
     def create_items(self) -> None:
         junk_count = 0

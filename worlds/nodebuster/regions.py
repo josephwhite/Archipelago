@@ -1,3 +1,9 @@
+from typing import TYPE_CHECKING, Callable, Optional, NamedTuple
+from BaseClasses import CollectionState, Location, MultiWorld, Region
+
+if TYPE_CHECKING:
+    from . import NodebusterWorld
+
 nodebuster_regions_all: dict[str, list[str]] = {
     "Menu": [
         "Upgrade Tree",
