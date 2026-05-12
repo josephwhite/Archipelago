@@ -1,6 +1,7 @@
 from typing import Callable, Union, Dict, Set
 
 from BaseClasses import MultiWorld
+from Options import OptionError
 from ..generic.Rules import add_rule, set_rule
 from .Locations import location_table
 from .Options import SM64Options, SM64PlandoConnections
@@ -22,12 +23,17 @@ def fix_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, invalid_r
     if entrance_map[entrance] in invalid_regions: # Unlucky :C
         replacement_regions = [(rand_entrance, rand_region) for rand_entrance, rand_region in swapdict.items()
                                if rand_region not in invalid_regions]
-        # TODO: throw option error if all other regions are used in plando
+        if not replacement_regions:
+            raise Exception(
+                "Super Mario 64 Entrance Rando and Plando ran out usable regions to fix an invalid connection."
+            )
         rand_entrance, rand_region = multiworld.random.choice(replacement_regions)
         old_dest = entrance_map[entrance]
         entrance_map[entrance], entrance_map[rand_entrance] = rand_region, old_dest
         swapdict[entrance], swapdict[rand_entrance] = rand_region, old_dest
-    swapdict.pop(entrance)
+        #print(f"{entrance_map[entrance]} fixed from {old_dest} to {rand_region}")
+    if entrance in swapdict:
+        swapdict.pop(entrance)
 
 
 def assign_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, to_region: str,
@@ -52,36 +58,41 @@ def assign_reg(entrance_map: Dict[SM64Levels, str], entrance: SM64Levels, to_reg
 
 
 def validate_all_sm64_plando_connection(connections: SM64PlandoConnections, move_rando: int) -> tuple[bool, str]:
+    """
+    Validation for all plando connections against Super Mario 64 logic and requirements.
+    :param connections: Plando connections
+    :param move_rando: Flag for Move Randomizer
+    :return: Pass/Fail and Error Message
+    """
     so_flags = []
-
-
     for conn in connections:
         entrance = conn.entrance
         exit = conn.exit
         # Must be valid Super Mario 64 levels
         if entrance not in sm64_entrances_to_level.keys():
-            return False, f"Entrance {entrance} not a valid Super Mario 64 level entrance."
+            return False, f"Entrance {entrance} not a valid Super Mario 64 level entrance"
         if exit not in sm64_entrances_to_level.keys():
-            return False, f"Exit {exit} not a valid Super Mario 64 level entrance."
+            return False, f"Exit {exit} not a valid Super Mario 64 level entrance"
         # First order impossible connections
         if move_rando and entrance == "Bob-omb Battlefield" and exit not in valid_move_randomizer_start_courses:
-            return False, f"Connection from {entrance} to {exit} is logically impossible with Move Randomizer."
+            return False, f"Connection from {entrance} to {exit} is too strict with Move Randomizer"
         if move_rando and entrance == "Whomp's Fortress" and exit not in valid_move_randomizer_start_courses:
-            return False, f"Connection from {entrance} to {exit} is too strict with Move Randomizer."
+            return False, f"Connection from {entrance} to {exit} is too strict with Move Randomizer"
         if not move_rando and entrance == "Bob-omb Battlefield" and exit in sm64_secrets_to_level.keys():
-            return False, f"Connection from {entrance} to {exit} is logically impossible."
+            return False, f"Connection from {entrance} to {exit} is logically impossible"
         if entrance == "Cavern of the Metal Cap" and exit == "Hazy Maze Cave":
-            return False, f"Connection from {entrance} to {exit} is logically impossible."
+            return False, f"Connection from {entrance} to {exit} is logically impossible"
         if entrance == "Bowser in the Fire Sea" and exit == "Dire, Dire Docks":
-            return False, f"Connection from {entrance} to {exit} is logically impossible."
+            return False, f"Connection from {entrance} to {exit} is logically impossible"
         # Flags for second order impossible connections
         if entrance == "Bowser in the Fire Sea" and exit == "Hazy Maze Cave":
             so_flags.append("BitFS->HMC")
         if entrance == "Cavern of the Metal Cap" and exit == "Dire, Dire Docks":
             so_flags.append("CotMC->DDD")
+    # Second order impossible connections
     if "BitFS->HMC" in so_flags and "CotMC->DDD" in so_flags:
-        return False, ("Connection is logically impossible. Cavern of the Metal Cap can't connect to Dire, Dire Docks "
-                       "if Bowser in the Fire Sea connects to Hazy Maze Cave.")
+        return False, ("Connection from Cavern of the Metal Cap to Dire, Dire Docks "
+                       "while Bowser in the Fire Sea connects to Hazy Maze Cave is logically impossible")
     # Validated.
     return True, ""
 
@@ -106,7 +117,7 @@ def set_rules(multiworld: MultiWorld, options: SM64Options, player: int, area_co
         plando_swapdict = sm64_level_to_entrances.copy()
         valid, msg = validate_all_sm64_plando_connection(options.plando_connections, move_rando_bitvec)
         if not valid:
-            raise Exception(
+            raise OptionError(
                 f"Invalid connection for player {multiworld.player_name[player]} ({msg})"
             )
         for conn in options.plando_connections:
@@ -114,7 +125,6 @@ def set_rules(multiworld: MultiWorld, options: SM64Options, player: int, area_co
                 plando_entrance = sm64_entrances_to_level[conn.entrance]
                 plando_exit = conn.exit
                 assign_reg(randomized_entrances, plando_entrance, plando_exit, plando_swapdict)
-                print(f"{randomized_entrances[plando_entrance]} connected to {plando_entrance}")
             except Exception:
                 raise Exception(
                     f"Unexpected error connecting {conn.entrance} to {conn.exit} "
