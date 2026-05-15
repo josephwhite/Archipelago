@@ -323,6 +323,16 @@ class TrapWeights(OptionDict):
     default = {trap_type.value: 1 for trap_type in TonyHawksProSkater12APTrapTypes}
 
 
+class TrapLink(Toggle):
+    """
+    Whether your received traps are linked to other players
+
+    You will also receive any linked traps from other players with Trap Link enabled,
+    if you have a weight above "none" set for that trap
+    """
+    display_name = "Trap Link"
+
+
 @dataclass
 class TonyHawksProSkater12Options(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
@@ -347,6 +357,7 @@ class TonyHawksProSkater12Options(PerGameCommonOptions):
     include_overpowered_abilities: IncludeOverpoweredAbilities
     trap_percentage: TrapPercentage
     trap_weights: TrapWeights
+    trap_link: TrapLink
 
 
 option_groups: List[OptionGroup] = [
@@ -404,6 +415,7 @@ option_groups: List[OptionGroup] = [
         [
             TrapPercentage,
             TrapWeights,
+            TrapLink,
         ],
     ),
 ]
