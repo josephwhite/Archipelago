@@ -1,4 +1,5 @@
 import asyncio
+import time
 import sys
 import urllib.parse
 
@@ -16,7 +17,7 @@ from .data_funcs import (
     process_slot_data,
 )
 
-from .enums import TonyHawksProSkater12APGoals
+from .enums import TonyHawksProSkater12APGoals, traplink_itemname_mapping, TonyHawksProSkater12APTrapTypes
 
 from .game_controller import GameController
 
@@ -139,6 +140,7 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
             self.game_controller.option_include_overpowered_abilities = slot_data["include_overpowered_abilities"]
             self.game_controller.option_trap_percentage = slot_data["trap_percentage"]
             self.game_controller.option_trap_weights = slot_data["trap_weights"]
+            self.game_controller.option_trap_link = slot_data["trap_link"]
 
             # Generation Data
             self.game_controller.selected_skaters = slot_data["selected_skaters"]
@@ -183,8 +185,40 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
                 ])
             )
 
+            # TrapLink
+            if self.game_controller.option_trap_link:
+                if "TrapLink" not in self.tags:
+                    self.tags.add("TrapLink")
+                Utils.async_start(
+                    self.send_msgs([
+                        {
+                            "cmd": "ConnectUpdate",
+                            "tags": self.tags
+                        }
+                    ])
+                )
+
             # UI Tabs
             self.ui.update_tabs()
+
+        if cmd == "Bounced":
+            if "tags" not in _args:
+                return
+            source_name = _args["data"]["source"]
+            if "TrapLink" in _args["tags"] and source_name != self.player_names[self.slot]:
+                trap_name: str = _args["data"]["trap_name"]
+                # Only process traps that can be converted to local enabled traps
+                if trap_name not in traplink_itemname_mapping:
+                    return
+                resolved_trap_name = traplink_itemname_mapping[trap_name]
+                if self.game_controller.option_trap_weights is None:
+                    return
+                if resolved_trap_name not in self.game_controller.option_trap_weights:
+                    return
+                if self.game_controller.option_trap_weights[resolved_trap_name] == 0:
+                    return
+                # Add trap to queue
+                self.game_controller.linked_trap_counters[TonyHawksProSkater12APTrapTypes(resolved_trap_name)] += 1
 
     async def controller(self):
         while not self.exit_event.is_set():
@@ -224,14 +258,27 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
 
                 # Send Checked Locations
                 checked_location_ids: List[int] = list()
-
                 while len(self.game_controller.completed_locations_queue) > 0:
                     location: str = self.game_controller.completed_locations_queue.popleft()
                     location_id: int = self.location_name_to_id[location]
-
                     checked_location_ids.append(location_id)
-
                 await self.check_locations(checked_location_ids)
+
+                # Send received traps to TrapLink players
+                while len(self.game_controller.outbound_trap_queue) > 0:
+                    trap_name = self.game_controller.outbound_trap_queue[0]
+                    await self.send_msgs([
+                        {
+                            "cmd": "Bounce",
+                            "tags": ["TrapLink"],
+                            "data": {
+                                "time": time.time(),
+                                "source": self.player_names[self.slot],
+                                "trap_name": trap_name
+                            }
+                        }
+                    ])
+                    self.game_controller.outbound_trap_queue.pop(0)
 
                 # Check for Goal Completion
                 if self.game_controller.goal_completed:

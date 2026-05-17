@@ -1219,3 +1219,37 @@ class TonyHawksProSkater12Specials(enum.Enum):
     THREE_SIXTY_VARIAL_MCTWIST = "360 Varial McTwist"
     WARP_SPEED = "Warp Speed"
     WEDDLE_BACKFLIP = "Weddle Backflip"
+
+
+traplink_itemname_mapping: dict[str, TonyHawksProSkater12APTrapTypes] = {
+    # Local traps
+    "Black and White Trap": TonyHawksProSkater12APTrapTypes.BLACK_AND_WHITE,
+    "Bloom Trap": TonyHawksProSkater12APTrapTypes.BLOOM,
+    "Chromatic Trap": TonyHawksProSkater12APTrapTypes.CHROMATIC,
+    "Color Inversion Trap": TonyHawksProSkater12APTrapTypes.COLOR_INVERSION,
+    "Giant Trap": TonyHawksProSkater12APTrapTypes.GIANT,
+    "High Gravity Trap": TonyHawksProSkater12APTrapTypes.HIGH_GRAVITY,
+    "Low Gravity Trap": TonyHawksProSkater12APTrapTypes.LOW_GRAVITY,
+    "Mobile Game Trap": TonyHawksProSkater12APTrapTypes.MOBILE_GAME,
+    "Retro Trap": TonyHawksProSkater12APTrapTypes.RETRO,
+    "Reverse Directional Controls Trap": TonyHawksProSkater12APTrapTypes.REVERSE_DIRECTIONAL_CONTROLS,
+    "Super Speed Trap": TonyHawksProSkater12APTrapTypes.SUPER_SPEED,
+    "Tiny Trap": TonyHawksProSkater12APTrapTypes.TINY,
+    "Tunnel Vision Trap": TonyHawksProSkater12APTrapTypes.TUNNEL_VISION,
+    "Wide Trap": TonyHawksProSkater12APTrapTypes.WIDE,
+    # Other games
+    "Confusion Trap": TonyHawksProSkater12APTrapTypes.REVERSE_DIRECTIONAL_CONTROLS,
+    "Fast Trap": TonyHawksProSkater12APTrapTypes.SUPER_SPEED,
+    "Iron Boots Trap": TonyHawksProSkater12APTrapTypes.HIGH_GRAVITY,
+    "Jump Trap": TonyHawksProSkater12APTrapTypes.LOW_GRAVITY,
+    "Light Up Path Trap": TonyHawksProSkater12APTrapTypes.BLOOM,
+    "Phone Trap": TonyHawksProSkater12APTrapTypes.MOBILE_GAME,
+    "Poison Mushroom": TonyHawksProSkater12APTrapTypes.TINY,
+    "Poison Trap": TonyHawksProSkater12APTrapTypes.COLOR_INVERSION,
+    "Reversal Trap": TonyHawksProSkater12APTrapTypes.REVERSE_DIRECTIONAL_CONTROLS,
+    "Reverse Trap": TonyHawksProSkater12APTrapTypes.REVERSE_DIRECTIONAL_CONTROLS,
+    "Spooky Time": TonyHawksProSkater12APTrapTypes.TUNNEL_VISION,
+    "Sticky Floor Trap": TonyHawksProSkater12APTrapTypes.HIGH_GRAVITY,
+    "W I D E Trap": TonyHawksProSkater12APTrapTypes.WIDE,
+    #
+}

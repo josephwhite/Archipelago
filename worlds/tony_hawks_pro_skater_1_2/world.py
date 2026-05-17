@@ -118,6 +118,7 @@ class TonyHawksProSkater12World(World):
     include_overpowered_abilities: bool
     trap_percentage: int
     trap_weights: Dict[TonyHawksProSkater12APTrapTypes, int]
+    trap_link: bool
 
     # Generation
     selected_skaters: List[TonyHawksProSkater12Skaters]
@@ -796,6 +797,7 @@ class TonyHawksProSkater12World(World):
             "include_overpowered_abilities",
             "trap_percentage",
             "trap_weights",
+            "trap_link",
         )
 
         slot_data["trap_weights"] = {
@@ -1026,6 +1028,7 @@ class TonyHawksProSkater12World(World):
             self.include_overpowered_abilities= passthrough["include_overpowered_abilities"]
             self.trap_percentage = passthrough["trap_percentage"]
             self.trap_weights = passthrough["trap_weights"]
+            self.trap_link = passthrough["trap_link"]
 
             self.selected_skaters = passthrough["selected_skaters"]
             self.selected_starting_skater = passthrough["selected_starting_skater"]
