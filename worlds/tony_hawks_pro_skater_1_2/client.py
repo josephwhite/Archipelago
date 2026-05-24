@@ -201,24 +201,29 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
             # UI Tabs
             self.ui.update_tabs()
 
-        if cmd == "Bounced":
+        elif cmd == "Bounced":
             if "tags" not in _args:
                 return
-            source_name = _args["data"]["source"]
-            if "TrapLink" in _args["tags"] and source_name != self.player_names[self.slot]:
+            if "TrapLink" in _args["tags"] and "data" in _args:
                 trap_name: str = _args["data"]["trap_name"]
+                source_name = _args["data"]["source"]
+                if source_name == self.player_names[self.slot]:
+                    return
                 # Only process traps that can be converted to local enabled traps
-                if trap_name not in traplink_itemname_mapping:
+                if trap_name not in traplink_itemname_mapping.keys() or trap_name == "":
                     return
                 resolved_trap_name = traplink_itemname_mapping[trap_name]
+                resolved_trap_type = TonyHawksProSkater12APTrapTypes(resolved_trap_name)
                 if self.game_controller.option_trap_weights is None:
                     return
-                if resolved_trap_name not in self.game_controller.option_trap_weights:
+                if resolved_trap_type not in self.game_controller.option_trap_weights.keys():
                     return
-                if self.game_controller.option_trap_weights[resolved_trap_name] == 0:
+                if self.game_controller.option_trap_weights[resolved_trap_type] == 0:
                     return
                 # Add trap to queue
-                self.game_controller.linked_trap_counters[TonyHawksProSkater12APTrapTypes(resolved_trap_name)] += 1
+                self.game_controller.linked_trap_counters[resolved_trap_type] += 1
+                self.game_controller.update()
+                self.game_controller.update()
 
     async def controller(self):
         while not self.exit_event.is_set():
