@@ -1221,7 +1221,7 @@ class TonyHawksProSkater12Specials(enum.Enum):
     WEDDLE_BACKFLIP = "Weddle Backflip"
 
 
-traplink_itemname_mapping: dict[str, str] = {
+traplink_aliases: dict[str, str] = {
     # Local traps
     "Black and White Trap": "Black and White Trap",
     "Bloom Trap": "Bloom Trap",
