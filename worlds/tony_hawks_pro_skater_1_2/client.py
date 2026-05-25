@@ -17,7 +17,7 @@ from .data_funcs import (
     process_slot_data,
 )
 
-from .enums import TonyHawksProSkater12APGoals, traplink_itemname_mapping, TonyHawksProSkater12APTrapTypes
+from .enums import TonyHawksProSkater12APGoals, traplink_aliases, TonyHawksProSkater12APTrapTypes
 
 from .game_controller import GameController
 
@@ -210,9 +210,9 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
                 if source_name == self.player_names[self.slot]:
                     return
                 # Only process traps that can be converted to local enabled traps
-                if trap_name not in traplink_itemname_mapping.keys() or trap_name == "":
+                if trap_name not in traplink_aliases.keys() or trap_name == "":
                     return
-                resolved_trap_name = traplink_itemname_mapping[trap_name]
+                resolved_trap_name = traplink_aliases[trap_name]
                 resolved_trap_type = TonyHawksProSkater12APTrapTypes(resolved_trap_name)
                 if self.game_controller.option_trap_weights is None:
                     return
