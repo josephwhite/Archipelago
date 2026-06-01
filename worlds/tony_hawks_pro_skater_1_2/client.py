@@ -222,8 +222,6 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
                     return
                 # Add trap to queue
                 self.game_controller.linked_trap_counters[resolved_trap_type] += 1
-                self.game_controller.update()
-                self.game_controller.update()
 
     async def controller(self):
         while not self.exit_event.is_set():
@@ -283,6 +281,7 @@ class TonyHawksProSkater12Context(CommonClient.CommonContext):
                             }
                         }
                     ])
+                    CommonClient.logger.info(f"Sent linked {trap_name}")
                     self.game_controller.outbound_trap_queue.pop(0)
 
                 # Check for Goal Completion
