@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from rule_builder.options import OptionFilter
-from rule_builder.rules import Has, HasAll, Rule
+from rule_builder.rules import Has
+
 from .data.basegame import Y2ROLL_WORLD_LEVEL_INFO, get_y2roll_world_name
-from .locations import get_y2roll_gem_locations
+from .locations import get_y2roll_gem_locations, get_y2roll_goal_locations, get_y2roll_medal_locations
 
 if TYPE_CHECKING:
     from .world import Y2ROLLWorld
@@ -37,9 +37,16 @@ def set_all_entrance_rules(world: Y2ROLLWorld) -> None:
 
 
 def set_all_location_rules(world: Y2ROLLWorld) -> None:
+    current_locations: list[str] = get_y2roll_goal_locations()
+    if world.options.include_gems == world.options.include_gems.option_true:
+        gems = get_y2roll_gem_locations()
+        current_locations += gems
+    if world.options.include_gold == world.options.include_gold.option_true:
+        medals = get_y2roll_medal_locations()
+        current_locations += medals
+    # World Access
     if world.options.level_unlocks == world.options.level_unlocks.option_world:
-        gem_locations = get_y2roll_gem_locations()
-        for loc in gem_locations:
+        for loc in current_locations:
             foo = world.get_location(loc)
             world_number = int(loc[0])
             world_name = get_y2roll_world_name(world_number)
@@ -48,4 +55,5 @@ def set_all_location_rules(world: Y2ROLLWorld) -> None:
 
 
 def set_completion_condition(world: Y2ROLLWorld) -> None:
-    world.set_completion_rule(Has("Empyrean Access"))
+    if world.options.level_unlocks == world.options.level_unlocks.option_world:
+        world.set_completion_rule(Has("Empyrean Access"))

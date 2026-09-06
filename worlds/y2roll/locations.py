@@ -7,6 +7,28 @@ class Y2ROLLLocation(Location):
     game = "Y2ROLL"
 
 
+def get_y2roll_goal_locations(world_num: int | None = None, level_num: int | None = None) -> list[str]:
+    goal_locations: list[str] = []
+    for v in Y2ROLL_LEVEL_BY_KEY.values():
+        if world_num is None or v["world"] == world_num:
+            if level_num is None or v["level_in_world"] == level_num:
+                level = v["display_name"]
+                loc_name = f"{level} - Clear"
+                goal_locations.append(loc_name)
+    return goal_locations
+
+
+def get_y2roll_medal_locations(world_num: int | None = None, level_num: int | None = None) -> list[str]:
+    medal_locations: list[str] = []
+    for v in Y2ROLL_LEVEL_BY_KEY.values():
+        if world_num is None or v["world"] == world_num:
+            if level_num is None or v["level_in_world"] == level_num:
+                level = v["display_name"]
+                loc_name = f"{level} - Gold Medal"
+                medal_locations.append(loc_name)
+    return medal_locations
+
+
 def get_y2roll_gem_locations(world_num: int | None = None, level_num: int | None = None) -> list[str]:
     gem_locations: list[str] = []
     for k, v in Y2ROLL_LEVEL_BY_KEY.items():
@@ -20,7 +42,8 @@ def get_y2roll_gem_locations(world_num: int | None = None, level_num: int | None
     return gem_locations
 
 
-all_locations = get_y2roll_gem_locations()
+all_locations = get_y2roll_goal_locations() + get_y2roll_medal_locations() + get_y2roll_gem_locations()
+
 all_locations_to_id = {item: index + 1 for index, item in enumerate(all_locations)}
 
 

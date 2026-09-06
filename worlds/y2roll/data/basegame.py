@@ -263,7 +263,7 @@ def get_y2roll_level_name(level_key: str) -> str:
 
 def get_y2roll_level_display_name(world_number: int, level_number: int) -> str:
     level_entry = get_y2roll_level_entry(world_number, level_number)
-    return f"{world_number}-{level_number}: {level_entry["name"]}"
+    return f"{world_number}-{level_number}: {level_entry['name']}"
 
 def get_level_gem_count(level_key: str) -> int:
     return get_level_entry(level_key)["gems"]

@@ -10,18 +10,22 @@ Worlds/Levels will be unlocked by collecting gems and completing levels.
 
 ## What is the goal?
 
-The goal options determines what is needed to goal.
-
-- % Cleared: Percent of all levels that MUST be beaten
-- Goal Level: A specific level MUST be beaten
-- Gem Hunt: Number of gems that MUST be collected between all levels
+The goal is to reach the goal in 7-15: ASCENDANCE.
 
 ## What is a "check" in Y2ROLL?
 
-- Level Completions
+- Goaling levels
+- Gold Medals
 - Gems
 
 ## What "items" can you unlock in Y2ROLL?
 
 - World/Level unlocks
 - Custom traps
+  - Saturation Trap: Excessive color on screen
+  - Grayscale Trap: Lack of color on screen
+  - :) Trap: Gives you a smile
+  - Minimap Trap: Replaces screen with JUST the minimap
+  - Taunt Trap: Displays various taunts on screen
+- A feeling of nostalgia
+  - AKA nothing
