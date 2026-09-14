@@ -19,10 +19,21 @@ class LevelUnlocks(Choice):
     Determine how worlds/levels will be unlocked.
 
     World - Worlds are unlocks (all levels per world are available)
+    Level - Levels are unlocks (all worlds are available)
     """
     display_name = "Level Unlocks"
     option_world = 0
+    option_level = 1
+    alias_vanilla = 0
     default = option_world
+
+class StartingLevelCount(Range):
+    """
+    Sets how many levels to start with when Level Unlocks is set to "Level"
+    """
+    range_start = 1
+    range_end = 15
+    default = 5
 
 
 class IncludeGems(Toggle):
@@ -92,13 +103,11 @@ class Y2ROLLDEV(OptionSet):
     """
     Developer and advanced user options that don't impact game randomization.
 
-    - Trap Counts in Spoiler: Adds count for traps in spoiler.
     - Make PUML: Creates a diagram of connected regions and locations.
     """
     display_name = "Dev"
     valid_keys = [
-        "Trap Counts in Spoiler",
-        "Make PUML"
+        "Make PUML",
     ]
     visibility = Visibility.template | Visibility.spoiler
     default = []
@@ -107,6 +116,7 @@ class Y2ROLLDEV(OptionSet):
 y2roll_options_groups = [
     OptionGroup("Game Options", [
         LevelUnlocks,
+        StartingLevelCount,
         IncludeGems,
         IncludeGold
     ]),
@@ -127,6 +137,7 @@ y2roll_options_groups = [
 @dataclass
 class Y2ROLLOptions(PerGameCommonOptions):
     level_unlocks: LevelUnlocks
+    starting_levels_count: StartingLevelCount
     include_gems: IncludeGems
     include_gold: IncludeGold
     death_link: Y2ROLLDeathLink

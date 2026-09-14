@@ -33,4 +33,4 @@ Enter the info (host/port/name/password) to connect.
 ### How do gem checks work?
 In Y2ROLL, the gems do not have unique identifiers to differentiate from each other in each level.
 Gem checks do not correspond to individual gems, but rather a **count** of collected gems.
-For example, collecting any gem in 1-1: BEGINNINGS will send a check for "1-1: BEGINNINGS - Gem 1"
+For example, collecting a single gem in 1-1: BEGINNINGS will send a check for "1-1: BEGINNINGS - Gem 1" regardless of which gem you collected in the level.

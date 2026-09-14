@@ -2,6 +2,7 @@ import typing
 from collections.abc import Mapping
 from typing import Any
 
+from BaseClasses import Region
 from worlds.AutoWorld import World
 
 from . import options as y2roll_options
@@ -13,7 +14,7 @@ from .items import (
     get_y2roll_item_groups,
     junk_item_data_table,
     trap_item_data_table,
-    world_access_item_data_table,
+    world_access_item_data_table, level_access_item_data_table,
 )
 from .locations import (
     Y2ROLLLocation,
@@ -55,7 +56,12 @@ class Y2ROLLWorld(World):
         for k, v in Y2ROLL_LEVEL_BY_KEY.items():
             world_number = v["world"]
             level_number = v["level_in_world"]
-            world_reg = self.get_region(get_y2roll_world_name(world_number))
+            level_name = v["display_name"]
+            world_reg = Region("", self.player, self.multiworld)
+            if self.options.level_unlocks == self.options.level_unlocks.option_world:
+                world_reg = self.get_region(get_y2roll_world_name(world_number))
+            elif self.options.level_unlocks == self.options.level_unlocks.option_level:
+                world_reg = self.get_region(level_name)
             # Level Goals
             goal_locs = get_y2roll_goal_locations(world_number, level_number)
             for loc in goal_locs:
@@ -77,11 +83,7 @@ class Y2ROLLWorld(World):
     def set_rules(self) -> None:
         set_all_y2roll_rules(self)
         if "Make PUML" in self.options.dev.value:
-            from Utils import visualize_regions
-            multiworld = self.multiworld
-            player = self.player
-            puml_name = f"y2roll_world_{self.player_name}_{self.multiworld.seed_name}.puml"
-            visualize_regions(multiworld.get_region("Menu", player), puml_name)
+            self.make_puml()
 
     def post_fill(self) -> None:
         pass
@@ -91,6 +93,9 @@ class Y2ROLLWorld(World):
         # Progression
         if self.options.level_unlocks == self.options.level_unlocks.option_world:
             for k in world_access_item_data_table.keys():
+                itempool.append(self.create_item(k))
+        elif self.options.level_unlocks == self.options.level_unlocks.option_level:
+            for k in level_access_item_data_table.keys():
                 itempool.append(self.create_item(k))
         # Get count of traps/junk needed
         number_of_items = len(itempool)
@@ -112,9 +117,15 @@ class Y2ROLLWorld(World):
                 itempool.append(self.create_item(name))
         # Junk
         itempool += [self.create_filler() for _ in range(needed_number_of_filler_items)]
-        # Start with the first world unlocked
+        # Start with the first world levels unlocked
+        # TODO: Remove levels from above access item adds
         if self.options.level_unlocks == self.options.level_unlocks.option_world:
             self.push_precollected(self.create_item("Purple Mountains Access"))
+        elif self.options.level_unlocks == self.options.level_unlocks.option_level:
+            levels = self.get_random_starting_levels()
+            for level in levels:
+                access = f"{level} - Access"
+                self.push_precollected(self.create_item(access))
         # Final step, always
         self.multiworld.itempool += itempool
 
@@ -135,11 +146,13 @@ class Y2ROLLWorld(World):
             "include_gems",
             "include_gold",
             "trap_percentage",
+            # TODO: Add DeathLink and TrapLink once tested and readded to options
         )
         # Options (but modified)
         data["trap_weights"] = self.output_trap_weights()
         # Metadata
         data["world_version"] = self.world_version
+        data["supported_base_builds"] = self.manifest.get("supported_base_builds")
         return data
 
     def output_trap_weights(self):
@@ -153,8 +166,33 @@ class Y2ROLLWorld(World):
         return trap_data
 
     def write_spoiler(self, spoiler_handle: typing.TextIO) -> None:
-        if "Trap Counts in Spoiler" in self.options.dev.value and self.options.trap_percentage > 0:
-            trap_list = [item for item in self.multiworld.itempool if item.trap and item.player == self.player]
-            trap_counts = {name: trap_list.count(name) for name in trap_list}
-            for name, count in trap_counts.items():
-                spoiler_handle.write(f"{name}: {count}\n")
+        pass
+
+    def trap_counts_to_spoiler(self, spoiler_handle: typing.TextIO) -> None:
+        """
+        Output trap counts to spoiler.
+        Intended for write_spoiler step of generation.
+        Trap Percentage must be greater than 0.
+        """
+        trap_list = [item for item in self.multiworld.itempool if item.trap and item.player == self.player]
+        trap_counts = {name: trap_list.count(name) for name in trap_list}
+        for name, count in trap_counts.items():
+            spoiler_handle.write(f"{name}: {count}\n")
+
+    def make_puml(self):
+        """
+        Generate PlantUML (PUML) diagram of region/location connections for seed.
+        """
+        from Utils import visualize_regions
+        multiworld = self.multiworld
+        player = self.player
+        puml_name = f"y2roll_world_{self.player_name}_{self.multiworld.seed_name}.puml"
+        visualize_regions(multiworld.get_region("Menu", player), puml_name)
+
+    def get_random_starting_levels(self):
+        all_world_1_levels = []
+        for v in Y2ROLL_LEVEL_BY_KEY.values():
+            if v["world"] == 1:
+                all_world_1_levels.append(v["display_name"])
+        selected_world_1_levels = self.random.sample(all_world_1_levels, self.options.starting_levels_count.value)
+        return selected_world_1_levels

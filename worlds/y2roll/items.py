@@ -1,6 +1,7 @@
 from typing import NamedTuple
 
 from BaseClasses import Item, ItemClassification
+from worlds.y2roll.data.basegame import Y2ROLL_LEVEL_BY_KEY
 
 
 class Y2ROLLItem(Item):
@@ -37,6 +38,10 @@ world_access_item_data_table: dict[str, Y2ROLLItemData] = {
     "Empyrean Access": Y2ROLLItemData(ItemClassification.progression, ["World Access"]),
 }
 
+level_access_item_data_table: dict[str, Y2ROLLItemData] = {
+    f"{v["display_name"]} - Access": Y2ROLLItemData(ItemClassification.progression, ["Level Access"]) for v in Y2ROLL_LEVEL_BY_KEY.values()
+}
+
 trap_item_data_table: dict[str, Y2ROLLItemData] = {
     "Saturation Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
     "Grayscale Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
@@ -52,5 +57,11 @@ junk_item_data_table: dict[str, Y2ROLLItemData] = {
     "A feeling of nostalgia": Y2ROLLItemData(ItemClassification.filler, ["Junk"]),
 }
 
-all_items = world_access_item_data_table | gem_item_data_table | trap_item_data_table | junk_item_data_table
+all_items = (
+    world_access_item_data_table
+    | level_access_item_data_table
+    | gem_item_data_table
+    | trap_item_data_table
+    | junk_item_data_table
+)
 all_items_to_id = {key: index + 1 for index, (key, values) in enumerate(all_items.items())}

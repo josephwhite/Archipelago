@@ -1,8 +1,12 @@
 {
-	"game": "Y2ROLL",
-	"minimum_ap_version": "0.6.7",
-	"world_version": "0.0.2",
-	"authors": [
-      "josephwhite"
-    ]
+  "game": "Y2ROLL",
+  "minimum_ap_version": "0.6.7",
+  "world_version": "0.0.3",
+  "authors": [
+    "josephwhite"
+  ],
+  "supported_base_builds": [
+    "1.3.1",
+    "1.0.0"
+  ]
 }
