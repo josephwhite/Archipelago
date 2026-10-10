@@ -57,6 +57,8 @@ class Y2ROLLWorld(World):
             world_number = v["world"]
             level_number = v["level_in_world"]
             level_name = v["display_name"]
+            if v["display_name"] in self.options.level_blacklist.value:
+                continue
             world_reg = Region("", self.player, self.multiworld)
             if self.options.level_unlocks == self.options.level_unlocks.option_world:
                 world_reg = self.get_region(get_y2roll_world_name(world_number))
@@ -82,20 +84,33 @@ class Y2ROLLWorld(World):
 
     def set_rules(self) -> None:
         set_all_y2roll_rules(self)
-        if "Make PUML" in self.options.dev.value:
-            self.make_puml()
 
     def post_fill(self) -> None:
         pass
 
     def create_items(self) -> None:
         itempool = []
+        # Establish starting items
+        precollection_itempool = []
+        if self.options.level_unlocks == self.options.level_unlocks.option_world:
+            precollection_itempool.append("Purple Mountains Access")
+        elif self.options.level_unlocks == self.options.level_unlocks.option_level:
+            random_starting_levels = self.get_random_starting_levels()
+            for level in random_starting_levels:
+                precollection_itempool.append(f"{level} - Access")
         # Progression
         if self.options.level_unlocks == self.options.level_unlocks.option_world:
             for k in world_access_item_data_table.keys():
+                if k in precollection_itempool:
+                    continue
                 itempool.append(self.create_item(k))
         elif self.options.level_unlocks == self.options.level_unlocks.option_level:
             for k in level_access_item_data_table.keys():
+                k_level_name = k.removesuffix(" - Access")
+                if k_level_name in self.options.level_blacklist.value:
+                    continue
+                if k_level_name in precollection_itempool:
+                    continue
                 itempool.append(self.create_item(k))
         # Get count of traps/junk needed
         number_of_items = len(itempool)
@@ -118,14 +133,8 @@ class Y2ROLLWorld(World):
         # Junk
         itempool += [self.create_filler() for _ in range(needed_number_of_filler_items)]
         # Start with the first world levels unlocked
-        # TODO: Remove levels from above access item adds
-        if self.options.level_unlocks == self.options.level_unlocks.option_world:
-            self.push_precollected(self.create_item("Purple Mountains Access"))
-        elif self.options.level_unlocks == self.options.level_unlocks.option_level:
-            levels = self.get_random_starting_levels()
-            for level in levels:
-                access = f"{level} - Access"
-                self.push_precollected(self.create_item(access))
+        for p in precollection_itempool:
+            self.push_precollected(self.create_item(p))
         # Final step, always
         self.multiworld.itempool += itempool
 
@@ -146,7 +155,8 @@ class Y2ROLLWorld(World):
             "include_gems",
             "include_gold",
             "trap_percentage",
-            # TODO: Add DeathLink and TrapLink once tested and readded to options
+            "death_link",
+            "trap_link",
         )
         # Options (but modified)
         data["trap_weights"] = self.output_trap_weights()

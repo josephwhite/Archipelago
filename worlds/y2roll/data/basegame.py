@@ -279,3 +279,4 @@ for world_number, world_info in Y2ROLL_WORLD_LEVEL_INFO.items():
         # Display name for items/locations/options
         Y2ROLL_LEVEL_BY_KEY[level_info["key"]]["display_name"] = get_y2roll_level_display_name(world_number,
                                                                                                level_number)
+        Y2ROLL_LEVEL_BY_KEY[level_info["key"]]["world-level_key"] = f"{world_number}-{level_number}"

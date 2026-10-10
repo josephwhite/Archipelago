@@ -45,7 +45,7 @@ level_access_item_data_table: dict[str, Y2ROLLItemData] = {
 trap_item_data_table: dict[str, Y2ROLLItemData] = {
     "Saturation Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
     "Grayscale Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
-    ":) Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
+    "Smile Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
     "Minimap Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
     "Taunt Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
     # TODO: Traps that can change some aspect of the level/world

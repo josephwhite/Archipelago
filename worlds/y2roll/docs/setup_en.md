@@ -25,7 +25,7 @@
    - Example: `python patch_pck.py --pck "C:\SteamLibrary\steamapps\common\Y2ROLL\Y2ROLL.pck" --modloader-dir "C:\SteamLibrary\steamapps\common\Y2ROLL\addons" --game-dir "C:\SteamLibrary\steamapps\common\Y2ROLL" --mod-dir "C:\repos\Y2ROLL_AP\josephwhite-ArchipelagoRandomizer" --mod-dir "C:\repos\Y2ROLL_AP\josephwhite-mod_manager" --mod-dir "C:\repos\Y2ROLL_AP\josephwhite-player_skins"`
 
 ## Connecting to the Archipelago server
-Clicking the AP button in the bottom right corner of the campaign menu will open a menu for connecting to an Archipelago server.
+Clicking the AP button in the corner of the campaign menu will open a menu for connecting to an Archipelago server.
 Enter the info (host/port/name/password) to connect.
 
 ## FAQ/Common Issues

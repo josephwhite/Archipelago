@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from rule_builder.rules import Has
-
 from .data.basegame import Y2ROLL_LEVEL_BY_KEY, Y2ROLL_WORLD_LEVEL_INFO, get_y2roll_level_entry, get_y2roll_world_name
 from .locations import get_y2roll_gem_locations, get_y2roll_goal_locations, get_y2roll_medal_locations
 
@@ -27,6 +26,8 @@ def set_all_entrance_rules(world: Y2ROLLWorld) -> None:
     elif world.options.level_unlocks == world.options.level_unlocks.option_level:
         for k, v in Y2ROLL_LEVEL_BY_KEY.items():
             level_name = v["display_name"]
+            if level_name in world.options.level_blacklist.value:
+                continue
             level_access_rule = Has(f"{level_name} - Access")
             level_entrance = world.get_entrance(f"Menu to {level_name}")
             world.set_rule(level_entrance, level_access_rule)
@@ -40,6 +41,9 @@ def set_all_location_rules(world: Y2ROLLWorld) -> None:
     if world.options.include_gold == world.options.include_gold.option_true:
         medals = get_y2roll_medal_locations()
         current_locations += medals
+    # Remove excluded levels
+    for level in world.options.level_blacklist.value:
+        current_locations = [loc for loc in current_locations if not loc.startswith(level)]
     # World/Level Access
     if world.options.level_unlocks == world.options.level_unlocks.option_world:
         for loc in current_locations:

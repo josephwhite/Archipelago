@@ -24,8 +24,8 @@ The goal is to reach the goal in 7-15: ASCENDANCE.
 - Custom traps
   - Saturation Trap: Excessive color on screen
   - Grayscale Trap: Lack of color on screen
-  - :) Trap: Gives you a smile
+  - Smile Trap: Gives you a smile (can be stacked)
   - Minimap Trap: Replaces screen with JUST the minimap
-  - Taunt Trap: Displays various taunts on screen
+  - Taunt Trap: Displays various taunts on screen (can be stacked)
 - A feeling of nostalgia
   - AKA nothing
