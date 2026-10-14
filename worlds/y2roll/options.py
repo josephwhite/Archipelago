@@ -9,10 +9,8 @@ from Options import (
     PerGameCommonOptions,
     Range,
     Toggle,
-    Visibility,
 )
 from worlds.y2roll.items import trap_item_data_table
-
 from .data.basegame import Y2ROLL_LEVEL_BY_KEY
 
 

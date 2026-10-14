@@ -54,7 +54,7 @@ trap_item_data_table: dict[str, Y2ROLLItemData] = {
 }
 
 junk_item_data_table: dict[str, Y2ROLLItemData] = {
-    "A feeling of nostalgia": Y2ROLLItemData(ItemClassification.filler, ["Junk"]),
+    "Timer Refill": Y2ROLLItemData(ItemClassification.filler, ["Junk"]),
 }
 
 all_items = (

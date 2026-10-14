@@ -21,11 +21,10 @@ The goal is to reach the goal in 7-15: ASCENDANCE.
 ## What "items" can you unlock in Y2ROLL?
 
 - World/Level unlocks
+- Timer Refills
 - Custom traps
-  - Saturation Trap: Excessive color on screen
-  - Grayscale Trap: Lack of color on screen
-  - Smile Trap: Gives you a smile (can be stacked)
-  - Minimap Trap: Replaces screen with JUST the minimap
-  - Taunt Trap: Displays various taunts on screen (can be stacked)
-- A feeling of nostalgia
-  - AKA nothing
+  - Saturation Trap: Screen filter that boosts color saturation.
+  - Grayscale Trap: Screen filter that removes color.
+  - Smile Trap: Replaces a random HUD element with a smiley face. This trap can be stacked to replace multiple HUD elements.
+  - Minimap Trap: Replaces the main view of the game with the minimap.
+  - Taunt Trap: Displays distracting messages on screen. This trap can be stacked to place multiple messages.

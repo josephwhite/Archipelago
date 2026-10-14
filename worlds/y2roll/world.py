@@ -48,7 +48,7 @@ class Y2ROLLWorld(World):
     item_name_groups = get_y2roll_item_groups()
 
     # Universal Tracker
-    disable_ut = True
+    disable_ut = False
 
     def create_regions(self) -> None:
         create_and_connect_regions(self)

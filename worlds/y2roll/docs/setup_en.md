@@ -2,9 +2,9 @@
 
 ## Required Software
 - [Y2ROLL (Steam)](https://store.steampowered.com/app/3459420/)
-- [Y2ROLL Archipelago Randomizer mod](https://github.com/josephwhite/Y2ROLL-mods)
+- Y2ROLL Archipelago Randomizer mod ([in the `Y2ROLL-mods.zip` from the GitHub Release](https://github.com/josephwhite/Y2ROLL-mods/releases/))
 - [Godot Mod Loader v6.3.0](https://github.com/GodotModding/godot-mod-loader/releases/tag/v6.3.0)
-- Python 3.6+
+- [Python 3.6+](https://www.python.org/)
 
 ## Optional Software
 - Y2ROLL Mod Manager
@@ -12,7 +12,7 @@
 ## Instructions
 
 ### Installing the mod
-1. Download/clone the git repo for Y2ROLL Archipelago Randomizer mod (and other Y2ROLL mods).
+1. Download the Y2ROLL Archipelago Randomizer mod (and other Y2ROLL mods). If downloading `Y2ROLL-mods.zip` from the GitHub Release, extract all to a folder.
 2. Extract the `addons` folder from the Godot Mod Loader next to the Y2ROLL executable.
 3. Open a terminal (bash/powershell) and navigate to the folder for the Y2ROLL mods.
 4. Run the below command, replacing the <folder-placeholder> values.
