@@ -14,7 +14,7 @@ from .items import (
     get_y2roll_item_groups,
     junk_item_data_table,
     trap_item_data_table,
-    world_access_item_data_table, level_access_item_data_table,
+    world_access_item_data_table, level_access_item_data_table, useful_item_data_table,
 )
 from .locations import (
     Y2ROLLLocation,
@@ -112,13 +112,18 @@ class Y2ROLLWorld(World):
                 if k_level_name in precollection_itempool:
                     continue
                 itempool.append(self.create_item(k))
-        # Get count of traps/junk needed
+        # Get count of junk needed
         number_of_items = len(itempool)
         number_of_unfilled_locations = len(self.multiworld.get_unfilled_locations(self.player))
         needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
+        # Subtract QOL items from junk
+        for u in useful_item_data_table.keys():
+            if needed_number_of_filler_items > 0:
+                itempool.append(self.create_item(u))
+                needed_number_of_filler_items -= 1
+        # Traps
         trap_items_needed: int = round((self.options.trap_percentage / 100) * needed_number_of_filler_items)
         needed_number_of_filler_items -= trap_items_needed
-        # Traps
         if trap_items_needed > 0:
             trap_items: list[str] = list(trap_item_data_table.keys())
             trap_item_weights: list[int] = []

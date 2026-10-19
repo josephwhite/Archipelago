@@ -22,6 +22,7 @@ The goal is to reach the goal in 7-15: ASCENDANCE.
 
 - World/Level unlocks
 - Timer Refills
+- No Fade: Prevents light surfaces from fading over time
 - Custom traps
   - Saturation Trap: Screen filter that boosts color saturation.
   - Grayscale Trap: Screen filter that removes color.

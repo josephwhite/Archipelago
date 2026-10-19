@@ -39,7 +39,7 @@ world_access_item_data_table: dict[str, Y2ROLLItemData] = {
 }
 
 level_access_item_data_table: dict[str, Y2ROLLItemData] = {
-    f"{v["display_name"]} - Access": Y2ROLLItemData(ItemClassification.progression, ["Level Access"]) for v in Y2ROLL_LEVEL_BY_KEY.values()
+    f"{v['display_name']} - Access": Y2ROLLItemData(ItemClassification.progression, ["Level Access"]) for v in Y2ROLL_LEVEL_BY_KEY.values()
 }
 
 trap_item_data_table: dict[str, Y2ROLLItemData] = {
@@ -53,6 +53,10 @@ trap_item_data_table: dict[str, Y2ROLLItemData] = {
     #"Level Distraction Trap": Y2ROLLItemData(ItemClassification.trap, ["Traps"]),
 }
 
+useful_item_data_table: dict[str, Y2ROLLItemData] = {
+    "No Fade": Y2ROLLItemData(ItemClassification.useful, ["Useful"]),
+}
+
 junk_item_data_table: dict[str, Y2ROLLItemData] = {
     "Timer Refill": Y2ROLLItemData(ItemClassification.filler, ["Junk"]),
 }
@@ -62,6 +66,7 @@ all_items = (
     | level_access_item_data_table
     | gem_item_data_table
     | trap_item_data_table
+    | useful_item_data_table
     | junk_item_data_table
 )
 all_items_to_id = {key: index + 1 for index, (key, values) in enumerate(all_items.items())}
