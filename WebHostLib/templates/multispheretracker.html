@@ -51,12 +51,14 @@
                         <tr>
                             {%- set item_id, receiver, item_flags = player_location_data[location_id] %}
                             {%- set receiver_game = tracker_data.get_player_game(receiver) %}
+                            {% if item_flags == 1 %}
                             <td>{{ current_sphere }}</td>
                             <td>{{ tracker_data.get_player_name(player) }}</td>
                             <td>{{ tracker_data.get_player_name(receiver) }}</td>
                             <td>{{ tracker_data.item_id_to_name[receiver_game][item_id] }}</td>
                             <td>{{ tracker_data.location_id_to_name[finder_game][location_id] }}</td>
                             <td>{{ finder_game }}</td>
+                            {% endif %}
                         </tr>
                         {%- endfor %}
 
